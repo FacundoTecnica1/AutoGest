@@ -1,0 +1,4 @@
+#ifndef PROVEEDORDAO_H
+#define PROVEEDORDAO_H
+
+#endif // PROVEEDORDAO_H

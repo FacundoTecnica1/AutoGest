@@ -1,0 +1,4 @@
+#ifndef INCIDENTEDAO_H
+#define INCIDENTEDAO_H
+
+#endif // INCIDENTEDAO_H

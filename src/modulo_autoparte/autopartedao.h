@@ -1,0 +1,4 @@
+#ifndef AUTOPARTEDAO_H
+#define AUTOPARTEDAO_H
+
+#endif // AUTOPARTEDAO_H

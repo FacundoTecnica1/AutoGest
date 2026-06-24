@@ -1,0 +1,4 @@
+#ifndef ALQUILERDAO_H
+#define ALQUILERDAO_H
+
+#endif // ALQUILERDAO_H
