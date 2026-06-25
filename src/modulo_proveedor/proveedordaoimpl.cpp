@@ -1,4 +1,4 @@
-#include "proveedordaoimpl.h"
+#include "Proveedordaoimpl.h"
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
@@ -6,7 +6,7 @@ using namespace std;
 
 void ProveedorDAOImpl::insertar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("INSERT INTO proveedor (nombre, telefono, email, direccion) "
+    query.prepare("INSERT INTO Proveedor (nombre, telefono, email, direccion) "
                   "VALUES (:nombre, :telefono, :email, :direccion)");
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":telefono", obj.getTelefono());
@@ -17,9 +17,9 @@ void ProveedorDAOImpl::insertar(Proveedor obj) {
 
 void ProveedorDAOImpl::actualizar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("UPDATE proveedor SET nombre = :nombre, telefono = :telefono, email = :email, direccion = :direccion "
-                  "WHERE `id proveedor` = :id_proveedor");
-    query.bindValue(":id_proveedor", obj.getIdProveedor());
+    query.prepare("UPDATE Proveedor SET nombre = :nombre, telefono = :telefono, email = :email, direccion = :direccion "
+                  "WHERE `id_Proveedor` = :id_Proveedor");
+    query.bindValue(":id_Proveedor", obj.getid_proveedor());
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":telefono", obj.getTelefono());
     query.bindValue(":email", obj.getEmail());
@@ -29,19 +29,19 @@ void ProveedorDAOImpl::actualizar(Proveedor obj) {
 
 void ProveedorDAOImpl::eliminar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("DELETE FROM proveedor WHERE `id proveedor` = :id_proveedor");
-    query.bindValue(":id_proveedor", obj.getIdProveedor());
+    query.prepare("DELETE FROM Proveedor WHERE `id_Proveedor` = :id_Proveedor");
+    query.bindValue(":id_Proveedor", obj.getid_proveedor());
     query.exec();
 }
 
 Proveedor ProveedorDAOImpl::buscarPorId(int id) {
     Proveedor obj;
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM proveedor WHERE `id proveedor` = :id_proveedor");
-    query.bindValue(":id_proveedor", id);
+    query.prepare("SELECT * FROM Proveedor WHERE `id_Proveedor` = :id_Proveedor");
+    query.bindValue(":id_Proveedor", id);
     if(query.exec()) {
         if(query.next()) {
-            obj.setIdProveedor(query.value("id proveedor").toInt());
+            obj.setid_proveedor(query.value("id_Proveedor").toInt());
             obj.setNombre(query.value("nombre").toString());
             obj.setTelefono(query.value("telefono").toString());
             obj.setEmail(query.value("email").toString());
@@ -54,11 +54,11 @@ Proveedor ProveedorDAOImpl::buscarPorId(int id) {
 vector<Proveedor> ProveedorDAOImpl::listar() {
     vector<Proveedor> lista;
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM proveedor");
+    query.prepare("SELECT * FROM Proveedor");
     if(query.exec()) {
         while(query.next()) {
             Proveedor obj;
-            obj.setIdProveedor(query.value("id proveedor").toInt());
+            obj.setid_proveedor(query.value("id_Proveedor").toInt());
             obj.setNombre(query.value("nombre").toString());
             obj.setTelefono(query.value("telefono").toString());
             obj.setEmail(query.value("email").toString());

@@ -13,10 +13,10 @@ debug/cliente.o
 debug/clientedaoimpl.o
 debug/incidente.o
 debug/incidentedaoimpl.o
-debug/mantenimiento.o
-debug/mantenimientodaoimpl.o
-debug/proveedor.o
-debug/proveedordaoimpl.o
-debug/tipo_mantenimiento.o
-debug/tipo_mantenimientodaoimpl.o
+debug/Mantenimiento.o
+debug/Mantenimientodaoimpl.o
+debug/Proveedor.o
+debug/Proveedordaoimpl.o
+debug/tipo_Mantenimiento.o
+debug/tipo_Mantenimientodaoimpl.o
 debug/moc_mainwindow.o

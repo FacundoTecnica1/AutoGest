@@ -8,9 +8,9 @@ void AlquilerDAOImpl::insertar(Alquiler obj) {
     QSqlQuery query(QSqlDatabase::database());
     query.prepare("INSERT INTO alquiler (id_auto, id_cliente, id_usuario, metodo_pago, fecha_inicio, fecha_fin, precio_total, estado) "
                   "VALUES (:id_auto, :id_cliente, :id_usuario, :metodo_pago, :fecha_inicio, :fecha_fin, :precio_total, :estado)");
-    query.bindValue(":id_auto", obj.getIdAuto());
-    query.bindValue(":id_cliente", obj.getIdCliente());
-    query.bindValue(":id_usuario", obj.getIdUsuario());
+    query.bindValue(":id_auto", obj.getid_auto());
+    query.bindValue(":id_cliente", obj.getid_cliente());
+    query.bindValue(":id_usuario", obj.getid_usuario());
     query.bindValue(":metodo_pago", obj.getMetodoPago());
     query.bindValue(":fecha_inicio", obj.getFechaInicio());
     query.bindValue(":fecha_fin", obj.getFechaFin());
@@ -23,10 +23,10 @@ void AlquilerDAOImpl::actualizar(Alquiler obj) {
     QSqlQuery query(QSqlDatabase::database());
     query.prepare("UPDATE alquiler SET id_auto = :id_auto, id_cliente = :id_cliente, id_usuario = :id_usuario, metodo_pago = :metodo_pago, "
                   "fecha_inicio = :fecha_inicio, fecha_fin = :fecha_fin, precio_total = :precio_total, estado = :estado WHERE id_alquiler = :id_alquiler");
-    query.bindValue(":id_alquiler", obj.getIdAlquiler());
-    query.bindValue(":id_auto", obj.getIdAuto());
-    query.bindValue(":id_cliente", obj.getIdCliente());
-    query.bindValue(":id_usuario", obj.getIdUsuario());
+    query.bindValue(":id_alquiler", obj.getid_alquiler());
+    query.bindValue(":id_auto", obj.getid_auto());
+    query.bindValue(":id_cliente", obj.getid_cliente());
+    query.bindValue(":id_usuario", obj.getid_usuario());
     query.bindValue(":metodo_pago", obj.getMetodoPago());
     query.bindValue(":fecha_inicio", obj.getFechaInicio());
     query.bindValue(":fecha_fin", obj.getFechaFin());
@@ -38,7 +38,7 @@ void AlquilerDAOImpl::actualizar(Alquiler obj) {
 void AlquilerDAOImpl::eliminar(Alquiler obj) {
     QSqlQuery query(QSqlDatabase::database());
     query.prepare("DELETE FROM alquiler WHERE id_alquiler = :id_alquiler");
-    query.bindValue(":id_alquiler", obj.getIdAlquiler());
+    query.bindValue(":id_alquiler", obj.getid_alquiler());
     query.exec();
 }
 
@@ -49,10 +49,10 @@ Alquiler AlquilerDAOImpl::buscarPorId(int id) {
     query.bindValue(":id_alquiler", id);
     if(query.exec()) {
         if(query.next()) {
-            obj.setIdAlquiler(query.value("id_alquiler").toInt());
-            obj.setIdAuto(query.value("id_auto").toInt());
-            obj.setIdCliente(query.value("id_cliente").toInt());
-            obj.setIdUsuario(query.value("id_usuario").toInt());
+            obj.setid_alquiler(query.value("id_alquiler").toInt());
+            obj.setid_auto(query.value("id_auto").toInt());
+            obj.setid_cliente(query.value("id_cliente").toInt());
+            obj.setid_usuario(query.value("id_usuario").toInt());
             obj.setMetodoPago(query.value("metodo_pago").toString());
             obj.setFechaInicio(query.value("fecha_inicio").toString());
             obj.setFechaFin(query.value("fecha_fin").toString());
@@ -70,10 +70,10 @@ vector<Alquiler> AlquilerDAOImpl::listar() {
     if(query.exec()) {
         while(query.next()) {
             Alquiler obj;
-            obj.setIdAlquiler(query.value("id_alquiler").toInt());
-            obj.setIdAuto(query.value("id_auto").toInt());
-            obj.setIdCliente(query.value("id_cliente").toInt());
-            obj.setIdUsuario(query.value("id_usuario").toInt());
+            obj.setid_alquiler(query.value("id_alquiler").toInt());
+            obj.setid_auto(query.value("id_auto").toInt());
+            obj.setid_cliente(query.value("id_cliente").toInt());
+            obj.setid_usuario(query.value("id_usuario").toInt());
             obj.setMetodoPago(query.value("metodo_pago").toString());
             obj.setFechaInicio(query.value("fecha_inicio").toString());
             obj.setFechaFin(query.value("fecha_fin").toString());

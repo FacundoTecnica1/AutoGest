@@ -6,11 +6,11 @@ using namespace std;
 
 class IncidenteDAOImpl : public IncidenteDAO {
 public:
-    void insertar(Incidente obj) override;
-    void actualizar(Incidente obj) override;
-    void eliminar(Incidente obj) override;
-    Incidente buscarPorId(int id) override;
-    vector<Incidente> listar() override;
+    void insertar(Incidente obj);
+    void actualizar(Incidente obj);
+    void eliminar(Incidente obj);
+    Incidente buscarPorId(int id);
+    vector<Incidente> listar();
 };
 
 #endif // INCIDENTEDAOIMPL_H

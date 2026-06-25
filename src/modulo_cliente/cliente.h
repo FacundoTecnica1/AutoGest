@@ -4,7 +4,7 @@
 
 class Cliente {
 private:
-    int idCliente;
+    int id_cliente;
     QString nombre;
     QString apellido;
     int edad;
@@ -18,8 +18,8 @@ private:
 public:
     Cliente();
 
-    int getIdCliente() const;
-    void setIdCliente(int value);
+    int getid_cliente() const;
+    void setid_cliente(int value);
 
     QString getNombre() const;
     void setNombre(const QString &value);

@@ -1,37 +1,37 @@
 #include "autoparte.h"
 
 Autoparte::Autoparte() {
-    idAutoparte = 0;
-    idProveedor = 0;
-    idMantenimiento = 0;
+    id_autoparte = 0;
+    id_proveedor = 0;
+    id_Mantenimiento = 0;
     nombre = "";
     marca = "";
     precio = 0.0;
     stock = 0;
 }
 
-int Autoparte::getIdAutoparte() const {
-    return idAutoparte;
+int Autoparte::getid_autoparte() const {
+    return id_autoparte;
 }
 
-void Autoparte::setIdAutoparte(int value) {
-    idAutoparte = value;
+void Autoparte::setid_autoparte(int value) {
+    id_autoparte = value;
 }
 
-int Autoparte::getIdProveedor() const {
-    return idProveedor;
+int Autoparte::getid_proveedor() const {
+    return id_proveedor;
 }
 
-void Autoparte::setIdProveedor(int value) {
-    idProveedor = value;
+void Autoparte::setid_proveedor(int value) {
+    id_proveedor = value;
 }
 
-int Autoparte::getIdMantenimiento() const {
-    return idMantenimiento;
+int Autoparte::getid_Mantenimiento() const {
+    return id_Mantenimiento;
 }
 
-void Autoparte::setIdMantenimiento(int value) {
-    idMantenimiento = value;
+void Autoparte::setid_Mantenimiento(int value) {
+    id_Mantenimiento = value;
 }
 
 QString Autoparte::getNombre() const {

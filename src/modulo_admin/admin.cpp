@@ -1,23 +1,28 @@
 #include "admin.h"
 
+//Inicializamos las variables sin nada, para crear el objeto vacío
 Admin::Admin() {
-    idAdmin = 0;
+    id_admin = 0;
     user = "";
     password = "";
 }
 
-Admin::Admin(int idAdmin, QString user, QString password) {
-    this->idAdmin = idAdmin;
+Admin::Admin(int id_admin, QString user, QString password) {
+    this->id_admin = id_admin;
     this->user = user;
     this->password = password;
+//Indico con el this las variables privadas, y después
+//EL valor que se les va a pasar a cada una
 }
 
-int Admin::getIdAdmin() const {
-    return idAdmin;
+//Los get devuelven lo que valen las variables
+
+int Admin::getid_admin() const {
+    return id_admin;
 }
 
-void Admin::setIdAdmin(int value) {
-    idAdmin = value;
+void Admin::setid_admin(int value) {
+    id_admin = value; //Value es lo que el usuario escribio
 }
 
 QString Admin::getUser() const {

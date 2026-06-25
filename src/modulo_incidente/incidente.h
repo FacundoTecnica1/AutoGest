@@ -4,8 +4,8 @@
 
 class Incidente {
 private:
-    int idIncidente;
-    int idAlquiler;
+    int id_incidente;
+    int id_alquiler;
     QString tipoIncidente;
     QString fechaIncidente;
     QString descripcion;
@@ -14,11 +14,11 @@ private:
 public:
     Incidente();
 
-    int getIdIncidente() const;
-    void setIdIncidente(int value);
+    int getid_incidente() const;
+    void setid_incidente(int value);
 
-    int getIdAlquiler() const;
-    void setIdAlquiler(int value);
+    int getid_alquiler() const;
+    void setid_alquiler(int value);
 
     QString getTipoIncidente() const;
     void setTipoIncidente(const QString &value);

@@ -1,10 +1,10 @@
 #include "alquiler.h"
 
 Alquiler::Alquiler() {
-    idAlquiler = 0;
-    idAuto = 0;
-    idCliente = 0;
-    idUsuario = 0;
+    id_alquiler = 0;
+    id_auto = 0;
+    id_cliente = 0;
+    id_usuario = 0;
     metodoPago = "";
     fechaInicio = "";
     fechaFin = "";
@@ -12,11 +12,11 @@ Alquiler::Alquiler() {
     estado = "";
 }
 
-Alquiler::Alquiler(int idAlquiler, int idAuto, int idCliente, int idUsuario, QString metodoPago, QString fechaInicio, QString fechaFin, double precioTotal, QString estado) {
-    this->idAlquiler = idAlquiler;
-    this->idAuto = idAuto;
-    this->idCliente = idCliente;
-    this->idUsuario = idUsuario;
+Alquiler::Alquiler(int id_alquiler, int id_auto, int id_cliente, int id_usuario, QString metodoPago, QString fechaInicio, QString fechaFin, double precioTotal, QString estado) {
+    this->id_alquiler = id_alquiler;
+    this->id_auto = id_auto;
+    this->id_cliente = id_cliente;
+    this->id_usuario = id_usuario;
     this->metodoPago = metodoPago;
     this->fechaInicio = fechaInicio;
     this->fechaFin = fechaFin;
@@ -24,35 +24,35 @@ Alquiler::Alquiler(int idAlquiler, int idAuto, int idCliente, int idUsuario, QSt
     this->estado = estado;
 }
 
-int Alquiler::getIdAlquiler() const{
-    return idAlquiler;
+int Alquiler::getid_alquiler() const{
+    return id_alquiler;
 }
 
-void Alquiler::setIdAlquiler(int value){
-    idAlquiler = value;
+void Alquiler::setid_alquiler(int value){
+    id_alquiler = value;
 }
 
-int Alquiler::getIdAuto() const {
-    return idAuto;
+int Alquiler::getid_auto() const {
+    return id_auto;
 }
 
-void Alquiler::setIdAuto(int value){ idAuto = value;
+void Alquiler::setid_auto(int value){ id_auto = value;
 }
 
-int Alquiler::getIdCliente() const{
-    return idCliente;
+int Alquiler::getid_cliente() const{
+    return id_cliente;
 }
 
-void Alquiler::setIdCliente(int value){
-    idCliente = value;
+void Alquiler::setid_cliente(int value){
+    id_cliente = value;
 }
 
-int Alquiler::getIdUsuario() const {
-    return idUsuario;
+int Alquiler::getid_usuario() const {
+    return id_usuario;
 }
 
-void Alquiler::setIdUsuario(int value){
-    idUsuario = value;
+void Alquiler::setid_usuario(int value){
+    id_usuario = value;
 }
 
 QString Alquiler::getMetodoPago() const {

@@ -1,7 +1,7 @@
 #include "cliente.h"
 
 Cliente::Cliente() {
-    idCliente = 0;
+    id_cliente = 0;
     nombre = "";
     apellido = "";
     edad = 0;
@@ -13,12 +13,12 @@ Cliente::Cliente() {
     fechaRegistro = "";
 }
 
-int Cliente::getIdCliente() const {
-    return idCliente;
+int Cliente::getid_cliente() const {
+    return id_cliente;
 }
 
-void Cliente::setIdCliente(int value) {
-    idCliente = value;
+void Cliente::setid_cliente(int value) {
+    id_cliente = value;
 }
 
 QString Cliente::getNombre() const {

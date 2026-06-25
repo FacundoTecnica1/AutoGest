@@ -22,12 +22,12 @@ SOURCES += \
     src/modulo_cliente/clientedaoimpl.cpp \
     src/modulo_incidente/incidente.cpp \
     src/modulo_incidente/incidentedaoimpl.cpp \
-    src/modulo_mantenimiento/mantenimiento.cpp \
-    src/modulo_mantenimiento/mantenimientodaoimpl.cpp \
-    src/modulo_proveedor/proveedor.cpp \
-    src/modulo_proveedor/proveedordaoimpl.cpp \
-    src/modulo_tipo_mantenimiento/tipo_mantenimiento.cpp \
-    src/modulo_tipo_mantenimiento/tipo_mantenimientodaoimpl.cpp
+    src/modulo_Mantenimiento/Mantenimiento.cpp \
+    src/modulo_Mantenimiento/Mantenimientodaoimpl.cpp \
+    src/modulo_Proveedor/Proveedor.cpp \
+    src/modulo_Proveedor/Proveedordaoimpl.cpp \
+    src/modulo_tipo_Mantenimiento/tipo_Mantenimiento.cpp \
+    src/modulo_tipo_Mantenimiento/tipo_Mantenimientodaoimpl.cpp
 
 HEADERS += \
     conexion.h \
@@ -51,15 +51,15 @@ HEADERS += \
     src/modulo_incidente/incidente.h \
     src/modulo_incidente/incidentedao.h \
     src/modulo_incidente/incidentedaoimpl.h \
-    src/modulo_mantenimiento/mantenimiento.h \
-    src/modulo_mantenimiento/mantenimientodao.h \
-    src/modulo_mantenimiento/mantenimientodaoimpl.h \
-    src/modulo_proveedor/proveedor.h \
-    src/modulo_proveedor/proveedordao.h \
-    src/modulo_proveedor/proveedordaoimpl.h \
-    src/modulo_tipo_mantenimiento/tipo_mantenimiento.h \
-    src/modulo_tipo_mantenimiento/tipo_mantenimientodao.h \
-    src/modulo_tipo_mantenimiento/tipo_mantenimientodaoimpl.h
+    src/modulo_Mantenimiento/Mantenimiento.h \
+    src/modulo_Mantenimiento/Mantenimientodao.h \
+    src/modulo_Mantenimiento/Mantenimientodaoimpl.h \
+    src/modulo_Proveedor/Proveedor.h \
+    src/modulo_Proveedor/Proveedordao.h \
+    src/modulo_Proveedor/Proveedordaoimpl.h \
+    src/modulo_tipo_Mantenimiento/tipo_Mantenimiento.h \
+    src/modulo_tipo_Mantenimiento/tipo_Mantenimientodao.h \
+    src/modulo_tipo_Mantenimiento/tipo_Mantenimientodaoimpl.h
 
 FORMS += \
     mainwindow.ui
@@ -71,9 +71,9 @@ INCLUDEPATH += src/modulo_admin \
                src/modulo_autoparte \
                src/modulo_cliente \
                src/modulo_incidente \
-               src/modulo_mantenimiento \
-               src/modulo_proveedor \
-               src/modulo_tipo_mantenimiento
+               src/modulo_Mantenimiento \
+               src/modulo_Proveedor \
+               src/modulo_tipo_Mantenimiento
 
 
 # Default rules for deployment.

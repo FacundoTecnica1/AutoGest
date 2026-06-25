@@ -1,28 +1,28 @@
 #include "incidente.h"
 
 Incidente::Incidente() {
-    idIncidente = 0;
-    idAlquiler = 0;
+    id_incidente = 0;
+    id_alquiler = 0;
     tipoIncidente = "";
     fechaIncidente = "";
     descripcion = "";
     costo = 0.0;
 }
 
-int Incidente::getIdIncidente() const {
-    return idIncidente;
+int Incidente::getid_incidente() const {
+    return id_incidente;
 }
 
-void Incidente::setIdIncidente(int value) {
-    idIncidente = value;
+void Incidente::setid_incidente(int value) {
+    id_incidente = value;
 }
 
-int Incidente::getIdAlquiler() const {
-    return idAlquiler;
+int Incidente::getid_alquiler() const {
+    return id_alquiler;
 }
 
-void Incidente::setIdAlquiler(int value) {
-    idAlquiler = value;
+void Incidente::setid_alquiler(int value) {
+    id_alquiler = value;
 }
 
 QString Incidente::getTipoIncidente() const {

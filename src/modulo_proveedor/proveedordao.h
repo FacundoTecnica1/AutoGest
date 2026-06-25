@@ -1,9 +1,9 @@
-#ifndef PROVEEDORDAO_H
-#define PROVEEDORDAO_H
+#ifndef ProveedorDAO_H
+#define ProveedorDAO_H
 #include "dao.h"
-#include "proveedor.h"
+#include "Proveedor.h"
 
 class ProveedorDAO : public DAO<Proveedor> {
 };
 
-#endif // PROVEEDORDAO_H
+#endif // ProveedorDAO_H

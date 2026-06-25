@@ -25,7 +25,7 @@ void ClienteDAOImpl::actualizar(Cliente obj) {
     query.prepare("UPDATE cliente SET nombre = :nombre, apellido = :apellido, edad = :edad, dni = :dni, telefono = :telefono, "
                   "email = :email, direccion = :direccion, clase_licencia = :clase_licencia, fecha_registro = :fecha_registro "
                   "WHERE id_cliente = :id_cliente");
-    query.bindValue(":id_cliente", obj.getIdCliente());
+    query.bindValue(":id_cliente", obj.getid_cliente());
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":apellido", obj.getApellido());
     query.bindValue(":edad", obj.getEdad());
@@ -41,7 +41,7 @@ void ClienteDAOImpl::actualizar(Cliente obj) {
 void ClienteDAOImpl::eliminar(Cliente obj) {
     QSqlQuery query(QSqlDatabase::database());
     query.prepare("DELETE FROM cliente WHERE id_cliente = :id_cliente");
-    query.bindValue(":id_cliente", obj.getIdCliente());
+    query.bindValue(":id_cliente", obj.getid_cliente());
     query.exec();
 }
 
@@ -52,7 +52,7 @@ Cliente ClienteDAOImpl::buscarPorId(int id) {
     query.bindValue(":id_cliente", id);
     if(query.exec()) {
         if(query.next()) {
-            obj.setIdCliente(query.value("id_cliente").toInt());
+            obj.setid_cliente(query.value("id_cliente").toInt());
             obj.setNombre(query.value("nombre").toString());
             obj.setApellido(query.value("apellido").toString());
             obj.setEdad(query.value("edad").toInt());
@@ -74,7 +74,7 @@ vector<Cliente> ClienteDAOImpl::listar() {
     if(query.exec()) {
         while(query.next()) {
             Cliente obj;
-            obj.setIdCliente(query.value("id_cliente").toInt());
+            obj.setid_cliente(query.value("id_cliente").toInt());
             obj.setNombre(query.value("nombre").toString());
             obj.setApellido(query.value("apellido").toString());
             obj.setEdad(query.value("edad").toInt());

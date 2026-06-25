@@ -4,16 +4,19 @@
 
 class Admin {
 private:
-    int idAdmin;
+    int id_admin;
     QString user;
     QString password;
 
 public:
-    Admin();
-    Admin(int idAdmin, QString user, QString password);
 
-    int getIdAdmin() const;
-    void setIdAdmin(int value);
+    //Creo dos constructores, uno sin nada
+    //y el otro con los parametros que va a recibir
+    Admin();
+    Admin(int id_admin, QString user, QString password);
+
+    int getid_admin() const;
+    void setid_admin(int value); //En value se va a guardar lo que ingreso el usuario
 
     QString getUser() const;
     void setUser(const QString &value);

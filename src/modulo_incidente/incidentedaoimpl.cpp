@@ -8,7 +8,7 @@ void IncidenteDAOImpl::insertar(Incidente obj) {
     QSqlQuery query(QSqlDatabase::database());
     query.prepare("INSERT INTO incidente (id_alquiler, tipo_incidente, fecha_incidente, descripcion, costo) "
                   "VALUES (:id_alquiler, :tipo_incidente, :fecha_incidente, :descripcion, :costo)");
-    query.bindValue(":id_alquiler", obj.getIdAlquiler());
+    query.bindValue(":id_alquiler", obj.getid_alquiler());
     query.bindValue(":tipo_incidente", obj.getTipoIncidente());
     query.bindValue(":fecha_incidente", obj.getFechaIncidente());
     query.bindValue(":descripcion", obj.getDescripcion());
@@ -20,8 +20,8 @@ void IncidenteDAOImpl::actualizar(Incidente obj) {
     QSqlQuery query(QSqlDatabase::database());
     query.prepare("UPDATE incidente SET id_alquiler = :id_alquiler, tipo_incidente = :tipo_incidente, "
                   "fecha_incidente = :fecha_incidente, descripcion = :descripcion, costo = :costo WHERE id_incidente = :id_incidente");
-    query.bindValue(":id_incidente", obj.getIdIncidente());
-    query.bindValue(":id_alquiler", obj.getIdAlquiler());
+    query.bindValue(":id_incidente", obj.getid_incidente());
+    query.bindValue(":id_alquiler", obj.getid_alquiler());
     query.bindValue(":tipo_incidente", obj.getTipoIncidente());
     query.bindValue(":fecha_incidente", obj.getFechaIncidente());
     query.bindValue(":descripcion", obj.getDescripcion());
@@ -32,7 +32,7 @@ void IncidenteDAOImpl::actualizar(Incidente obj) {
 void IncidenteDAOImpl::eliminar(Incidente obj) {
     QSqlQuery query(QSqlDatabase::database());
     query.prepare("DELETE FROM incidente WHERE id_incidente = :id_incidente");
-    query.bindValue(":id_incidente", obj.getIdIncidente());
+    query.bindValue(":id_incidente", obj.getid_incidente());
     query.exec();
 }
 
@@ -43,8 +43,8 @@ Incidente IncidenteDAOImpl::buscarPorId(int id) {
     query.bindValue(":id_incidente", id);
     if(query.exec()) {
         if(query.next()) {
-            obj.setIdIncidente(query.value("id_incidente").toInt());
-            obj.setIdAlquiler(query.value("id_alquiler").toInt());
+            obj.setid_incidente(query.value("id_incidente").toInt());
+            obj.setid_alquiler(query.value("id_alquiler").toInt());
             obj.setTipoIncidente(query.value("tipo_incidente").toString());
             obj.setFechaIncidente(query.value("fecha_incidente").toString());
             obj.setDescripcion(query.value("descripcion").toString());
@@ -61,8 +61,8 @@ vector<Incidente> IncidenteDAOImpl::listar() {
     if(query.exec()) {
         while(query.next()) {
             Incidente obj;
-            obj.setIdIncidente(query.value("id_incidente").toInt());
-            obj.setIdAlquiler(query.value("id_alquiler").toInt());
+            obj.setid_incidente(query.value("id_incidente").toInt());
+            obj.setid_alquiler(query.value("id_alquiler").toInt());
             obj.setTipoIncidente(query.value("tipo_incidente").toString());
             obj.setFechaIncidente(query.value("fecha_incidente").toString());
             obj.setDescripcion(query.value("descripcion").toString());

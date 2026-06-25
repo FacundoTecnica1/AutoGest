@@ -4,10 +4,10 @@
 
 class Alquiler {
 private:
-    int idAlquiler;
-    int idAuto;
-    int idCliente;
-    int idUsuario;
+    int id_alquiler;
+    int id_auto;
+    int id_cliente;
+    int id_usuario;
     QString metodoPago;
     QString fechaInicio;
     QString fechaFin;
@@ -16,19 +16,19 @@ private:
 
 public:
     Alquiler();
-    Alquiler(int idAlquiler, int idAuto, int idCliente, int idUsuario, QString metodoPago, QString fechaInicio, QString fechaFin, double precioTotal, QString estado);
+    Alquiler(int id_alquiler, int id_auto, int id_cliente, int id_usuario, QString metodoPago, QString fechaInicio, QString fechaFin, double precioTotal, QString estado);
 
-    int getIdAlquiler() const;
-    void setIdAlquiler(int value);
+    int getid_alquiler() const;
+    void setid_alquiler(int value);
 
-    int getIdAuto() const;
-    void setIdAuto(int value);
+    int getid_auto() const;
+    void setid_auto(int value);
 
-    int getIdCliente() const;
-    void setIdCliente(int value);
+    int getid_cliente() const;
+    void setid_cliente(int value);
 
-    int getIdUsuario() const;
-    void setIdUsuario(int value);
+    int getid_usuario() const;
+    void setid_usuario(int value);
 
     QString getMetodoPago() const;
     void setMetodoPago(const QString &value);

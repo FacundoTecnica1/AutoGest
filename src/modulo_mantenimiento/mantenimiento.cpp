@@ -1,9 +1,9 @@
-#include "mantenimiento.h"
+#include "Mantenimiento.h"
 
 Mantenimiento::Mantenimiento() {
-    idMantenimiento = 0;
-    idAuto = 0;
-    idTipoMantenimiento = 0;
+    id_Mantenimiento = 0;
+    id_auto = 0;
+    id_tipo_Mantenimiento = 0;
     fechaIngreso = "";
     fechaSalida = "";
     observaciones = "";
@@ -11,28 +11,28 @@ Mantenimiento::Mantenimiento() {
     estado = "";
 }
 
-int Mantenimiento::getIdMantenimiento() const {
-    return idMantenimiento;
+int Mantenimiento::getid_Mantenimiento() const {
+    return id_Mantenimiento;
 }
 
-void Mantenimiento::setIdMantenimiento(int value) {
-    idMantenimiento = value;
+void Mantenimiento::setid_Mantenimiento(int value) {
+    id_Mantenimiento = value;
 }
 
-int Mantenimiento::getIdAuto() const {
-    return idAuto;
+int Mantenimiento::getid_auto() const {
+    return id_auto;
 }
 
-void Mantenimiento::setIdAuto(int value) {
-    idAuto = value;
+void Mantenimiento::setid_auto(int value) {
+    id_auto = value;
 }
 
-int Mantenimiento::getIdTipoMantenimiento() const {
-    return idTipoMantenimiento;
+int Mantenimiento::getid_tipo_Mantenimiento() const {
+    return id_tipo_Mantenimiento;
 }
 
-void Mantenimiento::setIdTipoMantenimiento(int value) {
-    idTipoMantenimiento = value;
+void Mantenimiento::setid_tipo_Mantenimiento(int value) {
+    id_tipo_Mantenimiento = value;
 }
 
 QString Mantenimiento::getFechaIngreso() const {

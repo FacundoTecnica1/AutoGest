@@ -13,10 +13,10 @@ release/cliente.o
 release/clientedaoimpl.o
 release/incidente.o
 release/incidentedaoimpl.o
-release/mantenimiento.o
-release/mantenimientodaoimpl.o
-release/proveedor.o
-release/proveedordaoimpl.o
-release/tipo_mantenimiento.o
-release/tipo_mantenimientodaoimpl.o
+release/Mantenimiento.o
+release/Mantenimientodaoimpl.o
+release/Proveedor.o
+release/Proveedordaoimpl.o
+release/tipo_Mantenimiento.o
+release/tipo_Mantenimientodaoimpl.o
 release/moc_mainwindow.o

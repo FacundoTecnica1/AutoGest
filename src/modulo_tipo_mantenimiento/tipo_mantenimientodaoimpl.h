@@ -1,16 +1,16 @@
-#ifndef TIPO_MANTENIMIENTODAOIMPL_H
-#define TIPO_MANTENIMIENTODAOIMPL_H
-#include "tipo_mantenimientodao.h"
+#ifndef TIPO_MantenimientoDAOIMPL_H
+#define TIPO_MantenimientoDAOIMPL_H
+#include "tipo_Mantenimientodao.h"
 
 using namespace std;
 
 class TipoMantenimientoDAOImpl : public TipoMantenimientoDAO {
 public:
-    void insertar(TipoMantenimiento obj) override;
-    void actualizar(TipoMantenimiento obj) override;
-    void eliminar(TipoMantenimiento obj) override;
-    TipoMantenimiento buscarPorId(int id) override;
-    vector<TipoMantenimiento> listar() override;
+    void insertar(TipoMantenimiento obj);
+    void actualizar(TipoMantenimiento obj);
+    void eliminar(TipoMantenimiento obj);
+    TipoMantenimiento buscarPorId(int id);
+    vector<TipoMantenimiento> listar();
 };
 
-#endif // TIPO_MANTENIMIENTODAOIMPL_H
+#endif // TIPO_MantenimientoDAOIMPL_H

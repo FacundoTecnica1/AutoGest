@@ -1,7 +1,7 @@
 #include "auto.h"
 
 Auto::Auto() {
-    idAuto = 0;
+    id_auto = 0;
     marca = "";
     modelo = "";
     patente = "";
@@ -13,12 +13,12 @@ Auto::Auto() {
     fechaIngreso = "";
 }
 
-int Auto::getIdAuto() const {
-    return idAuto;
+int Auto::getid_auto() const {
+    return id_auto;
 }
 
-void Auto::setIdAuto(int value) {
-    idAuto = value;
+void Auto::setid_auto(int value) {
+    id_auto = value;
 }
 
 QString Auto::getMarca() const {

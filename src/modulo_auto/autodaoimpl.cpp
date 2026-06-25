@@ -25,7 +25,7 @@ void AutoDAOImpl::actualizar(Auto obj) {
     query.prepare("UPDATE auto SET marca = :marca, modelo = :modelo, patente = :patente, anio = :anio, color = :color, "
                   "kilometraje = :kilometraje, precio_por_dia = :precio_por_dia, estado = :estado, fecha_ingreso = :fecha_ingreso "
                   "WHERE id_auto = :id_auto");
-    query.bindValue(":id_auto", obj.getIdAuto());
+    query.bindValue(":id_auto", obj.getid_auto());
     query.bindValue(":marca", obj.getMarca());
     query.bindValue(":modelo", obj.getModelo());
     query.bindValue(":patente", obj.getPatente());
@@ -41,7 +41,7 @@ void AutoDAOImpl::actualizar(Auto obj) {
 void AutoDAOImpl::eliminar(Auto obj) {
     QSqlQuery query(QSqlDatabase::database());
     query.prepare("DELETE FROM auto WHERE id_auto = :id_auto");
-    query.bindValue(":id_auto", obj.getIdAuto());
+    query.bindValue(":id_auto", obj.getid_auto());
     query.exec();
 }
 
@@ -52,7 +52,7 @@ Auto AutoDAOImpl::buscarPorId(int id) {
     query.bindValue(":id_auto", id);
     if(query.exec()) {
         if(query.next()) {
-            obj.setIdAuto(query.value("id_auto").toInt());
+            obj.setid_auto(query.value("id_auto").toInt());
             obj.setMarca(query.value("marca").toString());
             obj.setModelo(query.value("modelo").toString());
             obj.setPatente(query.value("patente").toString());
@@ -74,7 +74,7 @@ vector<Auto> AutoDAOImpl::listar() {
     if(query.exec()) {
         while(query.next()) {
             Auto obj;
-            obj.setIdAuto(query.value("id_auto").toInt());
+            obj.setid_auto(query.value("id_auto").toInt());
             obj.setMarca(query.value("marca").toString());
             obj.setModelo(query.value("modelo").toString());
             obj.setPatente(query.value("patente").toString());

@@ -17,6 +17,12 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+//aca estan los btns q vamos a darles la funciones correspondientes
+//en la interfaz
+private slots:
+    void on_btnCerrar_clicked();
+    void on_btnIngresar_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -1,9 +1,9 @@
-#ifndef TIPO_MANTENIMIENTODAO_H
-#define TIPO_MANTENIMIENTODAO_H
+#ifndef TIPO_MantenimientoDAO_H
+#define TIPO_MantenimientoDAO_H
 #include "dao.h"
-#include "tipo_mantenimiento.h"
+#include "tipo_Mantenimiento.h"
 
 class TipoMantenimientoDAO : public DAO<TipoMantenimiento> {
 };
 
-#endif // TIPO_MANTENIMIENTODAO_H
+#endif // TIPO_MantenimientoDAO_H

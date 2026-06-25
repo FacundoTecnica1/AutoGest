@@ -1,10 +1,10 @@
-#ifndef PROVEEDOR_H
-#define PROVEEDOR_H
+#ifndef Proveedor_H
+#define Proveedor_H
 #include <QString>
 
 class Proveedor {
 private:
-    int idProveedor;
+    int id_proveedor;
     QString nombre;
     QString telefono;
     QString email;
@@ -13,8 +13,8 @@ private:
 public:
     Proveedor();
 
-    int getIdProveedor() const;
-    void setIdProveedor(int value);
+    int getid_proveedor() const;
+    void setid_proveedor(int value);
 
     QString getNombre() const;
     void setNombre(const QString &value);
@@ -29,4 +29,4 @@ public:
     void setDireccion(const QString &value);
 };
 
-#endif // PROVEEDOR_H
+#endif // Proveedor_H

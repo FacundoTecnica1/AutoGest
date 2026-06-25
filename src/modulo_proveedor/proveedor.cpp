@@ -1,19 +1,19 @@
-#include "proveedor.h"
+#include "Proveedor.h"
 
 Proveedor::Proveedor() {
-    idProveedor = 0;
+    id_proveedor = 0;
     nombre = "";
     telefono = "";
     email = "";
     direccion = "";
 }
 
-int Proveedor::getIdProveedor() const {
-    return idProveedor;
+int Proveedor::getid_proveedor() const {
+    return id_proveedor;
 }
 
-void Proveedor::setIdProveedor(int value) {
-    idProveedor = value;
+void Proveedor::setid_proveedor(int value) {
+    id_proveedor = value;
 }
 
 QString Proveedor::getNombre() const {

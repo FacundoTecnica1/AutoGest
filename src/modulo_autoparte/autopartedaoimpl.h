@@ -6,11 +6,11 @@ using namespace std;
 
 class AutoparteDAOImpl : public AutoparteDAO {
 public:
-    void insertar(Autoparte obj) override;
-    void actualizar(Autoparte obj) override;
-    void eliminar(Autoparte obj) override;
-    Autoparte buscarPorId(int id) override;
-    vector<Autoparte> listar() override;
+    void insertar(Autoparte obj);
+    void actualizar(Autoparte obj);
+    void eliminar(Autoparte obj);
+    Autoparte buscarPorId(int id);
+    vector<Autoparte> listar();
 };
 
 #endif // AUTOPARTEDAOIMPL_H

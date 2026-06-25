@@ -4,9 +4,9 @@
 
 class Autoparte {
 private:
-    int idAutoparte;
-    int idProveedor;
-    int idMantenimiento;
+    int id_autoparte;
+    int id_proveedor;
+    int id_Mantenimiento;
     QString nombre;
     QString marca;
     double precio;
@@ -15,14 +15,14 @@ private:
 public:
     Autoparte();
 
-    int getIdAutoparte() const;
-    void setIdAutoparte(int value);
+    int getid_autoparte() const;
+    void setid_autoparte(int value);
 
-    int getIdProveedor() const;
-    void setIdProveedor(int value);
+    int getid_proveedor() const;
+    void setid_proveedor(int value);
 
-    int getIdMantenimiento() const;
-    void setIdMantenimiento(int value);
+    int getid_Mantenimiento() const;
+    void setid_Mantenimiento(int value);
 
     QString getNombre() const;
     void setNombre(const QString &value);

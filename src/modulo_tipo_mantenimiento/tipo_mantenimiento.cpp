@@ -1,16 +1,16 @@
-#include "tipo_mantenimiento.h"
+#include "tipo_Mantenimiento.h"
 
 TipoMantenimiento::TipoMantenimiento() {
-    idTipoMantenimiento = 0;
+    id_tipo_Mantenimiento = 0;
     nombre = "";
 }
 
-int TipoMantenimiento::getIdTipoMantenimiento() const {
-    return idTipoMantenimiento;
+int TipoMantenimiento::getid_tipo_Mantenimiento() const {
+    return id_tipo_Mantenimiento;
 }
 
-void TipoMantenimiento::setIdTipoMantenimiento(int value) {
-    idTipoMantenimiento = value;
+void TipoMantenimiento::setid_tipo_Mantenimiento(int value) {
+    id_tipo_Mantenimiento = value;
 }
 
 QString TipoMantenimiento::getNombre() const {

@@ -6,10 +6,10 @@ using namespace std;
 
 void AutoparteDAOImpl::insertar(Autoparte obj) {
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("INSERT INTO autoparte (`id proveedor`, `id mantenimiento`, nombre, marca, precio, stock) "
-                  "VALUES (:id_proveedor, :id_mantenimiento, :nombre, :marca, :precio, :stock)");
-    query.bindValue(":id_proveedor", obj.getIdProveedor());
-    query.bindValue(":id_mantenimiento", obj.getIdMantenimiento());
+    query.prepare("INSERT INTO autoparte (`id_Proveedor`, `id_Mantenimiento`, nombre, marca, precio, stock) "
+                  "VALUES (:id_Proveedor, :id_Mantenimiento, :nombre, :marca, :precio, :stock)");
+    query.bindValue(":id_Proveedor", obj.getid_proveedor());
+    query.bindValue(":id_Mantenimiento", obj.getid_Mantenimiento());
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":marca", obj.getMarca());
     query.bindValue(":precio", obj.getPrecio());
@@ -19,11 +19,11 @@ void AutoparteDAOImpl::insertar(Autoparte obj) {
 
 void AutoparteDAOImpl::actualizar(Autoparte obj) {
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("UPDATE autoparte SET `id proveedor` = :id_proveedor, `id mantenimiento` = :id_mantenimiento, nombre = :nombre, "
+    query.prepare("UPDATE autoparte SET `id_Proveedor` = :id_Proveedor, `id_Mantenimiento` = :id_Mantenimiento, nombre = :nombre, "
                   "marca = :marca, precio = :precio, stock = :stock WHERE `id autoparte` = :id_autoparte");
-    query.bindValue(":id_autoparte", obj.getIdAutoparte());
-    query.bindValue(":id_proveedor", obj.getIdProveedor());
-    query.bindValue(":id_mantenimiento", obj.getIdMantenimiento());
+    query.bindValue(":id_autoparte", obj.getid_autoparte());
+    query.bindValue(":id_Proveedor", obj.getid_proveedor());
+    query.bindValue(":id_Mantenimiento", obj.getid_Mantenimiento());
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":marca", obj.getMarca());
     query.bindValue(":precio", obj.getPrecio());
@@ -34,7 +34,7 @@ void AutoparteDAOImpl::actualizar(Autoparte obj) {
 void AutoparteDAOImpl::eliminar(Autoparte obj) {
     QSqlQuery query(QSqlDatabase::database());
     query.prepare("DELETE FROM autoparte WHERE `id autoparte` = :id_autoparte");
-    query.bindValue(":id_autoparte", obj.getIdAutoparte());
+    query.bindValue(":id_autoparte", obj.getid_autoparte());
     query.exec();
 }
 
@@ -45,9 +45,9 @@ Autoparte AutoparteDAOImpl::buscarPorId(int id) {
     query.bindValue(":id_autoparte", id);
     if(query.exec()) {
         if(query.next()) {
-            obj.setIdAutoparte(query.value("id autoparte").toInt());
-            obj.setIdProveedor(query.value("id proveedor").toInt());
-            obj.setIdMantenimiento(query.value("id mantenimiento").toInt());
+            obj.setid_autoparte(query.value("id autoparte").toInt());
+            obj.setid_proveedor(query.value("id_Proveedor").toInt());
+            obj.setid_Mantenimiento(query.value("id_Mantenimiento").toInt());
             obj.setNombre(query.value("nombre").toString());
             obj.setMarca(query.value("marca").toString());
             obj.setPrecio(query.value("precio").toDouble());
@@ -64,9 +64,9 @@ vector<Autoparte> AutoparteDAOImpl::listar() {
     if(query.exec()) {
         while(query.next()) {
             Autoparte obj;
-            obj.setIdAutoparte(query.value("id autoparte").toInt());
-            obj.setIdProveedor(query.value("id proveedor").toInt());
-            obj.setIdMantenimiento(query.value("id mantenimiento").toInt());
+            obj.setid_autoparte(query.value("id autoparte").toInt());
+            obj.setid_proveedor(query.value("id_Proveedor").toInt());
+            obj.setid_Mantenimiento(query.value("id_Mantenimiento").toInt());
             obj.setNombre(query.value("nombre").toString());
             obj.setMarca(query.value("marca").toString());
             obj.setPrecio(query.value("precio").toDouble());

@@ -1,16 +1,16 @@
-#ifndef PROVEEDORDAOIMPL_H
-#define PROVEEDORDAOIMPL_H
-#include "proveedordao.h"
+#ifndef ProveedorDAOIMPL_H
+#define ProveedorDAOIMPL_H
+#include "Proveedordao.h"
 
 using namespace std;
 
 class ProveedorDAOImpl : public ProveedorDAO {
 public:
-    void insertar(Proveedor obj) override;
-    void actualizar(Proveedor obj) override;
-    void eliminar(Proveedor obj) override;
-    Proveedor buscarPorId(int id) override;
-    vector<Proveedor> listar() override;
+    void insertar(Proveedor obj);
+    void actualizar(Proveedor obj);
+    void eliminar(Proveedor obj);
+    Proveedor buscarPorId(int id);
+    vector<Proveedor> listar();
 };
 
-#endif // PROVEEDORDAOIMPL_H
+#endif // ProveedorDAOIMPL_H

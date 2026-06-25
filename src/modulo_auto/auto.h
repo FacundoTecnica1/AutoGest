@@ -4,7 +4,7 @@
 
 class Auto {
 private:
-    int idAuto;
+    int id_auto;
     QString marca;
     QString modelo;
     QString patente;
@@ -18,8 +18,8 @@ private:
 public:
     Auto();
 
-    int getIdAuto() const;
-    void setIdAuto(int value);
+    int getid_auto() const;
+    void setid_auto(int value);
 
     QString getMarca() const;
     void setMarca(const QString &value);
