@@ -1,6 +1,7 @@
 #ifndef TIPO_MantenimientoDAOIMPL_H
 #define TIPO_MantenimientoDAOIMPL_H
 #include "tipo_Mantenimientodao.h"
+#include <QString>
 
 using namespace std;
 
@@ -9,7 +10,6 @@ public:
     void insertar(TipoMantenimiento obj);
     void actualizar(TipoMantenimiento obj);
     void eliminar(TipoMantenimiento obj);
-    TipoMantenimiento buscarPorId(int id);
     vector<TipoMantenimiento> listar();
 };
 

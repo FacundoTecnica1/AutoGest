@@ -15,6 +15,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//......LOGIN......
 
 //Boton para cerrar la apliación
 void MainWindow::on_btnCerrar_clicked(){
@@ -57,3 +58,5 @@ void MainWindow::on_btnIngresar_clicked(){
         ui->txtPassword->clear();
     }
 }
+
+//......AUTOS......

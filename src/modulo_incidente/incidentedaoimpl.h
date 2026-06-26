@@ -1,6 +1,7 @@
 #ifndef INCIDENTEDAOIMPL_H
 #define INCIDENTEDAOIMPL_H
 #include "incidentedao.h"
+#include <QString>
 
 using namespace std;
 
@@ -9,7 +10,6 @@ public:
     void insertar(Incidente obj);
     void actualizar(Incidente obj);
     void eliminar(Incidente obj);
-    Incidente buscarPorId(int id);
     vector<Incidente> listar();
 };
 

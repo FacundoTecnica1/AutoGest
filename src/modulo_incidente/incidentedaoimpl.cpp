@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
+#include <vector>
 using namespace std;
 
 void IncidenteDAOImpl::insertar(Incidente obj) {
@@ -36,23 +38,6 @@ void IncidenteDAOImpl::eliminar(Incidente obj) {
     query.exec();
 }
 
-Incidente IncidenteDAOImpl::buscarPorId(int id) {
-    Incidente obj;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM incidente WHERE id_incidente = :id_incidente");
-    query.bindValue(":id_incidente", id);
-    if(query.exec()) {
-        if(query.next()) {
-            obj.setid_incidente(query.value("id_incidente").toInt());
-            obj.setid_alquiler(query.value("id_alquiler").toInt());
-            obj.setTipoIncidente(query.value("tipo_incidente").toString());
-            obj.setFechaIncidente(query.value("fecha_incidente").toString());
-            obj.setDescripcion(query.value("descripcion").toString());
-            obj.setCosto(query.value("costo").toDouble());
-        }
-    }
-    return obj;
-}
 
 vector<Incidente> IncidenteDAOImpl::listar() {
     vector<Incidente> lista;

@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
+#include <vector>
 using namespace std;
 
 void ProveedorDAOImpl::insertar(Proveedor obj) {
@@ -34,22 +36,6 @@ void ProveedorDAOImpl::eliminar(Proveedor obj) {
     query.exec();
 }
 
-Proveedor ProveedorDAOImpl::buscarPorId(int id) {
-    Proveedor obj;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM Proveedor WHERE `id_Proveedor` = :id_Proveedor");
-    query.bindValue(":id_Proveedor", id);
-    if(query.exec()) {
-        if(query.next()) {
-            obj.setid_proveedor(query.value("id_Proveedor").toInt());
-            obj.setNombre(query.value("nombre").toString());
-            obj.setTelefono(query.value("telefono").toString());
-            obj.setEmail(query.value("email").toString());
-            obj.setDireccion(query.value("direccion").toString());
-        }
-    }
-    return obj;
-}
 
 vector<Proveedor> ProveedorDAOImpl::listar() {
     vector<Proveedor> lista;

@@ -1,6 +1,7 @@
 #ifndef AUTOPARTEDAOIMPL_H
 #define AUTOPARTEDAOIMPL_H
 #include "autopartedao.h"
+#include <QString>
 
 using namespace std;
 
@@ -9,7 +10,6 @@ public:
     void insertar(Autoparte obj);
     void actualizar(Autoparte obj);
     void eliminar(Autoparte obj);
-    Autoparte buscarPorId(int id);
     vector<Autoparte> listar();
 };
 

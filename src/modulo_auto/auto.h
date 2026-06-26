@@ -11,13 +11,12 @@ private:
     int anio;
     QString color;
     int kilometraje;
-    double precioPorDia;
+    double precio_por_dia;
     QString estado;
     QString fechaIngreso;
 
 public:
     Auto();
-
     int getid_auto() const;
     void setid_auto(int value);
 
@@ -39,8 +38,8 @@ public:
     int getKilometraje() const;
     void setKilometraje(int value);
 
-    double getPrecioPorDia() const;
-    void setPrecioPorDia(double value);
+    double getPrecio_por_dia() const;
+    void setPrecio_por_dia(double value);
 
     QString getEstado() const;
     void setEstado(const QString &value);

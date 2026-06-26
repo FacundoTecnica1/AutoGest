@@ -8,7 +8,7 @@ Auto::Auto() {
     anio = 0;
     color = "";
     kilometraje = 0;
-    precioPorDia = 0.0;
+    precio_por_dia = 0.0;
     estado = "";
     fechaIngreso = "";
 }
@@ -69,12 +69,12 @@ void Auto::setKilometraje(int value) {
     kilometraje = value;
 }
 
-double Auto::getPrecioPorDia() const {
-    return precioPorDia;
+double Auto::getPrecio_por_dia() const {
+    return precio_por_dia;
 }
 
-void Auto::setPrecioPorDia(double value) {
-    precioPorDia = value;
+void Auto::setPrecio_por_dia(double value) {
+    precio_por_dia = value;
 }
 
 QString Auto::getEstado() const {

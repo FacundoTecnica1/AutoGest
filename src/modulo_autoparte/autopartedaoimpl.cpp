@@ -2,6 +2,7 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
 using namespace std;
 
 void AutoparteDAOImpl::insertar(Autoparte obj) {
@@ -36,25 +37,6 @@ void AutoparteDAOImpl::eliminar(Autoparte obj) {
     query.prepare("DELETE FROM autoparte WHERE `id autoparte` = :id_autoparte");
     query.bindValue(":id_autoparte", obj.getid_autoparte());
     query.exec();
-}
-
-Autoparte AutoparteDAOImpl::buscarPorId(int id) {
-    Autoparte obj;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM autoparte WHERE `id autoparte` = :id_autoparte");
-    query.bindValue(":id_autoparte", id);
-    if(query.exec()) {
-        if(query.next()) {
-            obj.setid_autoparte(query.value("id autoparte").toInt());
-            obj.setid_proveedor(query.value("id_Proveedor").toInt());
-            obj.setid_Mantenimiento(query.value("id_Mantenimiento").toInt());
-            obj.setNombre(query.value("nombre").toString());
-            obj.setMarca(query.value("marca").toString());
-            obj.setPrecio(query.value("precio").toDouble());
-            obj.setStock(query.value("stock").toInt());
-        }
-    }
-    return obj;
 }
 
 vector<Autoparte> AutoparteDAOImpl::listar() {

@@ -1,6 +1,8 @@
 #ifndef MantenimientoDAOIMPL_H
 #define MantenimientoDAOIMPL_H
 #include "Mantenimientodao.h"
+#include <QString>
+#include <QString>
 
 using namespace std;
 
@@ -9,7 +11,6 @@ public:
     void insertar(Mantenimiento obj) ;
     void actualizar(Mantenimiento obj) ;
     void eliminar(Mantenimiento obj) ;
-    Mantenimiento buscarPorId(int id) ;
     vector<Mantenimiento> listar();
 };
 

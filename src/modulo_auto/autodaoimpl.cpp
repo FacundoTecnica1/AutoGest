@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
+#include <vector>
 using namespace std;
 
 void AutoDAOImpl::insertar(Auto obj) {
@@ -14,7 +16,7 @@ void AutoDAOImpl::insertar(Auto obj) {
     query.bindValue(":anio", obj.getAnio());
     query.bindValue(":color", obj.getColor());
     query.bindValue(":kilometraje", obj.getKilometraje());
-    query.bindValue(":precio_por_dia", obj.getPrecioPorDia());
+    query.bindValue(":precio_por_dia", obj.getPrecio_por_dia());
     query.bindValue(":estado", obj.getEstado());
     query.bindValue(":fecha_ingreso", obj.getFechaIngreso());
     query.exec();
@@ -32,7 +34,7 @@ void AutoDAOImpl::actualizar(Auto obj) {
     query.bindValue(":anio", obj.getAnio());
     query.bindValue(":color", obj.getColor());
     query.bindValue(":kilometraje", obj.getKilometraje());
-    query.bindValue(":precio_por_dia", obj.getPrecioPorDia());
+    query.bindValue(":precio_por_dia", obj.getPrecio_por_dia());
     query.bindValue(":estado", obj.getEstado());
     query.bindValue(":fecha_ingreso", obj.getFechaIngreso());
     query.exec();
@@ -45,27 +47,6 @@ void AutoDAOImpl::eliminar(Auto obj) {
     query.exec();
 }
 
-Auto AutoDAOImpl::buscarPorId(int id) {
-    Auto obj;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM auto WHERE id_auto = :id_auto");
-    query.bindValue(":id_auto", id);
-    if(query.exec()) {
-        if(query.next()) {
-            obj.setid_auto(query.value("id_auto").toInt());
-            obj.setMarca(query.value("marca").toString());
-            obj.setModelo(query.value("modelo").toString());
-            obj.setPatente(query.value("patente").toString());
-            obj.setAnio(query.value("anio").toInt());
-            obj.setColor(query.value("color").toString());
-            obj.setKilometraje(query.value("kilometraje").toInt());
-            obj.setPrecioPorDia(query.value("precio_por_dia").toDouble());
-            obj.setEstado(query.value("estado").toString());
-            obj.setFechaIngreso(query.value("fecha_ingreso").toString());
-        }
-    }
-    return obj;
-}
 
 vector<Auto> AutoDAOImpl::listar() {
     vector<Auto> lista;
@@ -81,7 +62,7 @@ vector<Auto> AutoDAOImpl::listar() {
             obj.setAnio(query.value("anio").toInt());
             obj.setColor(query.value("color").toString());
             obj.setKilometraje(query.value("kilometraje").toInt());
-            obj.setPrecioPorDia(query.value("precio_por_dia").toDouble());
+            obj.setPrecio_por_dia(query.value("precio_por_dia").toDouble());
             obj.setEstado(query.value("estado").toString());
             obj.setFechaIngreso(query.value("fecha_ingreso").toString());
             lista.push_back(obj);
@@ -89,3 +70,4 @@ vector<Auto> AutoDAOImpl::listar() {
     }
     return lista;
 }
+

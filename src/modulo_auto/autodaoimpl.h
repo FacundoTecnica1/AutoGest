@@ -1,6 +1,7 @@
 #ifndef AUTODAOIMPL_H
 #define AUTODAOIMPL_H
 #include "autodao.h"
+#include <QString>
 
 using namespace std;
 
@@ -9,7 +10,6 @@ public:
     void insertar(Auto obj);
     void actualizar(Auto obj);
     void eliminar(Auto obj);
-    Auto buscarPorId(int id);
     vector<Auto> listar();
 };
 

@@ -1,6 +1,8 @@
 #ifndef ProveedorDAOIMPL_H
 #define ProveedorDAOIMPL_H
 #include "Proveedordao.h"
+#include <QString>
+
 
 using namespace std;
 
@@ -9,7 +11,6 @@ public:
     void insertar(Proveedor obj);
     void actualizar(Proveedor obj);
     void eliminar(Proveedor obj);
-    Proveedor buscarPorId(int id);
     vector<Proveedor> listar();
 };
 

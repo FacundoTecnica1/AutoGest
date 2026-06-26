@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
+#include <vector>
 using namespace std;
 
 void MantenimientoDAOImpl::insertar(Mantenimiento obj) {
@@ -39,26 +41,6 @@ void MantenimientoDAOImpl::eliminar(Mantenimiento obj) {
     query.prepare("DELETE FROM Mantenimiento WHERE id_Mantenimiento = :id_Mantenimiento");
     query.bindValue(":id_Mantenimiento", obj.getid_Mantenimiento());
     query.exec();
-}
-
-Mantenimiento MantenimientoDAOImpl::buscarPorId(int id) {
-    Mantenimiento obj;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM Mantenimiento WHERE id_Mantenimiento = :id_Mantenimiento");
-    query.bindValue(":id_Mantenimiento", id);
-    if(query.exec()) {
-        if(query.next()) {
-            obj.setid_Mantenimiento(query.value("id_Mantenimiento").toInt());
-            obj.setid_auto(query.value("id_auto").toInt());
-            obj.setid_tipo_Mantenimiento(query.value("id_tipo_Mantenimiento").toInt());
-            obj.setFechaIngreso(query.value("fecha_ingreso").toString());
-            obj.setFechaSalida(query.value("fecha_salida").toString());
-            obj.setObservaciones(query.value("observaciones").toString());
-            obj.setCosto(query.value("costo").toDouble());
-            obj.setEstado(query.value("estado").toString());
-        }
-    }
-    return obj;
 }
 
 vector<Mantenimiento> MantenimientoDAOImpl::listar() {

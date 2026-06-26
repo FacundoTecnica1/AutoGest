@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
+#include <vector>
 using namespace std;
 
 void AlquilerDAOImpl::insertar(Alquiler obj) {
@@ -40,27 +42,6 @@ void AlquilerDAOImpl::eliminar(Alquiler obj) {
     query.prepare("DELETE FROM alquiler WHERE id_alquiler = :id_alquiler");
     query.bindValue(":id_alquiler", obj.getid_alquiler());
     query.exec();
-}
-
-Alquiler AlquilerDAOImpl::buscarPorId(int id) {
-    Alquiler obj;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM alquiler WHERE id_alquiler = :id_alquiler");
-    query.bindValue(":id_alquiler", id);
-    if(query.exec()) {
-        if(query.next()) {
-            obj.setid_alquiler(query.value("id_alquiler").toInt());
-            obj.setid_auto(query.value("id_auto").toInt());
-            obj.setid_cliente(query.value("id_cliente").toInt());
-            obj.setid_usuario(query.value("id_usuario").toInt());
-            obj.setMetodoPago(query.value("metodo_pago").toString());
-            obj.setFechaInicio(query.value("fecha_inicio").toString());
-            obj.setFechaFin(query.value("fecha_fin").toString());
-            obj.setPrecioTotal(query.value("precio_total").toDouble());
-            obj.setEstado(query.value("estado").toString());
-        }
-    }
-    return obj;
 }
 
 vector<Alquiler> AlquilerDAOImpl::listar() {

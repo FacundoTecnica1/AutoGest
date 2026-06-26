@@ -1,6 +1,7 @@
 #ifndef ALQUILERDAOIMPL_H
 #define ALQUILERDAOIMPL_H
 #include "alquilerdao.h"
+#include <QString>
 
 using namespace std;
 
@@ -9,7 +10,6 @@ public:
     void insertar(Alquiler obj);
     void actualizar(Alquiler obj);
     void eliminar(Alquiler obj);
-    Alquiler buscarPorId(int id);
     vector<Alquiler> listar();
 };
 

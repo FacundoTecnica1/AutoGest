@@ -3,6 +3,9 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
+#include <vector>
+
 using namespace std;
 
 void AdminDAOImpl::insertar(Admin obj) {
@@ -29,20 +32,6 @@ void AdminDAOImpl::eliminar(Admin obj) {
     query.exec();
 }
 
-Admin AdminDAOImpl::buscarPorId(int id) {
-    Admin obj;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM admin WHERE id_admin = :id_admin");
-    query.bindValue(":id_admin", id);
-    if(query.exec()) {
-        if(query.next()) {
-            obj.setid_admin(query.value("id_admin").toInt());
-            obj.setUser(query.value("user").toString());
-            obj.setPassword(query.value("password").toString());
-        }
-    }
-    return obj;
-}
 
 vector<Admin> AdminDAOImpl::listar() {
     vector<Admin> lista;
@@ -59,6 +48,8 @@ vector<Admin> AdminDAOImpl::listar() {
     }
     return lista;
 }
+
+
 
 bool AdminDAOImpl::validarLogin(const QString &user, const QString &password) {
 

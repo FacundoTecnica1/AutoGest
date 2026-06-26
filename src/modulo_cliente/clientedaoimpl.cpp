@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
+#include <vector>
 using namespace std;
 
 void ClienteDAOImpl::insertar(Cliente obj) {
@@ -43,28 +45,6 @@ void ClienteDAOImpl::eliminar(Cliente obj) {
     query.prepare("DELETE FROM cliente WHERE id_cliente = :id_cliente");
     query.bindValue(":id_cliente", obj.getid_cliente());
     query.exec();
-}
-
-Cliente ClienteDAOImpl::buscarPorId(int id) {
-    Cliente obj;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM cliente WHERE id_cliente = :id_cliente");
-    query.bindValue(":id_cliente", id);
-    if(query.exec()) {
-        if(query.next()) {
-            obj.setid_cliente(query.value("id_cliente").toInt());
-            obj.setNombre(query.value("nombre").toString());
-            obj.setApellido(query.value("apellido").toString());
-            obj.setEdad(query.value("edad").toInt());
-            obj.setDni(query.value("dni").toString());
-            obj.setTelefono(query.value("telefono").toString());
-            obj.setEmail(query.value("email").toString());
-            obj.setDireccion(query.value("direccion").toString());
-            obj.setClaseLicencia(query.value("clase_licencia").toString());
-            obj.setFechaRegistro(query.value("fecha_registro").toString());
-        }
-    }
-    return obj;
 }
 
 vector<Cliente> ClienteDAOImpl::listar() {

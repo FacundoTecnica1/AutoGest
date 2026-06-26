@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
+#include <vector>
 using namespace std;
 
 void TipoMantenimientoDAOImpl::insertar(TipoMantenimiento obj) {
@@ -26,19 +28,6 @@ void TipoMantenimientoDAOImpl::eliminar(TipoMantenimiento obj) {
     query.exec();
 }
 
-TipoMantenimiento TipoMantenimientoDAOImpl::buscarPorId(int id) {
-    TipoMantenimiento obj;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM tipo_Mantenimiento WHERE id_tipo_Mantenimiento = :id_tipo_Mantenimiento");
-    query.bindValue(":id_tipo_Mantenimiento", id);
-    if(query.exec()) {
-        if(query.next()) {
-            obj.setid_tipo_Mantenimiento(query.value("id_tipo_Mantenimiento").toInt());
-            obj.setNombre(query.value("nombre").toString());
-        }
-    }
-    return obj;
-}
 
 vector<TipoMantenimiento> TipoMantenimientoDAOImpl::listar() {
     vector<TipoMantenimiento> lista;
