@@ -97,7 +97,7 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>4</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="Autos">
          <attribute name="title">
@@ -975,7 +975,7 @@
           </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="tab">
+        <widget class="QWidget" name="Incidentes">
          <attribute name="title">
           <string>Page</string>
          </attribute>
@@ -1169,16 +1169,6 @@
          <attribute name="title">
           <string>Page</string>
          </attribute>
-         <widget class="QTableWidget" name="tableWidget_Mantenimientos">
-          <property name="geometry">
-           <rect>
-            <x>290</x>
-            <y>100</y>
-            <width>421</width>
-            <height>321</height>
-           </rect>
-          </property>
-         </widget>
          <widget class="QLabel" name="label_buscadorMantenimiento">
           <property name="geometry">
            <rect>
@@ -1408,6 +1398,396 @@
             <width>113</width>
             <height>24</height>
            </rect>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="tableWidget_Mantenimientos">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>100</y>
+            <width>421</width>
+            <height>401</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="Autopartes">
+         <attribute name="title">
+          <string>Page</string>
+         </attribute>
+         <widget class="QLineEdit" name="txtPrecio_autoparte">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>140</y>
+            <width>113</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Stock_autoparte">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>100</y>
+            <width>101</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Stock:</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnGuardar_Autopartes">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>190</y>
+            <width>80</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Guardar</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_ListaAutopartes">
+          <property name="geometry">
+           <rect>
+            <x>440</x>
+            <y>0</y>
+            <width>161</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Lista de Autopartes</string>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="tableWidget_Autopartes">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>100</y>
+            <width>421</width>
+            <height>401</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Nombre_autoparte">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>20</y>
+            <width>121</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Nombre de autoparte:</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnEliminar_Autopartes">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>190</y>
+            <width>80</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Eliminar</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Marca_autoparte">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>20</y>
+            <width>91</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Marca:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Autopartes">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>20</y>
+            <width>75</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Buscador:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtBuscadorAutopartes">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>60</y>
+            <width>421</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="placeholderText">
+           <string>Buscar por nombre, marca, precio o cantidad de stock</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnActualizar_Autopartes">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>230</y>
+            <width>80</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Actualizar</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtNombre_autoparte">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>60</y>
+            <width>113</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtStock_autoparte">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>140</y>
+            <width>113</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Precio_autoparte">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>100</y>
+            <width>101</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Precio:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtMarca_autoparte">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>60</y>
+            <width>113</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Page</string>
+         </attribute>
+         <widget class="QLineEdit" name="txtTelefono_proveedor">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>60</y>
+            <width>113</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Nombre_proveedor">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>20</y>
+            <width>121</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Nombre proveedor:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Autopartes_2">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>20</y>
+            <width>75</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Buscador:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtBuscadorProveedor">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>60</y>
+            <width>421</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="placeholderText">
+           <string>Buscar por nombre, telefono, email o direccion del proveedor</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtPrecio_autoparte_2">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>140</y>
+            <width>113</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Direccion_proveedor">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>100</y>
+            <width>101</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Direccion:</string>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="tableWidget_Proveedor">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>100</y>
+            <width>421</width>
+            <height>401</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtDireccion_proveedor">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>140</y>
+            <width>113</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_ListaAutopartes_2">
+          <property name="geometry">
+           <rect>
+            <x>440</x>
+            <y>0</y>
+            <width>181</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Lista de proveedores</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnEliminar_proveedor">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>190</y>
+            <width>80</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Eliminar</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Telefono_proveedor">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>20</y>
+            <width>91</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Telefono:</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnActualizar_proveedor">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>230</y>
+            <width>80</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Actualizar</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtNombre_autoparte_2">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>60</y>
+            <width>113</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Email_proveedor">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>100</y>
+            <width>101</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Email:</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnGuardar_proveedor">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>190</y>
+            <width>80</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Guardar</string>
           </property>
          </widget>
         </widget>
