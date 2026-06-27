@@ -57,3 +57,27 @@ vector<Incidente> IncidenteDAOImpl::listar() {
     }
     return lista;
 }
+
+vector<Incidente> IncidenteDAOImpl::buscarCampo(const QString &busqueda) {
+    vector<Incidente> lista;
+    QSqlQuery query(QSqlDatabase::database());
+
+    query.prepare("SELECT * FROM incidente WHERE id_incidente LIKE :busqueda OR id_alquiler LIKE :busqueda "
+                  "OR tipo_incidente LIKE :busqueda OR fecha_incidente LIKE :busqueda OR descripcion LIKE :busqueda "
+                  "OR costo LIKE :busqueda");
+    query.bindValue(":busqueda", "%" + busqueda + "%");
+
+    if(query.exec()) {
+        while(query.next()) {
+            Incidente obj;
+            obj.setid_incidente(query.value("id_incidente").toInt());
+            obj.setid_alquiler(query.value("id_alquiler").toInt());
+            obj.setTipoIncidente(query.value("tipo_incidente").toString());
+            obj.setFechaIncidente(query.value("fecha_incidente").toString());
+            obj.setDescripcion(query.value("descripcion").toString());
+            obj.setCosto(query.value("costo").toDouble());
+            lista.push_back(obj);
+        }
+    }
+    return lista;
+}

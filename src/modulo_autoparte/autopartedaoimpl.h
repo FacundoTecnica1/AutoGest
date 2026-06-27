@@ -11,6 +11,7 @@ public:
     void actualizar(Autoparte obj);
     void eliminar(Autoparte obj);
     vector<Autoparte> listar();
+    vector<Autoparte> buscarCampo(const QString &busqueda);
 };
 
 #endif // AUTOPARTEDAOIMPL_H

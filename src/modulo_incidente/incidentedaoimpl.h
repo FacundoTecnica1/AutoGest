@@ -11,6 +11,7 @@ public:
     void actualizar(Incidente obj);
     void eliminar(Incidente obj);
     vector<Incidente> listar();
+    vector<Incidente> buscarCampo(const QString &busqueda);
 };
 
 #endif // INCIDENTEDAOIMPL_H

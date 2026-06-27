@@ -43,3 +43,21 @@ vector<TipoMantenimiento> TipoMantenimientoDAOImpl::listar() {
     }
     return lista;
 }
+
+vector<TipoMantenimiento> TipoMantenimientoDAOImpl::buscarCampo(const QString &busqueda) {
+    vector<TipoMantenimiento> lista;
+    QSqlQuery query(QSqlDatabase::database());
+
+    query.prepare("SELECT * FROM tipo_Mantenimiento WHERE id_tipo_Mantenimiento LIKE :busqueda OR nombre LIKE :busqueda");
+    query.bindValue(":busqueda", "%" + busqueda + "%");
+
+    if(query.exec()) {
+        while(query.next()) {
+            TipoMantenimiento obj;
+            obj.setid_tipo_Mantenimiento(query.value("id_tipo_Mantenimiento").toInt());
+            obj.setNombre(query.value("nombre").toString());
+            lista.push_back(obj);
+        }
+    }
+    return lista;
+}

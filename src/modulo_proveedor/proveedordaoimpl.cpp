@@ -54,3 +54,25 @@ vector<Proveedor> ProveedorDAOImpl::listar() {
     }
     return lista;
 }
+
+vector<Proveedor> ProveedorDAOImpl::buscarCampo(const QString &busqueda) {
+    vector<Proveedor> lista;
+    QSqlQuery query(QSqlDatabase::database());
+
+    query.prepare("SELECT * FROM Proveedor WHERE id_Proveedor LIKE :busqueda OR nombre LIKE :busqueda "
+                  "OR telefono LIKE :busqueda OR email LIKE :busqueda OR direccion LIKE :busqueda");
+    query.bindValue(":busqueda", "%" + busqueda + "%");
+
+    if(query.exec()) {
+        while(query.next()) {
+            Proveedor obj;
+            obj.setid_proveedor(query.value("id_Proveedor").toInt());
+            obj.setNombre(query.value("nombre").toString());
+            obj.setTelefono(query.value("telefono").toString());
+            obj.setEmail(query.value("email").toString());
+            obj.setDireccion(query.value("direccion").toString());
+            lista.push_back(obj);
+        }
+    }
+    return lista;
+}

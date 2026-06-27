@@ -63,3 +63,29 @@ vector<Mantenimiento> MantenimientoDAOImpl::listar() {
     }
     return lista;
 }
+
+vector<Mantenimiento> MantenimientoDAOImpl::buscarCampo(const QString &busqueda) {
+    vector<Mantenimiento> lista;
+    QSqlQuery query(QSqlDatabase::database());
+
+    query.prepare("SELECT * FROM Mantenimiento WHERE id_Mantenimiento LIKE :busqueda OR id_auto LIKE :busqueda "
+                  "OR id_tipo_Mantenimiento LIKE :busqueda OR fecha_ingreso LIKE :busqueda OR fecha_salida LIKE :busqueda "
+                  "OR observaciones LIKE :busqueda OR costo LIKE :busqueda OR estado LIKE :busqueda");
+    query.bindValue(":busqueda", "%" + busqueda + "%");
+
+    if(query.exec()) {
+        while(query.next()) {
+            Mantenimiento obj;
+            obj.setid_Mantenimiento(query.value("id_Mantenimiento").toInt());
+            obj.setid_auto(query.value("id_auto").toInt());
+            obj.setid_tipo_Mantenimiento(query.value("id_tipo_Mantenimiento").toInt());
+            obj.setFechaIngreso(query.value("fecha_ingreso").toString());
+            obj.setFechaSalida(query.value("fecha_salida").toString());
+            obj.setObservaciones(query.value("observaciones").toString());
+            obj.setCosto(query.value("costo").toDouble());
+            obj.setEstado(query.value("estado").toString());
+            lista.push_back(obj);
+        }
+    }
+    return lista;
+}

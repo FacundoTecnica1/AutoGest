@@ -65,3 +65,31 @@ vector<Alquiler> AlquilerDAOImpl::listar() {
     }
     return lista;
 }
+
+vector<Alquiler> AlquilerDAOImpl::buscarCampo(const QString &busqueda) {
+    vector<Alquiler> lista;
+    QSqlQuery query(QSqlDatabase::database());
+
+    query.prepare("SELECT * FROM alquiler WHERE id_alquiler LIKE :busqueda OR id_auto LIKE :busqueda "
+                  "OR id_cliente LIKE :busqueda OR id_usuario LIKE :busqueda OR metodo_pago LIKE :busqueda "
+                  "OR fecha_inicio LIKE :busqueda OR fecha_fin LIKE :busqueda OR precio_total LIKE :busqueda "
+                  "OR estado LIKE :busqueda");
+    query.bindValue(":busqueda", "%" + busqueda + "%");
+
+    if(query.exec()) {
+        while(query.next()) {
+            Alquiler obj;
+            obj.setid_alquiler(query.value("id_alquiler").toInt());
+            obj.setid_auto(query.value("id_auto").toInt());
+            obj.setid_cliente(query.value("id_cliente").toInt());
+            obj.setid_usuario(query.value("id_usuario").toInt());
+            obj.setMetodoPago(query.value("metodo_pago").toString());
+            obj.setFechaInicio(query.value("fecha_inicio").toString());
+            obj.setFechaFin(query.value("fecha_fin").toString());
+            obj.setPrecioTotal(query.value("precio_total").toDouble());
+            obj.setEstado(query.value("estado").toString());
+            lista.push_back(obj);
+        }
+    }
+    return lista;
+}

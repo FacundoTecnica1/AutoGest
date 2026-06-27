@@ -58,3 +58,28 @@ vector<Autoparte> AutoparteDAOImpl::listar() {
     }
     return lista;
 }
+
+vector<Autoparte> AutoparteDAOImpl::buscarCampo(const QString &busqueda) {
+    vector<Autoparte> lista;
+    QSqlQuery query(QSqlDatabase::database());
+
+    query.prepare("SELECT * FROM autoparte WHERE `id autoparte` LIKE :busqueda OR id_Proveedor LIKE :busqueda "
+                  "OR id_Mantenimiento LIKE :busqueda OR nombre LIKE :busqueda OR marca LIKE :busqueda "
+                  "OR precio LIKE :busqueda OR stock LIKE :busqueda");
+    query.bindValue(":busqueda", "%" + busqueda + "%");
+
+    if(query.exec()) {
+        while(query.next()) {
+            Autoparte obj;
+            obj.setid_autoparte(query.value("id autoparte").toInt());
+            obj.setid_proveedor(query.value("id_Proveedor").toInt());
+            obj.setid_Mantenimiento(query.value("id_Mantenimiento").toInt());
+            obj.setNombre(query.value("nombre").toString());
+            obj.setMarca(query.value("marca").toString());
+            obj.setPrecio(query.value("precio").toDouble());
+            obj.setStock(query.value("stock").toInt());
+            lista.push_back(obj);
+        }
+    }
+    return lista;
+}

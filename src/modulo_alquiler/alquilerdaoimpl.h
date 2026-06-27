@@ -11,6 +11,7 @@ public:
     void actualizar(Alquiler obj);
     void eliminar(Alquiler obj);
     vector<Alquiler> listar();
+    vector<Alquiler> buscarCampo(const QString &busqueda);
 };
 
 #endif // ALQUILERDAOIMPL_H

@@ -11,6 +11,7 @@ public:
     void actualizar(TipoMantenimiento obj);
     void eliminar(TipoMantenimiento obj);
     vector<TipoMantenimiento> listar();
+    vector<TipoMantenimiento> buscarCampo(const QString &busqueda);
 };
 
 #endif // TIPO_MantenimientoDAOIMPL_H

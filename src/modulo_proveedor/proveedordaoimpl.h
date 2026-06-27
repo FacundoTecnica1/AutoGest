@@ -12,6 +12,7 @@ public:
     void actualizar(Proveedor obj);
     void eliminar(Proveedor obj);
     vector<Proveedor> listar();
+    vector<Proveedor> buscarCampo(const QString &busqueda);
 };
 
 #endif // ProveedorDAOIMPL_H

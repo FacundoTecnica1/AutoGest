@@ -11,6 +11,7 @@ public:
     void actualizar(Cliente obj);
     void eliminar(Cliente obj);
     vector<Cliente> listar();
+    vector<Cliente> buscarCampo(const QString &busqueda);
 };
 
 #endif // CLIENTEDAOIMPL_H

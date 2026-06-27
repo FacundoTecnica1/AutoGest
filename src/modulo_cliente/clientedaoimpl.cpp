@@ -69,3 +69,32 @@ vector<Cliente> ClienteDAOImpl::listar() {
     }
     return lista;
 }
+
+vector<Cliente> ClienteDAOImpl::buscarCampo(const QString &busqueda) {
+    vector<Cliente> lista;
+    QSqlQuery query(QSqlDatabase::database());
+
+    query.prepare("SELECT * FROM cliente WHERE id_cliente LIKE :busqueda OR nombre LIKE :busqueda "
+                  "OR apellido LIKE :busqueda OR edad LIKE :busqueda OR dni LIKE :busqueda "
+                  "OR telefono LIKE :busqueda OR email LIKE :busqueda OR direccion LIKE :busqueda "
+                  "OR clase_licencia LIKE :busqueda OR fecha_registro LIKE :busqueda");
+    query.bindValue(":busqueda", "%" + busqueda + "%");
+
+    if(query.exec()) {
+        while(query.next()) {
+            Cliente obj;
+            obj.setid_cliente(query.value("id_cliente").toInt());
+            obj.setNombre(query.value("nombre").toString());
+            obj.setApellido(query.value("apellido").toString());
+            obj.setEdad(query.value("edad").toInt());
+            obj.setDni(query.value("dni").toString());
+            obj.setTelefono(query.value("telefono").toString());
+            obj.setEmail(query.value("email").toString());
+            obj.setDireccion(query.value("direccion").toString());
+            obj.setClaseLicencia(query.value("clase_licencia").toString());
+            obj.setFechaRegistro(query.value("fecha_registro").toString());
+            lista.push_back(obj);
+        }
+    }
+    return lista;
+}
