@@ -35,14 +35,14 @@
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0" colspan="2">
-          <widget class="QLabel" name="label_iniciarSesion">
+          <widget class="QLabel" name="lblIniciarSesion">
            <property name="text">
             <string>Iniciar Sesión</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label_Usuario">
+          <widget class="QLabel" name="lblUsuario">
            <property name="text">
             <string>Usuario:</string>
            </property>
@@ -56,14 +56,14 @@
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QLabel" name="label_Contrasena">
+          <widget class="QLabel" name="lblContrasena">
            <property name="text">
             <string>Contraseña:</string>
            </property>
           </widget>
          </item>
          <item row="4" column="0" colspan="2">
-          <widget class="QLineEdit" name="txtPassword">
+          <widget class="QLineEdit" name="txtContrasena">
            <property name="echoMode">
             <enum>QLineEdit::EchoMode::Normal</enum>
            </property>
@@ -87,7 +87,7 @@
        </widget>
       </widget>
       <widget class="QWidget" name="page_2">
-       <widget class="QTabWidget" name="QTabWidget">
+       <widget class="QTabWidget" name="tabWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -97,13 +97,13 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>6</number>
         </property>
         <widget class="QWidget" name="Autos">
          <attribute name="title">
           <string>Autos</string>
          </attribute>
-         <widget class="QLabel" name="label_marca">
+         <widget class="QLabel" name="lblMarcaAuto">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -116,7 +116,7 @@
            <string>Marca:</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtMarca">
+         <widget class="QLineEdit" name="txtMarcaAuto">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -126,7 +126,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_modelo">
+         <widget class="QLabel" name="lblModeloAuto">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -139,7 +139,7 @@
            <string>Modelo:</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtModelo">
+         <widget class="QLineEdit" name="txtModeloAuto">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -149,7 +149,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtAnio">
+         <widget class="QLineEdit" name="txtAnioAuto">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -159,7 +159,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtPatente">
+         <widget class="QLineEdit" name="txtPatenteAuto">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -169,7 +169,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_anio">
+         <widget class="QLabel" name="lblAnioAuto">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -182,7 +182,7 @@
            <string>Año:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_patente">
+         <widget class="QLabel" name="lblPatenteAuto">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -195,7 +195,7 @@
            <string>Patente:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_kilometraje">
+         <widget class="QLabel" name="lblKilometrajeAuto">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -208,7 +208,7 @@
            <string>Kilometraje:</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtKilometraje">
+         <widget class="QLineEdit" name="txtKilometrajeAuto">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -218,7 +218,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtPrecioDia">
+         <widget class="QLineEdit" name="txtPrecioDiaAuto">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -228,7 +228,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_preciodia">
+         <widget class="QLabel" name="lblPrecioDiaAuto">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -241,7 +241,7 @@
            <string>Precio por día:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_estado">
+         <widget class="QLabel" name="lblEstadoAuto">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -254,7 +254,7 @@
            <string>Estado:</string>
           </property>
          </widget>
-         <widget class="QComboBox" name="comboBox_estado">
+         <widget class="QComboBox" name="cmbEstadoAuto">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -279,7 +279,7 @@
            </property>
           </item>
          </widget>
-         <widget class="QComboBox" name="comboBox_color">
+         <widget class="QComboBox" name="cmbColorAuto">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -319,7 +319,7 @@
            </property>
           </item>
          </widget>
-         <widget class="QLabel" name="label_color">
+         <widget class="QLabel" name="lblColorAuto">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -332,7 +332,7 @@
            <string>Color:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnGuardar_Autos">
+         <widget class="QPushButton" name="btnGuardarAuto">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -345,7 +345,7 @@
            <string>Guardar</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnEliminar_Autos">
+         <widget class="QPushButton" name="btnEliminarAuto">
           <property name="geometry">
            <rect>
             <x>160</x>
@@ -358,7 +358,7 @@
            <string>Eliminar</string>
           </property>
          </widget>
-         <widget class="QTableWidget" name="tableWidget_Autos">
+         <widget class="QTableWidget" name="tblAutos">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -368,7 +368,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_ListaAutos">
+         <widget class="QLabel" name="lblListaAutos">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -386,7 +386,7 @@
            <string>Lista de autos</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtBuscadorAutos">
+         <widget class="QLineEdit" name="txtBuscadorAuto">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -399,7 +399,7 @@
            <string>Buscar por patente, color, año, modelo, etc</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_buscadorAutos">
+         <widget class="QLabel" name="lblBuscadorAuto">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -412,7 +412,7 @@
            <string>Buscador:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnActualizar_Autos">
+         <widget class="QPushButton" name="btnActualizarAuto">
           <property name="geometry">
            <rect>
             <x>90</x>
@@ -430,7 +430,7 @@
          <attribute name="title">
           <string>Clientes</string>
          </attribute>
-         <widget class="QLineEdit" name="txtTelefono">
+         <widget class="QLineEdit" name="txtTelefonoCliente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -440,7 +440,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtDni">
+         <widget class="QLineEdit" name="txtDniCliente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -450,7 +450,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_ListaClientes">
+         <widget class="QLabel" name="lblListaClientes">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -468,7 +468,7 @@
            <string>Lista de Clientes</string>
           </property>
          </widget>
-         <widget class="QTableWidget" name="tableWidget_Clientes">
+         <widget class="QTableWidget" name="tblClientes">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -478,7 +478,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QComboBox" name="comboBox_ClaseLicencia">
+         <widget class="QComboBox" name="cmbClaseLicenciaCliente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -498,7 +498,7 @@
            </property>
           </item>
          </widget>
-         <widget class="QLineEdit" name="txtDireccion">
+         <widget class="QLineEdit" name="txtDireccionCliente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -508,7 +508,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_direccion">
+         <widget class="QLabel" name="lblDireccionCliente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -521,7 +521,7 @@
            <string>Dirección:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_nombre">
+         <widget class="QLabel" name="lblNombreCliente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -534,7 +534,7 @@
            <string>Nombre:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnGuardar_Clientes">
+         <widget class="QPushButton" name="btnGuardarCliente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -547,7 +547,7 @@
            <string>Guardar</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_email">
+         <widget class="QLabel" name="lblEmailCliente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -560,7 +560,7 @@
            <string>Email:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_dni">
+         <widget class="QLabel" name="lblDniCliente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -573,7 +573,7 @@
            <string>Dni:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_telefono">
+         <widget class="QLabel" name="lblTelefonoCliente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -586,7 +586,7 @@
            <string>Telefono:</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtApellido">
+         <widget class="QLineEdit" name="txtApellidoCliente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -596,7 +596,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnEliminar_Clientes">
+         <widget class="QPushButton" name="btnEliminarCliente">
           <property name="geometry">
            <rect>
             <x>160</x>
@@ -609,7 +609,7 @@
            <string>Eliminar</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtBuscadorClientes">
+         <widget class="QLineEdit" name="txtBuscadorCliente">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -622,7 +622,7 @@
            <string>Buscar por nombre, apellido, dni, telefono, email, etc</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_claseLicencia">
+         <widget class="QLabel" name="lblClaseLicenciaCliente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -635,7 +635,7 @@
            <string>Clase de licencia:</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtEmail">
+         <widget class="QLineEdit" name="txtEmailCliente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -645,7 +645,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_buscadorClientes">
+         <widget class="QLabel" name="lblBuscadorCliente">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -658,7 +658,7 @@
            <string>Buscador:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_apellido">
+         <widget class="QLabel" name="lblApellidoCliente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -671,7 +671,7 @@
            <string>Apellido:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnActualizar_Clientes">
+         <widget class="QPushButton" name="btnActualizarCliente">
           <property name="geometry">
            <rect>
             <x>90</x>
@@ -684,7 +684,7 @@
            <string>Actualizar</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtNombre">
+         <widget class="QLineEdit" name="txtNombreCliente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -694,7 +694,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtEdad">
+         <widget class="QLineEdit" name="txtEdadCliente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -704,7 +704,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_edad">
+         <widget class="QLabel" name="lblEdadCliente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -720,9 +720,9 @@
         </widget>
         <widget class="QWidget" name="Alquiler">
          <attribute name="title">
-          <string>Page</string>
+          <string>Alquileres</string>
          </attribute>
-         <widget class="QPushButton" name="btnEliminar_Alquiler">
+         <widget class="QPushButton" name="btnEliminarAlquiler">
           <property name="geometry">
            <rect>
             <x>170</x>
@@ -735,7 +735,7 @@
            <string>Eliminar</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_metodoPago">
+         <widget class="QLabel" name="lblMetodoPagoAlquiler">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -748,7 +748,7 @@
            <string>Metodo de pago:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_EstadoAlquiler">
+         <widget class="QLabel" name="lblEstadoAlquiler">
           <property name="geometry">
            <rect>
             <x>140</x>
@@ -761,7 +761,7 @@
            <string>Estado de alquiler:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_fechaInicio">
+         <widget class="QLabel" name="lblFechaInicioAlquiler">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -774,7 +774,7 @@
            <string>Fecha inicio:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_FechaFin">
+         <widget class="QLabel" name="lblFechaFinAlquiler">
           <property name="geometry">
            <rect>
             <x>140</x>
@@ -787,7 +787,7 @@
            <string>Fecha Fin:</string>
           </property>
          </widget>
-         <widget class="QComboBox" name="comboBox_MetodoPago">
+         <widget class="QComboBox" name="cmbMetodoPagoAlquiler">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -817,7 +817,7 @@
            </property>
           </item>
          </widget>
-         <widget class="QPushButton" name="btnGuardar_Alquiler">
+         <widget class="QPushButton" name="btnGuardarAlquiler">
           <property name="geometry">
            <rect>
             <x>30</x>
@@ -830,7 +830,7 @@
            <string>Guardar</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_ListaAlquileres">
+         <widget class="QLabel" name="lblListaAlquileres">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -848,7 +848,7 @@
            <string>Lista de Alquileres</string>
           </property>
          </widget>
-         <widget class="QTableWidget" name="tableWidget_Alquileres">
+         <widget class="QTableWidget" name="tblAlquileres">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -858,7 +858,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_buscadorAlquileres">
+         <widget class="QLabel" name="lblBuscadorAlquiler">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -871,7 +871,7 @@
            <string>Buscador:</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtBuscadorAlquileres">
+         <widget class="QLineEdit" name="txtBuscadorAlquiler">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -884,7 +884,7 @@
            <string>Buscar por nombre, apellido, dni, telefono, email, etc</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnActualizar_Alquiler">
+         <widget class="QPushButton" name="btnActualizarAlquiler">
           <property name="geometry">
            <rect>
             <x>100</x>
@@ -897,7 +897,7 @@
            <string>Actualizar</string>
           </property>
          </widget>
-         <widget class="QComboBox" name="comboBox_EstadoAlquiler">
+         <widget class="QComboBox" name="cmbEstadoAlquiler">
           <property name="geometry">
            <rect>
             <x>140</x>
@@ -922,7 +922,7 @@
            </property>
           </item>
          </widget>
-         <widget class="QLabel" name="label_precioTotal">
+         <widget class="QLabel" name="lblPrecioTotalAlquiler">
           <property name="geometry">
            <rect>
             <x>100</x>
@@ -935,7 +935,7 @@
            <string>Precio total:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_total">
+         <widget class="QLabel" name="lblTotalAlquiler">
           <property name="geometry">
            <rect>
             <x>110</x>
@@ -954,7 +954,7 @@
            <string>$ 0.00</string>
           </property>
          </widget>
-         <widget class="QDateEdit" name="dateEdit_FechaInicio">
+         <widget class="QDateEdit" name="dteFechaInicioAlquiler">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -964,7 +964,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QDateEdit" name="dateEdit_FechaFin">
+         <widget class="QDateEdit" name="dteFechaFinAlquiler">
           <property name="geometry">
            <rect>
             <x>140</x>
@@ -977,9 +977,9 @@
         </widget>
         <widget class="QWidget" name="Incidentes">
          <attribute name="title">
-          <string>Page</string>
+          <string>Incidentes</string>
          </attribute>
-         <widget class="QTableWidget" name="tableWidget_Incidentes">
+         <widget class="QTableWidget" name="tblIncidentes">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -989,7 +989,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_buscadorIncidentes">
+         <widget class="QLabel" name="lblBuscadorIncidente">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1002,7 +1002,7 @@
            <string>Buscador:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_ListaIncidentes">
+         <widget class="QLabel" name="lblListaIncidentes">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -1020,7 +1020,7 @@
            <string>Lista de Incidentes</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnEliminar_Incidente">
+         <widget class="QPushButton" name="btnEliminarIncidente">
           <property name="geometry">
            <rect>
             <x>170</x>
@@ -1033,7 +1033,7 @@
            <string>Eliminar</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_TipoIncidente">
+         <widget class="QLabel" name="lblTipoIncidente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1046,7 +1046,7 @@
            <string>Tipo de incidente:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnActualizar_Incidente">
+         <widget class="QPushButton" name="btnActualizarIncidente">
           <property name="geometry">
            <rect>
             <x>100</x>
@@ -1059,7 +1059,7 @@
            <string>Actualizar</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtBuscadorIncidentes">
+         <widget class="QLineEdit" name="txtBuscadorIncidente">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1072,7 +1072,7 @@
            <string>Buscar por nombre, apellido, dni, telefono, email, etc</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_FechaIncidente">
+         <widget class="QLabel" name="lblFechaIncidente">
           <property name="geometry">
            <rect>
             <x>140</x>
@@ -1085,7 +1085,7 @@
            <string>Fecha Incidente:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnGuardar_Incidente">
+         <widget class="QPushButton" name="btnGuardarIncidente">
           <property name="geometry">
            <rect>
             <x>30</x>
@@ -1098,7 +1098,7 @@
            <string>Guardar</string>
           </property>
          </widget>
-         <widget class="QDateEdit" name="dateEdit_FechaIncidente">
+         <widget class="QDateEdit" name="dteFechaIncidente">
           <property name="geometry">
            <rect>
             <x>140</x>
@@ -1108,7 +1108,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Descripcion">
+         <widget class="QLabel" name="lblDescripcionIncidente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1131,7 +1131,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtDescripcion">
+         <widget class="QLineEdit" name="txtDescripcionIncidente">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1141,7 +1141,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtCosto">
+         <widget class="QLineEdit" name="txtCostoIncidente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1151,7 +1151,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Costo">
+         <widget class="QLabel" name="lblCostoIncidente">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1167,9 +1167,9 @@
         </widget>
         <widget class="QWidget" name="Mantenimientos">
          <attribute name="title">
-          <string>Page</string>
+          <string>Mantenimientos</string>
          </attribute>
-         <widget class="QLabel" name="label_buscadorMantenimiento">
+         <widget class="QLabel" name="lblBuscadorMantenimiento">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1182,7 +1182,7 @@
            <string>Buscador:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_ListaMantenimientos">
+         <widget class="QLabel" name="lblListaMantenimientos">
           <property name="geometry">
            <rect>
             <x>410</x>
@@ -1200,7 +1200,7 @@
            <string>Lista de Mantenimientos</string>
           </property>
          </widget>
-         <widget class="QDateEdit" name="dateEdit_FechaIngreso">
+         <widget class="QDateEdit" name="dteFechaIngresoMantenimiento">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1210,7 +1210,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_fechaIngreso">
+         <widget class="QLabel" name="lblFechaIngresoMantenimiento">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1249,7 +1249,7 @@
            <string>Actualizar</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_ObservacionesMantenimiento">
+         <widget class="QLabel" name="lblObservacionesMantenimiento">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1262,7 +1262,7 @@
            <string>Observaciones:</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtBuscadorMantenimientos">
+         <widget class="QLineEdit" name="txtBuscadorMantenimiento">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1275,7 +1275,7 @@
            <string>Buscar por nombre, apellido, dni, telefono, email, etc</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_FechaSalida">
+         <widget class="QLabel" name="lblFechaSalidaMantenimiento">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1301,7 +1301,7 @@
            <string>Guardar</string>
           </property>
          </widget>
-         <widget class="QDateEdit" name="dateEdit_FechaSalida">
+         <widget class="QDateEdit" name="dteFechaSalidaMantenimiento">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1311,7 +1311,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_TipoMantenimiento">
+         <widget class="QLabel" name="lblTipoMantenimiento">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1324,7 +1324,7 @@
            <string>Tipo_mantenimiento:</string>
           </property>
          </widget>
-         <widget class="QComboBox" name="comboBox_TipoMantenimiento">
+         <widget class="QComboBox" name="cmbTipoMantenimiento">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1334,7 +1334,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtObservaciones">
+         <widget class="QLineEdit" name="txtObservacionesMantenimiento">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1344,7 +1344,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_EstadoMantenimiento">
+         <widget class="QLabel" name="lblEstadoMantenimiento">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1357,7 +1357,7 @@
            <string>Estado:</string>
           </property>
          </widget>
-         <widget class="QComboBox" name="comboBox_EstadoMantenimiento">
+         <widget class="QComboBox" name="cmbEstadoMantenimiento">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1377,7 +1377,7 @@
            </property>
           </item>
          </widget>
-         <widget class="QLabel" name="label_CostoMantenimiento">
+         <widget class="QLabel" name="lblCostoMantenimiento">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1400,7 +1400,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QTableWidget" name="tableWidget_Mantenimientos">
+         <widget class="QTableWidget" name="tblMantenimientos">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1413,9 +1413,9 @@
         </widget>
         <widget class="QWidget" name="Autopartes">
          <attribute name="title">
-          <string>Page</string>
+          <string>Autopartes</string>
          </attribute>
-         <widget class="QLineEdit" name="txtPrecio_autoparte">
+         <widget class="QLineEdit" name="txtPrecioAutoparte">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1425,7 +1425,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Stock_autoparte">
+         <widget class="QLabel" name="lblStockAutoparte">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1438,7 +1438,7 @@
            <string>Stock:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnGuardar_Autopartes">
+         <widget class="QPushButton" name="btnGuardarAutoparte">
           <property name="geometry">
            <rect>
             <x>30</x>
@@ -1451,7 +1451,7 @@
            <string>Guardar</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_ListaAutopartes">
+         <widget class="QLabel" name="lblListaAutopartes">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -1469,7 +1469,7 @@
            <string>Lista de Autopartes</string>
           </property>
          </widget>
-         <widget class="QTableWidget" name="tableWidget_Autopartes">
+         <widget class="QTableWidget" name="tblAutopartes">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1479,7 +1479,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Nombre_autoparte">
+         <widget class="QLabel" name="lblNombreAutoparte">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1492,7 +1492,7 @@
            <string>Nombre de autoparte:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnEliminar_Autopartes">
+         <widget class="QPushButton" name="btnEliminarAutoparte">
           <property name="geometry">
            <rect>
             <x>170</x>
@@ -1505,7 +1505,7 @@
            <string>Eliminar</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Marca_autoparte">
+         <widget class="QLabel" name="lblMarcaAutoparte">
           <property name="geometry">
            <rect>
             <x>160</x>
@@ -1518,7 +1518,7 @@
            <string>Marca:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Autopartes">
+         <widget class="QLabel" name="lblBuscadorAutoparte">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1531,7 +1531,7 @@
            <string>Buscador:</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtBuscadorAutopartes">
+         <widget class="QLineEdit" name="txtBuscadorAutoparte">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1544,7 +1544,7 @@
            <string>Buscar por nombre, marca, precio o cantidad de stock</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnActualizar_Autopartes">
+         <widget class="QPushButton" name="btnActualizarAutoparte">
           <property name="geometry">
            <rect>
             <x>100</x>
@@ -1557,7 +1557,7 @@
            <string>Actualizar</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtNombre_autoparte">
+         <widget class="QLineEdit" name="txtNombreAutoparte">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1567,7 +1567,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtStock_autoparte">
+         <widget class="QLineEdit" name="txtStockAutoparte">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1577,7 +1577,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Precio_autoparte">
+         <widget class="QLabel" name="lblPrecioAutoparte">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1590,7 +1590,7 @@
            <string>Precio:</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtMarca_autoparte">
+         <widget class="QLineEdit" name="txtMarcaAutoparte">
           <property name="geometry">
            <rect>
             <x>160</x>
@@ -1601,11 +1601,11 @@
           </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="tab">
+        <widget class="QWidget" name="Proveedores">
          <attribute name="title">
-          <string>Page</string>
+          <string>Proveedores</string>
          </attribute>
-         <widget class="QLineEdit" name="txtTelefono_proveedor">
+         <widget class="QLineEdit" name="txtTelefonoProveedor">
           <property name="geometry">
            <rect>
             <x>160</x>
@@ -1615,7 +1615,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Nombre_proveedor">
+         <widget class="QLabel" name="lblNombreProveedor">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1628,7 +1628,7 @@
            <string>Nombre proveedor:</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Autopartes_2">
+         <widget class="QLabel" name="lblBuscadorProveedor">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1654,7 +1654,7 @@
            <string>Buscar por nombre, telefono, email o direccion del proveedor</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtPrecio_autoparte_2">
+         <widget class="QLineEdit" name="txtEmailProveedor">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1664,7 +1664,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Direccion_proveedor">
+         <widget class="QLabel" name="lblDireccionProveedor">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1677,7 +1677,7 @@
            <string>Direccion:</string>
           </property>
          </widget>
-         <widget class="QTableWidget" name="tableWidget_Proveedor">
+         <widget class="QTableWidget" name="tblProveedores">
           <property name="geometry">
            <rect>
             <x>290</x>
@@ -1687,7 +1687,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtDireccion_proveedor">
+         <widget class="QLineEdit" name="txtDireccionProveedor">
           <property name="geometry">
            <rect>
             <x>150</x>
@@ -1697,7 +1697,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_ListaAutopartes_2">
+         <widget class="QLabel" name="lblListaProveedores">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -1715,7 +1715,7 @@
            <string>Lista de proveedores</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnEliminar_proveedor">
+         <widget class="QPushButton" name="btnEliminarProveedor">
           <property name="geometry">
            <rect>
             <x>170</x>
@@ -1728,7 +1728,7 @@
            <string>Eliminar</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Telefono_proveedor">
+         <widget class="QLabel" name="lblTelefonoProveedor">
           <property name="geometry">
            <rect>
             <x>160</x>
@@ -1741,7 +1741,7 @@
            <string>Telefono:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnActualizar_proveedor">
+         <widget class="QPushButton" name="btnActualizarProveedor">
           <property name="geometry">
            <rect>
             <x>100</x>
@@ -1754,7 +1754,7 @@
            <string>Actualizar</string>
           </property>
          </widget>
-         <widget class="QLineEdit" name="txtNombre_autoparte_2">
+         <widget class="QLineEdit" name="txtNombreProveedor">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1764,7 +1764,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Email_proveedor">
+         <widget class="QLabel" name="lblEmailProveedor">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -1777,7 +1777,7 @@
            <string>Email:</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="btnGuardar_proveedor">
+         <widget class="QPushButton" name="btnGuardarProveedor">
           <property name="geometry">
            <rect>
             <x>30</x>

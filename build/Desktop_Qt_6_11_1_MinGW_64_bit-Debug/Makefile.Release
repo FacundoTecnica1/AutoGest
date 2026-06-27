@@ -195,8 +195,9 @@ compiler_moc_header_make_all: release/moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) release\moc_mainwindow.cpp
 release/moc_mainwindow.cpp: ../../mainwindow.h \
-		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
-		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QTableWidgetItem \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtablewidget.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtableview.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qtguiglobal.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qglobal.h \
@@ -250,6 +251,9 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qtguiexports.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtwidgets-config.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qwidget.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qobjectdefs.h \
@@ -396,7 +400,21 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.11.1/mingw_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabbar.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qrubberband.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h \
 		release/moc_predefs.h \
 		C:/Qt/6.11.1/mingw_64/bin/moc.exe
 	C:\Qt\6.11.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Nico/Desktop/AutoGest/build/Desktop_Qt_6_11_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.11.1/mingw_64/mkspecs/win32-g++ -IC:/Users/Nico/Desktop/AutoGest -IC:/Users/Nico/Desktop/AutoGest/src/modulo_admin -IC:/Users/Nico/Desktop/AutoGest/src/modulo_alquiler -IC:/Users/Nico/Desktop/AutoGest/src/modulo_auto -IC:/Users/Nico/Desktop/AutoGest/src/modulo_autoparte -IC:/Users/Nico/Desktop/AutoGest/src/modulo_cliente -IC:/Users/Nico/Desktop/AutoGest/src/modulo_incidente -IC:/Users/Nico/Desktop/AutoGest/src/modulo_Mantenimiento -IC:/Users/Nico/Desktop/AutoGest/src/modulo_Proveedor -IC:/Users/Nico/Desktop/AutoGest/src/modulo_tipo_Mantenimiento -IC:/Qt/6.11.1/mingw_64/include -IC:/Qt/6.11.1/mingw_64/include/QtWidgets -IC:/Qt/6.11.1/mingw_64/include/QtGui -IC:/Qt/6.11.1/mingw_64/include/QtSql -IC:/Qt/6.11.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
@@ -745,8 +763,12 @@ release/main.o: ../../main.cpp C:/Qt/6.11.1/mingw_64/include/QtWidgets/QApplicat
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlError \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlerror.h \
 		../../mainwindow.h \
-		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
-		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QTableWidgetItem \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtablewidget.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtableview.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qwidget.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qaction.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qkeysequence.h \
@@ -775,12 +797,27 @@ release/main.o: ../../main.cpp C:/Qt/6.11.1/mingw_64/include/QtWidgets/QApplicat
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QSizeF \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/QTransform \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qscreen_platform.h \
-		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabwidget.h
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.11.1/mingw_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qrubberband.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\main.cpp
 
 release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
-		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
-		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QTableWidgetItem \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtablewidget.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtableview.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qtguiglobal.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qglobal.h \
@@ -834,6 +871,9 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qtguiexports.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtwidgets-config.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qwidget.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qobjectdefs.h \
@@ -980,13 +1020,27 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.11.1/mingw_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabbar.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qrubberband.h \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h \
 		ui_mainwindow.h \
 		../../src/modulo_admin/admindaoimpl.h \
 		../../src/modulo_admin/admindao.h \
 		../../dao.h \
-		../../src/modulo_admin/admin.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
+		../../src/modulo_admin/admin.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialog.h \
@@ -1078,7 +1132,6 @@ release/admin.o: ../../src/modulo_admin/admin.cpp ../../src/modulo_admin/admin.h
 release/admindaoimpl.o: ../../src/modulo_admin/admindaoimpl.cpp ../../src/modulo_admin/admindaoimpl.h \
 		../../src/modulo_admin/admindao.h \
 		../../dao.h \
-		../../src/modulo_admin/admin.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qchar.h \
@@ -1158,6 +1211,7 @@ release/admindaoimpl.o: ../../src/modulo_admin/admindaoimpl.cpp ../../src/modulo
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../src/modulo_admin/admin.h \
 		../../conexion.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlDatabase \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqldatabase.h \
@@ -1304,7 +1358,6 @@ release/alquiler.o: ../../src/modulo_alquiler/alquiler.cpp ../../src/modulo_alqu
 release/alquilerdaoimpl.o: ../../src/modulo_alquiler/alquilerdaoimpl.cpp ../../src/modulo_alquiler/alquilerdaoimpl.h \
 		../../src/modulo_alquiler/alquilerdao.h \
 		../../dao.h \
-		../../src/modulo_alquiler/alquiler.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qchar.h \
@@ -1384,6 +1437,7 @@ release/alquilerdaoimpl.o: ../../src/modulo_alquiler/alquilerdaoimpl.cpp ../../s
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../src/modulo_alquiler/alquiler.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
@@ -1527,7 +1581,6 @@ release/auto.o: ../../src/modulo_auto/auto.cpp ../../src/modulo_auto/auto.h \
 release/autodaoimpl.o: ../../src/modulo_auto/autodaoimpl.cpp ../../src/modulo_auto/autodaoimpl.h \
 		../../src/modulo_auto/autodao.h \
 		../../dao.h \
-		../../src/modulo_auto/auto.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qchar.h \
@@ -1607,6 +1660,7 @@ release/autodaoimpl.o: ../../src/modulo_auto/autodaoimpl.cpp ../../src/modulo_au
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../src/modulo_auto/auto.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
@@ -1750,7 +1804,6 @@ release/autoparte.o: ../../src/modulo_autoparte/autoparte.cpp ../../src/modulo_a
 release/autopartedaoimpl.o: ../../src/modulo_autoparte/autopartedaoimpl.cpp ../../src/modulo_autoparte/autopartedaoimpl.h \
 		../../src/modulo_autoparte/autopartedao.h \
 		../../dao.h \
-		../../src/modulo_autoparte/autoparte.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qchar.h \
@@ -1830,6 +1883,7 @@ release/autopartedaoimpl.o: ../../src/modulo_autoparte/autopartedaoimpl.cpp ../.
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../src/modulo_autoparte/autoparte.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
@@ -1973,7 +2027,6 @@ release/cliente.o: ../../src/modulo_cliente/cliente.cpp ../../src/modulo_cliente
 release/clientedaoimpl.o: ../../src/modulo_cliente/clientedaoimpl.cpp ../../src/modulo_cliente/clientedaoimpl.h \
 		../../src/modulo_cliente/clientedao.h \
 		../../dao.h \
-		../../src/modulo_cliente/cliente.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qchar.h \
@@ -2053,6 +2106,7 @@ release/clientedaoimpl.o: ../../src/modulo_cliente/clientedaoimpl.cpp ../../src/
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../src/modulo_cliente/cliente.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
@@ -2196,7 +2250,6 @@ release/incidente.o: ../../src/modulo_incidente/incidente.cpp ../../src/modulo_i
 release/incidentedaoimpl.o: ../../src/modulo_incidente/incidentedaoimpl.cpp ../../src/modulo_incidente/incidentedaoimpl.h \
 		../../src/modulo_incidente/incidentedao.h \
 		../../dao.h \
-		../../src/modulo_incidente/incidente.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qchar.h \
@@ -2276,6 +2329,7 @@ release/incidentedaoimpl.o: ../../src/modulo_incidente/incidentedaoimpl.cpp ../.
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../src/modulo_incidente/incidente.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
@@ -2419,7 +2473,6 @@ release/Mantenimiento.o: ../../src/modulo_Mantenimiento/Mantenimiento.cpp ../../
 release/Mantenimientodaoimpl.o: ../../src/modulo_Mantenimiento/Mantenimientodaoimpl.cpp ../../src/modulo_Mantenimiento/Mantenimientodaoimpl.h \
 		../../src/modulo_Mantenimiento/Mantenimientodao.h \
 		../../dao.h \
-		../../src/modulo_Mantenimiento/Mantenimiento.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qchar.h \
@@ -2499,6 +2552,7 @@ release/Mantenimientodaoimpl.o: ../../src/modulo_Mantenimiento/Mantenimientodaoi
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../src/modulo_Mantenimiento/Mantenimiento.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
@@ -2642,7 +2696,6 @@ release/Proveedor.o: ../../src/modulo_Proveedor/Proveedor.cpp ../../src/modulo_P
 release/Proveedordaoimpl.o: ../../src/modulo_Proveedor/Proveedordaoimpl.cpp ../../src/modulo_Proveedor/Proveedordaoimpl.h \
 		../../src/modulo_Proveedor/Proveedordao.h \
 		../../dao.h \
-		../../src/modulo_Proveedor/Proveedor.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qchar.h \
@@ -2722,6 +2775,7 @@ release/Proveedordaoimpl.o: ../../src/modulo_Proveedor/Proveedordaoimpl.cpp ../.
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../src/modulo_Proveedor/Proveedor.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
@@ -2865,7 +2919,6 @@ release/tipo_Mantenimiento.o: ../../src/modulo_tipo_Mantenimiento/tipo_Mantenimi
 release/tipo_Mantenimientodaoimpl.o: ../../src/modulo_tipo_Mantenimiento/tipo_Mantenimientodaoimpl.cpp ../../src/modulo_tipo_Mantenimiento/tipo_Mantenimientodaoimpl.h \
 		../../src/modulo_tipo_Mantenimiento/tipo_Mantenimientodao.h \
 		../../dao.h \
-		../../src/modulo_tipo_Mantenimiento/tipo_Mantenimiento.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qchar.h \
@@ -2945,6 +2998,7 @@ release/tipo_Mantenimientodaoimpl.o: ../../src/modulo_tipo_Mantenimiento/tipo_Ma
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../src/modulo_tipo_Mantenimiento/tipo_Mantenimiento.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
