@@ -1,0 +1,23 @@
+#ifndef GESTOR_AUTO_H
+#define GESTOR_AUTO_H
+
+#include <QObject>
+#include "autodaoimpl.h"
+
+namespace Ui { class MainWindow; }
+
+class GestorAuto : public QObject {
+    Q_OBJECT
+public:
+    GestorAuto(Ui::MainWindow *ui, QObject *parent = nullptr);
+    void listar();
+    void guardar();
+    void actualizar();
+    void eliminar();
+
+private:
+    Ui::MainWindow *ui;
+    AutoDAOImpl daoAuto;
+    int getIdSeleccionadoTabla();
+};
+#endif

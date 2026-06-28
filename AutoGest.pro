@@ -14,18 +14,25 @@ SOURCES += \
     src/modulo_admin/admindaoimpl.cpp \
     src/modulo_alquiler/alquiler.cpp \
     src/modulo_alquiler/alquilerdaoimpl.cpp \
+    src/modulo_alquiler/gestor_alquiler.cpp \
     src/modulo_auto/auto.cpp \
     src/modulo_auto/autodaoimpl.cpp \
+    src/modulo_auto/gestor_auto.cpp \
     src/modulo_autoparte/autoparte.cpp \
     src/modulo_autoparte/autopartedaoimpl.cpp \
+    src/modulo_autoparte/gestor_autoparte.cpp \
     src/modulo_cliente/cliente.cpp \
     src/modulo_cliente/clientedaoimpl.cpp \
+    src/modulo_cliente/gestor_cliente.cpp \
+    src/modulo_incidente/gestor_incidente.cpp \
     src/modulo_incidente/incidente.cpp \
     src/modulo_incidente/incidentedaoimpl.cpp \
     src/modulo_Mantenimiento/Mantenimiento.cpp \
     src/modulo_Mantenimiento/Mantenimientodaoimpl.cpp \
     src/modulo_Proveedor/Proveedor.cpp \
     src/modulo_Proveedor/Proveedordaoimpl.cpp \
+    src/modulo_mantenimiento/gestor_mantenimiento.cpp \
+    src/modulo_proveedor/gestor_proveedor.cpp \
     src/modulo_tipo_Mantenimiento/tipo_Mantenimiento.cpp \
     src/modulo_tipo_Mantenimiento/tipo_Mantenimientodaoimpl.cpp
 
@@ -39,15 +46,20 @@ HEADERS += \
     src/modulo_alquiler/alquiler.h \
     src/modulo_alquiler/alquilerdao.h \
     src/modulo_alquiler/alquilerdaoimpl.h \
+    src/modulo_alquiler/gestor_alquiler.h \
     src/modulo_auto/auto.h \
     src/modulo_auto/autodao.h \
     src/modulo_auto/autodaoimpl.h \
+    src/modulo_auto/gestor_auto.h \
     src/modulo_autoparte/autoparte.h \
     src/modulo_autoparte/autopartedao.h \
     src/modulo_autoparte/autopartedaoimpl.h \
+    src/modulo_autoparte/gestor_autoparte.h \
     src/modulo_cliente/cliente.h \
     src/modulo_cliente/clientedao.h \
     src/modulo_cliente/clientedaoimpl.h \
+    src/modulo_cliente/gestor_cliente.h \
+    src/modulo_incidente/gestor_incidente.h \
     src/modulo_incidente/incidente.h \
     src/modulo_incidente/incidentedao.h \
     src/modulo_incidente/incidentedaoimpl.h \
@@ -57,6 +69,8 @@ HEADERS += \
     src/modulo_Proveedor/Proveedor.h \
     src/modulo_Proveedor/Proveedordao.h \
     src/modulo_Proveedor/Proveedordaoimpl.h \
+    src/modulo_mantenimiento/gestor_mantenimiento.h \
+    src/modulo_proveedor/gestor_proveedor.h \
     src/modulo_tipo_Mantenimiento/tipo_Mantenimiento.h \
     src/modulo_tipo_Mantenimiento/tipo_Mantenimientodao.h \
     src/modulo_tipo_Mantenimiento/tipo_Mantenimientodaoimpl.h
