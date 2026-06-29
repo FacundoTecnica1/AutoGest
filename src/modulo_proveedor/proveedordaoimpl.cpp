@@ -31,6 +31,13 @@ void ProveedorDAOImpl::actualizar(Proveedor obj) {
 
 void ProveedorDAOImpl::eliminar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
+
+    //se limpian las autopartes conectadas a este proveedor primero
+    query.prepare("DELETE FROM autoparte WHERE id_Proveedor = :id_Proveedor");
+    query.bindValue(":id_Proveedor", obj.getid_proveedor());
+    query.exec();
+
+    //y ahora sí se va el proveedor
     query.prepare("DELETE FROM Proveedor WHERE `id_Proveedor` = :id_Proveedor");
     query.bindValue(":id_Proveedor", obj.getid_proveedor());
     query.exec();

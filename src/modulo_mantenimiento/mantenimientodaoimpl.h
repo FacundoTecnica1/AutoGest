@@ -13,6 +13,7 @@ public:
     void eliminar(Mantenimiento obj) ;
     vector<Mantenimiento> listar();
     vector<Mantenimiento> buscarCampo(const QString &busqueda);
+    vector<vector<QString>> listarDetalles();
 };
 
 #endif // MantenimientoDAOIMPL_H

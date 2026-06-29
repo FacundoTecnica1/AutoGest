@@ -3,7 +3,9 @@
 #include <QVariant>
 #include <QSqlDatabase>
 #include <QString>
+#include <QDate>
 #include <vector>
+
 using namespace std;
 
 void AlquilerDAOImpl::insertar(Alquiler obj) {
@@ -39,6 +41,13 @@ void AlquilerDAOImpl::actualizar(Alquiler obj) {
 
 void AlquilerDAOImpl::eliminar(Alquiler obj) {
     QSqlQuery query(QSqlDatabase::database());
+
+    //primero borramos dependencias en incidentes para evitar el error de Foreign Key
+    query.prepare("DELETE FROM incidente WHERE id_alquiler = :id_alquiler");
+    query.bindValue(":id_alquiler", obj.getid_alquiler());
+    query.exec();
+
+    //ahora sí borramos el alquiler sin problema
     query.prepare("DELETE FROM alquiler WHERE id_alquiler = :id_alquiler");
     query.bindValue(":id_alquiler", obj.getid_alquiler());
     query.exec();
@@ -92,4 +101,50 @@ vector<Alquiler> AlquilerDAOImpl::buscarCampo(const QString &busqueda) {
         }
     }
     return lista;
+}
+
+//lista todo completo con los inner join
+vector<vector<QString>> AlquilerDAOImpl::listarDetalles() {
+    vector<vector<QString>> lista;
+    QSqlQuery q(QSqlDatabase::database());
+    q.prepare("SELECT alq.id_alquiler, a.marca, a.modelo, a.patente, c.nombre, c.apellido, "
+              "alq.metodo_pago, alq.fecha_inicio, alq.fecha_fin, alq.precio_total, alq.estado "
+              "FROM alquiler alq "
+              "INNER JOIN auto a ON alq.id_auto = a.id_auto "
+              "INNER JOIN cliente c ON alq.id_cliente = c.id_cliente");
+
+    if(q.exec()) {
+        while(q.next()) {
+            vector<QString> fila;
+            fila.push_back(q.value(0).toString()); // ID Alquiler
+            fila.push_back(q.value(1).toString() + " " + q.value(2).toString() + " (" + q.value(3).toString() + ")"); // Auto
+            fila.push_back(q.value(4).toString() + " " + q.value(5).toString()); // Cliente
+            fila.push_back(q.value(6).toString()); // Metodo de pago
+            fila.push_back(q.value(7).toString()); // Inicio
+            fila.push_back(q.value(8).toString()); // Fin
+            fila.push_back(q.value(9).toString()); // Total
+            fila.push_back(q.value(10).toString()); // Estado
+            lista.push_back(fila);
+        }
+    }
+    return lista;
+}
+
+double AlquilerDAOImpl::calcularTotal(int id_auto, const QString& fechaInicio, const QString& fechaFin) {
+    QDate inicio = QDate::fromString(fechaInicio, "yyyy-MM-dd");
+    QDate fin = QDate::fromString(fechaFin, "yyyy-MM-dd");
+
+    int dias = inicio.daysTo(fin);
+    if(dias <= 0) dias = 1;
+
+    double precioDia = 0.0;
+    QSqlQuery q(QSqlDatabase::database());
+    q.prepare("SELECT precio_por_dia FROM auto WHERE id_auto = :id_auto");
+    q.bindValue(":id_auto", id_auto);
+
+    if(q.exec() && q.next()) {
+        precioDia = q.value(0).toDouble();
+    }
+
+    return dias * precioDia;
 }

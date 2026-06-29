@@ -42,11 +42,22 @@ void ClienteDAOImpl::actualizar(Cliente obj) {
 
 void ClienteDAOImpl::eliminar(Cliente obj) {
     QSqlQuery query(QSqlDatabase::database());
+
+    //primero borramos incidentes de alquileres de este cliente
+    query.prepare("DELETE FROM incidente WHERE id_alquiler IN (SELECT id_alquiler FROM alquiler WHERE id_cliente = :id_cliente)");
+    query.bindValue(":id_cliente", obj.getid_cliente());
+    query.exec();
+
+    //borramos los alquileres
+    query.prepare("DELETE FROM alquiler WHERE id_cliente = :id_cliente");
+    query.bindValue(":id_cliente", obj.getid_cliente());
+    query.exec();
+
+    //y por ultimo al cliente
     query.prepare("DELETE FROM cliente WHERE id_cliente = :id_cliente");
     query.bindValue(":id_cliente", obj.getid_cliente());
     query.exec();
 }
-
 vector<Cliente> ClienteDAOImpl::listar() {
     vector<Cliente> lista;
     QSqlQuery query(QSqlDatabase::database());

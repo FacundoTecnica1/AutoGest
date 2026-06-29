@@ -45,7 +45,7 @@ void GestorAuto::guardar() {
     obj.setPrecio_por_dia(ui->txtPrecioDiaAuto->text().toDouble());
     obj.setEstado(ui->cmbEstadoAuto->currentText());
 
-    //Hardcodeamos fecha ingreso por hoy o si tenes un dateEdit, usalo
+
     obj.setFechaIngreso(QDate::currentDate().toString("yyyy-MM-dd"));
 
     daoAuto.insertar(obj);

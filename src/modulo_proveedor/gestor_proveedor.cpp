@@ -14,7 +14,7 @@ void GestorProveedor::listar() {
     ui->tblProveedores->setColumnCount(5);
     ui->tblProveedores->setHorizontalHeaderLabels({"ID", "Nombre", "Teléfono", "Email", "Dirección"});
 
-    //escondemos la columna del id porque al usuario no le importa ver el numerito
+    //escondemos la columna del id
     ui->tblProveedores->setColumnHidden(0, true);
 
     //traemos todos los proveedores de la base de datos

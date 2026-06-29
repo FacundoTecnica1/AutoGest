@@ -10,10 +10,10 @@ bool Conexion::conectar(){
 
     db.setDatabaseName(
         "Driver={MySQL ODBC 9.7 Unicode Driver};"
-        "Server=127.0.0.1;"
-        "Database=autogest;"
-        "User=root;"
-        "Password=;"
+        "Server=5.180.151.26;"
+        "Database=autogest_noriega;"
+        "User=autogest_user;"
+        "Password=Autogestion_NicoNoriega2026!;"
         );
 
     if (!db.open()){

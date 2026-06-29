@@ -12,6 +12,9 @@ public:
     void eliminar(Alquiler obj);
     vector<Alquiler> listar();
     vector<Alquiler> buscarCampo(const QString &busqueda);
+    vector<vector<QString>> listarDetalles(); //Lista con los inner jois necesarios
+    double calcularTotal(int id_auto, const QString& fechaInicio, const QString& fechaFin);
+    //Sirve para calcular cuanto costara el precio del alquiler
 };
 
 #endif // ALQUILERDAOIMPL_H

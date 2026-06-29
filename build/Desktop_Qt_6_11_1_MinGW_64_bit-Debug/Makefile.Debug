@@ -2425,7 +2425,11 @@ debug/alquilerdaoimpl.o: ../../src/modulo_alquiler/alquilerdaoimpl.cpp ../../src
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qobject_impl.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qbindingstorage.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlDatabase
+		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlDatabase \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/QDate \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.11.1/mingw_64/include/QtCore/qlocale.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\alquilerdaoimpl.o ..\..\src\modulo_alquiler\alquilerdaoimpl.cpp
 
 debug/gestor_alquiler.o: ../../src/modulo_alquiler/gestor_alquiler.cpp ../../src/modulo_alquiler/gestor_alquiler.h \
@@ -2644,15 +2648,6 @@ debug/gestor_alquiler.o: ../../src/modulo_alquiler/gestor_alquiler.cpp ../../src
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqldatabase.h \
-		C:/Qt/6.11.1/mingw_64/include/QtCore/qmetaobject.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlError \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlerror.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/QDate \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qdatetime.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qcalendar.h
@@ -3258,6 +3253,9 @@ debug/autopartedaoimpl.o: ../../src/modulo_autoparte/autopartedaoimpl.cpp ../../
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
 		../../src/modulo_autoparte/autoparte.h \
+		../../src/modulo_auto/autodaoimpl.h \
+		../../src/modulo_auto/autodao.h \
+		../../src/modulo_auto/auto.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
@@ -5065,14 +5063,7 @@ debug/gestor_mantenimiento.o: ../../src/modulo_mantenimiento/gestor_mantenimient
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.11.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.11.1/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/QSqlQuery \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqlquery.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.11.1/mingw_64/include/QtSql/qsqldatabase.h \
-		C:/Qt/6.11.1/mingw_64/include/QtCore/qmetaobject.h
+		C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialogbuttonbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\gestor_mantenimiento.o ..\..\src\modulo_mantenimiento\gestor_mantenimiento.cpp
 
 debug/gestor_proveedor.o: ../../src/modulo_proveedor/gestor_proveedor.cpp ../../src/modulo_proveedor/gestor_proveedor.h \

@@ -460,10 +460,10 @@ public:
         cmbEstadoAlquiler->setGeometry(QRect(140, 140, 111, 24));
         lblPrecioTotalAlquiler = new QLabel(Alquiler);
         lblPrecioTotalAlquiler->setObjectName("lblPrecioTotalAlquiler");
-        lblPrecioTotalAlquiler->setGeometry(QRect(110, 240, 111, 40));
+        lblPrecioTotalAlquiler->setGeometry(QRect(30, 250, 71, 40));
         lblTotalAlquiler = new QLabel(Alquiler);
         lblTotalAlquiler->setObjectName("lblTotalAlquiler");
-        lblTotalAlquiler->setGeometry(QRect(120, 270, 41, 40));
+        lblTotalAlquiler->setGeometry(QRect(100, 250, 161, 40));
         QFont font1;
         font1.setPointSize(10);
         font1.setUnderline(true);
@@ -501,13 +501,13 @@ public:
         lblListaIncidentes->setFont(font);
         btnEliminarIncidente = new QPushButton(Incidentes);
         btnEliminarIncidente->setObjectName("btnEliminarIncidente");
-        btnEliminarIncidente->setGeometry(QRect(170, 190, 80, 24));
+        btnEliminarIncidente->setGeometry(QRect(170, 200, 80, 24));
         lblTipoIncidente = new QLabel(Incidentes);
         lblTipoIncidente->setObjectName("lblTipoIncidente");
         lblTipoIncidente->setGeometry(QRect(20, 20, 101, 40));
         btnActualizarIncidente = new QPushButton(Incidentes);
         btnActualizarIncidente->setObjectName("btnActualizarIncidente");
-        btnActualizarIncidente->setGeometry(QRect(100, 230, 80, 24));
+        btnActualizarIncidente->setGeometry(QRect(100, 240, 80, 24));
         txtBuscadorIncidente = new QLineEdit(Incidentes);
         txtBuscadorIncidente->setObjectName("txtBuscadorIncidente");
         txtBuscadorIncidente->setGeometry(QRect(290, 60, 421, 24));
@@ -516,7 +516,7 @@ public:
         lblFechaIncidente->setGeometry(QRect(140, 20, 91, 40));
         btnGuardarIncidente = new QPushButton(Incidentes);
         btnGuardarIncidente->setObjectName("btnGuardarIncidente");
-        btnGuardarIncidente->setGeometry(QRect(30, 190, 80, 24));
+        btnGuardarIncidente->setGeometry(QRect(30, 200, 80, 24));
         dteFechaIncidente = new QDateEdit(Incidentes);
         dteFechaIncidente->setObjectName("dteFechaIncidente");
         dteFechaIncidente->setGeometry(QRect(140, 60, 110, 25));
@@ -711,7 +711,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
