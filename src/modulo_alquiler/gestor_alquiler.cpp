@@ -52,7 +52,7 @@ void GestorAlquiler::listar() {
     ui->tblAlquileres->setColumnHidden(0, true); //Ocultamos el ID
 
     QSqlQuery q;
-    //Hacemos inner join para traer los datos reales en vez de numeritos
+    //Hacemos inner join para traer los datos reales de la bd
     q.prepare("SELECT alq.id_alquiler, a.marca, a.modelo, a.patente, c.nombre, c.apellido, "
               "alq.metodo_pago, alq.fecha_inicio, alq.fecha_fin, alq.precio_total, alq.estado "
               "FROM alquiler alq "

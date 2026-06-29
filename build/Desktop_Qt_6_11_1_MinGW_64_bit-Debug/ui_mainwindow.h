@@ -600,7 +600,7 @@ public:
         tblMantenimientos->setGeometry(QRect(290, 100, 421, 401));
         cmbAutoMantenimiento = new QComboBox(Mantenimientos);
         cmbAutoMantenimiento->setObjectName("cmbAutoMantenimiento");
-        cmbAutoMantenimiento->setGeometry(QRect(20, 280, 111, 24));
+        cmbAutoMantenimiento->setGeometry(QRect(20, 280, 231, 24));
         lblEstadoMantenimiento_2 = new QLabel(Mantenimientos);
         lblEstadoMantenimiento_2->setObjectName("lblEstadoMantenimiento_2");
         lblEstadoMantenimiento_2->setGeometry(QRect(20, 240, 121, 40));

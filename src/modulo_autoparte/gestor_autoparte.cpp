@@ -5,6 +5,7 @@
 GestorAutoparte::GestorAutoparte(Ui::MainWindow *ui, QObject *parent) : QObject(parent), ui(ui) {}
 
 void GestorAutoparte::listar() {
+
     //limpiamos todo antes de cargar
     ui->tblAutopartes->clearContents();
     ui->tblAutopartes->setRowCount(0);
@@ -13,7 +14,7 @@ void GestorAutoparte::listar() {
     ui->tblAutopartes->setColumnCount(7);
     ui->tblAutopartes->setHorizontalHeaderLabels({"ID", "ID Prov", "ID Mant", "Nombre", "Marca", "Precio", "Stock"});
 
-    //ocultamos los ids para que quede mas limpio
+    //ocultamos los ids para que quede mas limpia la tabla
     ui->tblAutopartes->setColumnHidden(0, true);
     ui->tblAutopartes->setColumnHidden(1, true);
     ui->tblAutopartes->setColumnHidden(2, true);
@@ -29,7 +30,7 @@ void GestorAutoparte::listar() {
         ui->tblAutopartes->setItem(row, 3, new QTableWidgetItem(a.getNombre()));
         ui->tblAutopartes->setItem(row, 4, new QTableWidgetItem(a.getMarca()));
 
-        //le metemos el signito de pesos para que quede mas facha
+        //le metemos el signito de pesos para que quede mejor
         ui->tblAutopartes->setItem(row, 5, new QTableWidgetItem("$" + QString::number(a.getPrecio())));
         ui->tblAutopartes->setItem(row, 6, new QTableWidgetItem(QString::number(a.getStock())));
         row++;
@@ -45,8 +46,7 @@ int GestorAutoparte::getIdSeleccionadoTabla() {
 void GestorAutoparte::guardar() {
     Autoparte obj;
 
-    //como no hay combobox en tu interfaz para proveedor ni mantenimiento, le clavo un 1 fijo
-    //asi no pincha con las foreign keys de la base de datos
+
     obj.setid_proveedor(1);
     obj.setid_Mantenimiento(1);
 

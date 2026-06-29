@@ -3,7 +3,7 @@
 #include "admindaoimpl.h"
 #include <QMessageBox>
 
-//Incluimos todos nuestros gestores
+
 #include "gestor_auto.h"
 #include "gestor_cliente.h"
 #include "gestor_alquiler.h"
@@ -81,36 +81,99 @@ void MainWindow::on_btnIngresar_clicked(){
 }
 
 //Eventos de Autos
-void MainWindow::on_btnGuardarAuto_clicked() { gestorAuto->guardar(); }
-void MainWindow::on_btnActualizarAuto_clicked() { gestorAuto->actualizar(); }
-void MainWindow::on_btnEliminarAuto_clicked() { gestorAuto->eliminar(); }
+void MainWindow::on_btnGuardarAuto_clicked() {
+    gestorAuto->guardar();
+    gestorAlquiler->cargarListasCombo();
+    gestorMantenimiento->cargarListasCombo();
+}
+void MainWindow::on_btnActualizarAuto_clicked() {
+    gestorAuto->actualizar();
+    gestorAlquiler->cargarListasCombo();
+    gestorMantenimiento->cargarListasCombo();
+}
+void MainWindow::on_btnEliminarAuto_clicked() {
+    gestorAuto->eliminar();
+    gestorAlquiler->cargarListasCombo();
+    gestorMantenimiento->cargarListasCombo();
+}
 
 //Eventos de Clientes
-void MainWindow::on_btnGuardarCliente_clicked() { gestorCliente->guardar(); }
-void MainWindow::on_btnActualizarCliente_clicked() { gestorCliente->actualizar(); }
-void MainWindow::on_btnEliminarCliente_clicked() { gestorCliente->eliminar(); }
+void MainWindow::on_btnGuardarCliente_clicked() {
+    gestorCliente->guardar();
+    gestorAlquiler->cargarListasCombo();
+}
+
+void MainWindow::on_btnActualizarCliente_clicked() {
+    gestorCliente->actualizar();
+    gestorAlquiler->cargarListasCombo();
+}
+
+void MainWindow::on_btnEliminarCliente_clicked() {
+    gestorCliente->eliminar();
+    gestorAlquiler->cargarListasCombo();
+}
 
 //Eventos de Alquiler
-void MainWindow::on_btnGuardarAlquiler_clicked() { gestorAlquiler->guardar(); }
-void MainWindow::on_btnActualizarAlquiler_clicked() { gestorAlquiler->actualizar(); }
-void MainWindow::on_btnEliminarAlquiler_clicked() { gestorAlquiler->eliminar(); }
+void MainWindow::on_btnGuardarAlquiler_clicked() {
+    gestorAlquiler->guardar();
+}
+
+void MainWindow::on_btnActualizarAlquiler_clicked() {
+    gestorAlquiler->actualizar();
+}
+
+void MainWindow::on_btnEliminarAlquiler_clicked() {
+    gestorAlquiler->eliminar();
+}
 
 //Eventos de Mantenimiento
-void MainWindow::on_btnGuardarMantenimiento_clicked() { gestorMantenimiento->guardar(); }
-void MainWindow::on_btnActualizarMantenimiento_clicked() { gestorMantenimiento->actualizar(); }
-void MainWindow::on_btnEliminarMantenimiento_clicked() { gestorMantenimiento->eliminar(); }
+void MainWindow::on_btnGuardarMantenimiento_clicked() {
+    gestorMantenimiento->guardar();
+}
+
+void MainWindow::on_btnActualizarMantenimiento_clicked() {
+    gestorMantenimiento->actualizar();
+}
+
+void MainWindow::on_btnEliminarMantenimiento_clicked() {
+    gestorMantenimiento->eliminar();
+}
 
 //Eventos de Proveedores
-void MainWindow::on_btnGuardarProveedor_clicked() { gestorProveedor->guardar(); }
-void MainWindow::on_btnActualizarProveedor_clicked() { gestorProveedor->actualizar(); }
-void MainWindow::on_btnEliminarProveedor_clicked() { gestorProveedor->eliminar(); }
+void MainWindow::on_btnGuardarProveedor_clicked() {
+    gestorProveedor->guardar();
+}
+
+void MainWindow::on_btnActualizarProveedor_clicked() {
+    gestorProveedor->actualizar();
+}
+
+void MainWindow::on_btnEliminarProveedor_clicked() {
+    gestorProveedor->eliminar();
+}
 
 //Eventos de Autopartes
-void MainWindow::on_btnGuardarAutoparte_clicked() { gestorAutoparte->guardar(); }
-void MainWindow::on_btnActualizarAutoparte_clicked() { gestorAutoparte->actualizar(); }
-void MainWindow::on_btnEliminarAutoparte_clicked() { gestorAutoparte->eliminar(); }
+void MainWindow::on_btnGuardarAutoparte_clicked() {
+    gestorAutoparte->guardar();
+}
+
+void MainWindow::on_btnActualizarAutoparte_clicked() {
+    gestorAutoparte->actualizar();
+}
+
+void MainWindow::on_btnEliminarAutoparte_clicked() {
+    gestorAutoparte->eliminar();
+}
 
 //Eventos de Incidentes
-void MainWindow::on_btnGuardarIncidente_clicked() { gestorIncidente->guardar(); }
-void MainWindow::on_btnActualizarIncidente_clicked() { gestorIncidente->actualizar(); }
-void MainWindow::on_btnEliminarIncidente_clicked() { gestorIncidente->eliminar(); }
+void MainWindow::on_btnGuardarIncidente_clicked() {
+    gestorIncidente->guardar();
+}
+
+void MainWindow::on_btnActualizarIncidente_clicked() {
+    gestorIncidente->actualizar();
+}
+
+void MainWindow::on_btnEliminarIncidente_clicked() {
+    gestorIncidente->eliminar();
+}
