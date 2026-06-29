@@ -34,32 +34,10 @@ void AutoparteDAOImpl::actualizar(Autoparte obj) {
     query.exec();
 }
 
-void AutoDAOImpl::eliminar(Auto obj) {
+void AutoparteDAOImpl::eliminar(Autoparte obj) {
     QSqlQuery query(QSqlDatabase::database());
-
-    //limpia incidentes pegados a los alquileres de este auto
-    query.prepare("DELETE FROM incidente WHERE id_alquiler IN (SELECT id_alquiler FROM alquiler WHERE id_auto = :id_auto)");
-    query.bindValue(":id_auto", obj.getid_auto());
-    query.exec();
-
-    //despues se limpiar alquileres
-    query.prepare("DELETE FROM alquiler WHERE id_auto = :id_auto");
-    query.bindValue(":id_auto", obj.getid_auto());
-    query.exec();
-
-    //despues se borra autopartes pegadas a los mantenimientos de este auto
-    query.prepare("DELETE FROM autoparte WHERE id_Mantenimiento IN (SELECT id_Mantenimiento FROM mantenimiento WHERE id_auto = :id_auto)");
-    query.bindValue(":id_auto", obj.getid_auto());
-    query.exec();
-
-    //se borra directamente mantenimientos
-    query.prepare("DELETE FROM mantenimiento WHERE id_auto = :id_auto");
-    query.bindValue(":id_auto", obj.getid_auto());
-    query.exec();
-
-    //y por ultimo se borra el auto
-    query.prepare("DELETE FROM auto WHERE id_auto = :id_auto");
-    query.bindValue(":id_auto", obj.getid_auto());
+    query.prepare("DELETE FROM autoparte WHERE `id autoparte` = :id_autoparte");
+    query.bindValue(":id_autoparte", obj.getid_autoparte());
     query.exec();
 }
 
