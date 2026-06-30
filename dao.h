@@ -11,7 +11,6 @@ public:
     virtual void insertar(T obj) = 0;
     virtual void actualizar(T obj) = 0;
     virtual void eliminar(T obj) = 0;
-    virtual vector<T> listar() = 0;
 };
 
 #endif // DAO_H

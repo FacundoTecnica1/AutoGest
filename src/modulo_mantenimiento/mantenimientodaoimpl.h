@@ -11,9 +11,8 @@ public:
     void insertar(Mantenimiento obj) ;
     void actualizar(Mantenimiento obj) ;
     void eliminar(Mantenimiento obj) ;
-    vector<Mantenimiento> listar();
-    vector<Mantenimiento> buscarCampo(const QString &busqueda);
-    vector<vector<QString>> listarDetalles();
+    vector<vector<QString>> listar();
+    vector<vector<QString>> buscarCampo(const QString &busqueda);
 };
 
 #endif // MantenimientoDAOIMPL_H

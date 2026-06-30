@@ -51,55 +51,7 @@ void MantenimientoDAOImpl::eliminar(Mantenimiento obj) {
     query.exec();
 }
 
-vector<Mantenimiento> MantenimientoDAOImpl::listar() {
-    vector<Mantenimiento> lista;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM mantenimiento");
-    if(query.exec()) {
-        while(query.next()) {
-            Mantenimiento obj;
-            obj.setid_Mantenimiento(query.value("id_Mantenimiento").toInt());
-            obj.setid_auto(query.value("id_auto").toInt());
-            obj.setid_tipo_Mantenimiento(query.value("id_tipo_Mantenimiento").toInt());
-            obj.setFechaIngreso(query.value("fecha_ingreso").toString());
-            obj.setFechaSalida(query.value("fecha_salida").toString());
-            obj.setObservaciones(query.value("observaciones").toString());
-            obj.setCosto(query.value("costo").toDouble());
-            obj.setEstado(query.value("estado").toString());
-            lista.push_back(obj);
-        }
-    }
-    return lista;
-}
-
-vector<Mantenimiento> MantenimientoDAOImpl::buscarCampo(const QString &busqueda) {
-    vector<Mantenimiento> lista;
-    QSqlQuery query(QSqlDatabase::database());
-
-    query.prepare("SELECT * FROM mantenimiento WHERE id_Mantenimiento LIKE :busqueda OR id_auto LIKE :busqueda "
-                  "OR id_tipo_Mantenimiento LIKE :busqueda OR fecha_ingreso LIKE :busqueda OR fecha_salida LIKE :busqueda "
-                  "OR observaciones LIKE :busqueda OR costo LIKE :busqueda OR estado LIKE :busqueda");
-    query.bindValue(":busqueda", "%" + busqueda + "%");
-
-    if(query.exec()) {
-        while(query.next()) {
-            Mantenimiento obj;
-            obj.setid_Mantenimiento(query.value("id_Mantenimiento").toInt());
-            obj.setid_auto(query.value("id_auto").toInt());
-            obj.setid_tipo_Mantenimiento(query.value("id_tipo_Mantenimiento").toInt());
-            obj.setFechaIngreso(query.value("fecha_ingreso").toString());
-            obj.setFechaSalida(query.value("fecha_salida").toString());
-            obj.setObservaciones(query.value("observaciones").toString());
-            obj.setCosto(query.value("costo").toDouble());
-            obj.setEstado(query.value("estado").toString());
-            lista.push_back(obj);
-        }
-    }
-    return lista;
-}
-
-//buscatodo con los inner joins
-vector<vector<QString>> MantenimientoDAOImpl::listarDetalles() {
+vector<vector<QString>> MantenimientoDAOImpl::listar() {
     vector<vector<QString>> lista;
     QSqlQuery q(QSqlDatabase::database());
     q.prepare("SELECT m.id_Mantenimiento, a.marca, a.modelo, a.patente, t.nombre, "
@@ -112,12 +64,42 @@ vector<vector<QString>> MantenimientoDAOImpl::listarDetalles() {
         while(q.next()) {
             vector<QString> fila;
             fila.push_back(q.value(0).toString()); // ID
-            fila.push_back(q.value(1).toString() + " " + q.value(2).toString() + " (" + q.value(3).toString() + ")"); // Auto (Marca Modelo y Patente)
-            fila.push_back(q.value(4).toString()); // Tipo mantenimiento (Nombre)
+            fila.push_back(q.value(1).toString() + " " + q.value(2).toString() + " (" + q.value(3).toString() + ")"); // Auto
+            fila.push_back(q.value(4).toString()); // Tipo mantenimiento
             fila.push_back(q.value(5).toString()); // Fecha Ingreso
             fila.push_back(q.value(6).toString()); // Fecha Salida
             fila.push_back(q.value(7).toString()); // Costo
             fila.push_back(q.value(8).toString()); // Estado
+            lista.push_back(fila);
+        }
+    }
+    return lista;
+}
+
+vector<vector<QString>> MantenimientoDAOImpl::buscarCampo(const QString &busqueda) {
+    vector<vector<QString>> lista;
+    QSqlQuery q(QSqlDatabase::database());
+    q.prepare("SELECT m.id_Mantenimiento, a.marca, a.modelo, a.patente, t.nombre, "
+              "m.fecha_ingreso, m.fecha_salida, m.costo, m.estado "
+              "FROM mantenimiento m "
+              "INNER JOIN auto a ON m.id_auto = a.id_auto "
+              "INNER JOIN tipo_mantenimiento t ON m.id_tipo_Mantenimiento = t.id_tipo_Mantenimiento "
+              "WHERE m.id_Mantenimiento LIKE :busqueda OR a.marca LIKE :busqueda OR a.modelo LIKE :busqueda "
+              "OR a.patente LIKE :busqueda OR t.nombre LIKE :busqueda OR m.fecha_ingreso LIKE :busqueda "
+              "OR m.fecha_salida LIKE :busqueda OR m.costo LIKE :busqueda OR m.estado LIKE :busqueda");
+
+    q.bindValue(":busqueda", "%" + busqueda + "%");
+
+    if(q.exec()) {
+        while(q.next()) {
+            vector<QString> fila;
+            fila.push_back(q.value(0).toString());
+            fila.push_back(q.value(1).toString() + " " + q.value(2).toString() + " (" + q.value(3).toString() + ")");
+            fila.push_back(q.value(4).toString());
+            fila.push_back(q.value(5).toString());
+            fila.push_back(q.value(6).toString());
+            fila.push_back(q.value(7).toString());
+            fila.push_back(q.value(8).toString());
             lista.push_back(fila);
         }
     }

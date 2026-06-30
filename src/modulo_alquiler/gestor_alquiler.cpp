@@ -34,8 +34,8 @@ void GestorAlquiler::listar() {
     ui->tblAlquileres->setHorizontalHeaderLabels({"ID", "Auto", "Cliente", "Metodo Pago", "Inicio", "Fin", "Total", "Estado"});
     ui->tblAlquileres->setColumnHidden(0, true);
 
-    // Le pedimos al DAO la lista ya armada y formateada
-    auto lista = daoAlquiler.listarDetalles();
+    // Le pedimos al DAO la lista ya armada y formateada usando listar()
+    auto lista = daoAlquiler.listar();
     int row = 0;
 
     for(const auto& fila : lista) {

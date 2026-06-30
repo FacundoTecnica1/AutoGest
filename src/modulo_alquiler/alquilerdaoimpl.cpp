@@ -53,58 +53,7 @@ void AlquilerDAOImpl::eliminar(Alquiler obj) {
     query.exec();
 }
 
-vector<Alquiler> AlquilerDAOImpl::listar() {
-    vector<Alquiler> lista;
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM alquiler");
-    if(query.exec()) {
-        while(query.next()) {
-            Alquiler obj;
-            obj.setid_alquiler(query.value("id_alquiler").toInt());
-            obj.setid_auto(query.value("id_auto").toInt());
-            obj.setid_cliente(query.value("id_cliente").toInt());
-            obj.setid_usuario(query.value("id_usuario").toInt());
-            obj.setMetodoPago(query.value("metodo_pago").toString());
-            obj.setFechaInicio(query.value("fecha_inicio").toString());
-            obj.setFechaFin(query.value("fecha_fin").toString());
-            obj.setPrecioTotal(query.value("precio_total").toDouble());
-            obj.setEstado(query.value("estado").toString());
-            lista.push_back(obj);
-        }
-    }
-    return lista;
-}
-
-vector<Alquiler> AlquilerDAOImpl::buscarCampo(const QString &busqueda) {
-    vector<Alquiler> lista;
-    QSqlQuery query(QSqlDatabase::database());
-
-    query.prepare("SELECT * FROM alquiler WHERE id_alquiler LIKE :busqueda OR id_auto LIKE :busqueda "
-                  "OR id_cliente LIKE :busqueda OR id_usuario LIKE :busqueda OR metodo_pago LIKE :busqueda "
-                  "OR fecha_inicio LIKE :busqueda OR fecha_fin LIKE :busqueda OR precio_total LIKE :busqueda "
-                  "OR estado LIKE :busqueda");
-    query.bindValue(":busqueda", "%" + busqueda + "%");
-
-    if(query.exec()) {
-        while(query.next()) {
-            Alquiler obj;
-            obj.setid_alquiler(query.value("id_alquiler").toInt());
-            obj.setid_auto(query.value("id_auto").toInt());
-            obj.setid_cliente(query.value("id_cliente").toInt());
-            obj.setid_usuario(query.value("id_usuario").toInt());
-            obj.setMetodoPago(query.value("metodo_pago").toString());
-            obj.setFechaInicio(query.value("fecha_inicio").toString());
-            obj.setFechaFin(query.value("fecha_fin").toString());
-            obj.setPrecioTotal(query.value("precio_total").toDouble());
-            obj.setEstado(query.value("estado").toString());
-            lista.push_back(obj);
-        }
-    }
-    return lista;
-}
-
-//lista todo completo con los inner join
-vector<vector<QString>> AlquilerDAOImpl::listarDetalles() {
+vector<vector<QString>> AlquilerDAOImpl::listar() {
     vector<vector<QString>> lista;
     QSqlQuery q(QSqlDatabase::database());
     q.prepare("SELECT alq.id_alquiler, a.marca, a.modelo, a.patente, c.nombre, c.apellido, "
@@ -116,10 +65,10 @@ vector<vector<QString>> AlquilerDAOImpl::listarDetalles() {
     if(q.exec()) {
         while(q.next()) {
             vector<QString> fila;
-            fila.push_back(q.value(0).toString()); // ID Alquiler
+            fila.push_back(q.value(0).toString()); // ID
             fila.push_back(q.value(1).toString() + " " + q.value(2).toString() + " (" + q.value(3).toString() + ")"); // Auto
             fila.push_back(q.value(4).toString() + " " + q.value(5).toString()); // Cliente
-            fila.push_back(q.value(6).toString()); // Metodo de pago
+            fila.push_back(q.value(6).toString()); // Metodo
             fila.push_back(q.value(7).toString()); // Inicio
             fila.push_back(q.value(8).toString()); // Fin
             fila.push_back(q.value(9).toString()); // Total
@@ -129,6 +78,42 @@ vector<vector<QString>> AlquilerDAOImpl::listarDetalles() {
     }
     return lista;
 }
+
+vector<vector<QString>> AlquilerDAOImpl::buscarCampo(const QString &busqueda) {
+    vector<vector<QString>> lista;
+    QSqlQuery q(QSqlDatabase::database());
+    // Hacemos el JOIN e incluimos todos los campos en el WHERE para que busque por cualquier lado
+    q.prepare("SELECT alq.id_alquiler, a.marca, a.modelo, a.patente, c.nombre, c.apellido, "
+              "alq.metodo_pago, alq.fecha_inicio, alq.fecha_fin, alq.precio_total, alq.estado "
+              "FROM alquiler alq "
+              "INNER JOIN auto a ON alq.id_auto = a.id_auto "
+              "INNER JOIN cliente c ON alq.id_cliente = c.id_cliente "
+              "WHERE alq.id_alquiler LIKE :busqueda OR a.marca LIKE :busqueda OR a.modelo LIKE :busqueda "
+              "OR a.patente LIKE :busqueda OR c.nombre LIKE :busqueda OR c.apellido LIKE :busqueda "
+              "OR alq.metodo_pago LIKE :busqueda OR alq.fecha_inicio LIKE :busqueda "
+              "OR alq.fecha_fin LIKE :busqueda OR alq.precio_total LIKE :busqueda OR alq.estado LIKE :busqueda");
+
+    q.bindValue(":busqueda", "%" + busqueda + "%");
+
+    if(q.exec()) {
+        while(q.next()) {
+            vector<QString> fila;
+            fila.push_back(q.value(0).toString());
+            fila.push_back(q.value(1).toString() + " " + q.value(2).toString() + " (" + q.value(3).toString() + ")");
+            fila.push_back(q.value(4).toString() + " " + q.value(5).toString());
+            fila.push_back(q.value(6).toString());
+            fila.push_back(q.value(7).toString());
+            fila.push_back(q.value(8).toString());
+            fila.push_back(q.value(9).toString());
+            fila.push_back(q.value(10).toString());
+            lista.push_back(fila);
+        }
+    }
+    return lista;
+}
+
+
+
 
 double AlquilerDAOImpl::calcularTotal(int id_auto, const QString& fechaInicio, const QString& fechaFin) {
     QDate inicio = QDate::fromString(fechaInicio, "yyyy-MM-dd");

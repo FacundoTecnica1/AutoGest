@@ -23,7 +23,8 @@ void GestorMantenimiento::listar() {
     ui->tblMantenimientos->setHorizontalHeaderLabels({"ID", "Auto", "Tipo", "Ingreso", "Salida", "Costo", "Estado"});
     ui->tblMantenimientos->setColumnHidden(0, true);
 
-    auto lista = daoMantenimiento.listarDetalles();
+    // Le pedimos al DAO la lista usando listar()
+    auto lista = daoMantenimiento.listar();
     int row = 0;
     for(const auto& fila : lista) {
         ui->tblMantenimientos->insertRow(row);
