@@ -42,6 +42,26 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->dteFechaInicioAlquiler, &QDateEdit::dateChanged, gestorAlquiler, &GestorAlquiler::calcularTotal);
     connect(ui->dteFechaFinAlquiler, &QDateEdit::dateChanged, gestorAlquiler, &GestorAlquiler::calcularTotal);
     connect(ui->cmbAutoAlquiler, &QComboBox::currentIndexChanged, gestorAlquiler, &GestorAlquiler::calcularTotal);
+
+
+    //conectamos los buscadores de texto con la funcion buscar de cada gestor
+    connect(ui->txtBuscadorAuto, &QLineEdit::textChanged, gestorAuto, &GestorAuto::buscar);
+    connect(ui->txtBuscadorCliente, &QLineEdit::textChanged, gestorCliente, &GestorCliente::buscar);
+    connect(ui->txtBuscadorAlquiler, &QLineEdit::textChanged, gestorAlquiler, &GestorAlquiler::buscar);
+    connect(ui->txtBuscadorMantenimiento, &QLineEdit::textChanged, gestorMantenimiento, &GestorMantenimiento::buscar);
+    connect(ui->txtBuscadorProveedor, &QLineEdit::textChanged, gestorProveedor, &GestorProveedor::buscar);
+    connect(ui->txtBuscadorAutoparte, &QLineEdit::textChanged, gestorAutoparte, &GestorAutoparte::buscar);
+    connect(ui->txtBuscadorIncidente, &QLineEdit::textChanged, gestorIncidente, &GestorIncidente::buscar);
+
+    //conectamos el evento de tocar una fila de la tabla para rellenar los datos en el formulario
+    connect(ui->tblAutos, &QTableWidget::itemSelectionChanged, gestorAuto, &GestorAuto::cargarDatos);
+    connect(ui->tblClientes, &QTableWidget::itemSelectionChanged, gestorCliente, &GestorCliente::cargarDatos);
+    connect(ui->tblAlquileres, &QTableWidget::itemSelectionChanged, gestorAlquiler, &GestorAlquiler::cargarDatos);
+    connect(ui->tblMantenimientos, &QTableWidget::itemSelectionChanged, gestorMantenimiento, &GestorMantenimiento::cargarDatos);
+    connect(ui->tblProveedores, &QTableWidget::itemSelectionChanged, gestorProveedor, &GestorProveedor::cargarDatos);
+    connect(ui->tblAutopartes, &QTableWidget::itemSelectionChanged, gestorAutoparte, &GestorAutoparte::cargarDatos);
+    connect(ui->tblIncidentes, &QTableWidget::itemSelectionChanged, gestorIncidente, &GestorIncidente::cargarDatos);
+
 }
 
 MainWindow::~MainWindow()

@@ -2,6 +2,7 @@
 #define GESTOR_ALQUILER_H
 
 #include <QObject>
+#include <vector>
 #include "alquilerdaoimpl.h"
 #include "autodaoimpl.h"
 #include "clientedaoimpl.h"
@@ -17,15 +18,19 @@ public:
     void guardar();
     void actualizar();
     void eliminar();
+    void limpiarFormulario();
 
 public slots:
-    void calcularTotal(); //Se ejecuta cuando cambian las fechas o el auto
+    void calcularTotal();
+    void buscar(const QString &texto);
+    void cargarDatos();
 
 private:
     Ui::MainWindow *ui;
     AlquilerDAOImpl daoAlquiler;
     AutoDAOImpl daoAuto;
     ClienteDAOImpl daoCliente;
-    int getIdSeleccionadoTabla(); //Ayuda para saber que fila tocaron
+    int getIdSeleccionadoTabla();
+    void poblarTabla(const std::vector<std::vector<QString>>& lista);
 };
 #endif // GESTOR_ALQUILER_H

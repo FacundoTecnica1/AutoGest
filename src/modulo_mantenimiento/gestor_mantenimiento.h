@@ -2,6 +2,7 @@
 #define GESTOR_MANTENIMIENTO_H
 
 #include <QObject>
+#include <vector>
 #include "Mantenimientodaoimpl.h"
 #include "autodaoimpl.h"
 #include "tipo_Mantenimientodaoimpl.h"
@@ -17,6 +18,11 @@ public:
     void guardar();
     void actualizar();
     void eliminar();
+    void limpiarFormulario();
+
+public slots:
+    void buscar(const QString &texto);
+    void cargarDatos();
 
 private:
     Ui::MainWindow *ui;
@@ -24,5 +30,6 @@ private:
     AutoDAOImpl daoAuto;
     TipoMantenimientoDAOImpl daoTipo;
     int getIdSeleccionadoTabla();
+    void poblarTabla(const std::vector<std::vector<QString>>& lista);
 };
 #endif

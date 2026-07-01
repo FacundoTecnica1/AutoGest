@@ -40,12 +40,21 @@ template <> constexpr inline auto GestorAlquiler::qt_create_metaobjectdata<qt_me
     QtMocHelpers::StringRefStorage qt_stringData {
         "GestorAlquiler",
         "calcularTotal",
-        ""
+        "",
+        "buscar",
+        "texto",
+        "cargarDatos"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Slot 'calcularTotal'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'buscar'
+        QtMocHelpers::SlotData<void(const QString &)>(3, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 4 },
+        }}),
+        // Slot 'cargarDatos'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -70,10 +79,11 @@ void GestorAlquiler::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->calcularTotal(); break;
+        case 1: _t->buscar((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 2: _t->cargarDatos(); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *GestorAlquiler::metaObject() const
@@ -95,14 +105,14 @@ int GestorAlquiler::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 3;
     }
     return _id;
 }

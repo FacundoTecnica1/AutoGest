@@ -14,10 +14,16 @@ public:
     void guardar();
     void actualizar();
     void eliminar();
+    void limpiarFormulario();
+
+public slots:
+    void buscar(const QString &texto);
+    void cargarDatos();
 
 private:
     Ui::MainWindow *ui;
     ClienteDAOImpl daoCliente;
     int getIdSeleccionadoTabla();
+    void poblarTabla(const std::vector<Cliente>& lista);
 };
 #endif

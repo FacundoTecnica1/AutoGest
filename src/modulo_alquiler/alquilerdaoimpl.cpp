@@ -56,7 +56,7 @@ void AlquilerDAOImpl::eliminar(Alquiler obj) {
 vector<vector<QString>> AlquilerDAOImpl::listar() {
     vector<vector<QString>> lista;
     QSqlQuery q(QSqlDatabase::database());
-    q.prepare("SELECT alq.id_alquiler, a.marca, a.modelo, a.patente, c.nombre, c.apellido, "
+    q.prepare("SELECT alq.id_alquiler, alq.id_auto, alq.id_cliente, a.marca, a.modelo, a.patente, c.nombre, c.apellido, "
               "alq.metodo_pago, alq.fecha_inicio, alq.fecha_fin, alq.precio_total, alq.estado "
               "FROM alquiler alq "
               "INNER JOIN auto a ON alq.id_auto = a.id_auto "
@@ -66,13 +66,15 @@ vector<vector<QString>> AlquilerDAOImpl::listar() {
         while(q.next()) {
             vector<QString> fila;
             fila.push_back(q.value(0).toString()); // ID
-            fila.push_back(q.value(1).toString() + " " + q.value(2).toString() + " (" + q.value(3).toString() + ")"); // Auto
-            fila.push_back(q.value(4).toString() + " " + q.value(5).toString()); // Cliente
-            fila.push_back(q.value(6).toString()); // Metodo
-            fila.push_back(q.value(7).toString()); // Inicio
-            fila.push_back(q.value(8).toString()); // Fin
-            fila.push_back(q.value(9).toString()); // Total
-            fila.push_back(q.value(10).toString()); // Estado
+            fila.push_back(q.value(1).toString()); // ID auto
+            fila.push_back(q.value(2).toString()); // ID cliente
+            fila.push_back(q.value(3).toString() + " " + q.value(4).toString() + " (" + q.value(5).toString() + ")"); // Auto
+            fila.push_back(q.value(6).toString() + " " + q.value(7).toString()); // Cliente
+            fila.push_back(q.value(8).toString()); // Metodo
+            fila.push_back(q.value(9).toString()); // Inicio
+            fila.push_back(q.value(10).toString()); // Fin
+            fila.push_back(q.value(11).toString()); // Total
+            fila.push_back(q.value(12).toString()); // Estado
             lista.push_back(fila);
         }
     }
@@ -83,7 +85,7 @@ vector<vector<QString>> AlquilerDAOImpl::buscarCampo(const QString &busqueda) {
     vector<vector<QString>> lista;
     QSqlQuery q(QSqlDatabase::database());
     // Hacemos el JOIN e incluimos todos los campos en el WHERE para que busque por cualquier lado
-    q.prepare("SELECT alq.id_alquiler, a.marca, a.modelo, a.patente, c.nombre, c.apellido, "
+    q.prepare("SELECT alq.id_alquiler, alq.id_auto, alq.id_cliente, a.marca, a.modelo, a.patente, c.nombre, c.apellido, "
               "alq.metodo_pago, alq.fecha_inicio, alq.fecha_fin, alq.precio_total, alq.estado "
               "FROM alquiler alq "
               "INNER JOIN auto a ON alq.id_auto = a.id_auto "
@@ -99,13 +101,15 @@ vector<vector<QString>> AlquilerDAOImpl::buscarCampo(const QString &busqueda) {
         while(q.next()) {
             vector<QString> fila;
             fila.push_back(q.value(0).toString());
-            fila.push_back(q.value(1).toString() + " " + q.value(2).toString() + " (" + q.value(3).toString() + ")");
-            fila.push_back(q.value(4).toString() + " " + q.value(5).toString());
-            fila.push_back(q.value(6).toString());
-            fila.push_back(q.value(7).toString());
+            fila.push_back(q.value(1).toString());
+            fila.push_back(q.value(2).toString());
+            fila.push_back(q.value(3).toString() + " " + q.value(4).toString() + " (" + q.value(5).toString() + ")");
+            fila.push_back(q.value(6).toString() + " " + q.value(7).toString());
             fila.push_back(q.value(8).toString());
             fila.push_back(q.value(9).toString());
             fila.push_back(q.value(10).toString());
+            fila.push_back(q.value(11).toString());
+            fila.push_back(q.value(12).toString());
             lista.push_back(fila);
         }
     }

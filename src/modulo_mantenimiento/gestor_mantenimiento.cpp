@@ -1,6 +1,7 @@
 #include "gestor_mantenimiento.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QDate>
 
 GestorMantenimiento::GestorMantenimiento(Ui::MainWindow *ui, QObject *parent) : QObject(parent), ui(ui) {}
 
@@ -16,15 +17,13 @@ void GestorMantenimiento::cargarListasCombo() {
     }
 }
 
-void GestorMantenimiento::listar() {
+void GestorMantenimiento::poblarTabla(const std::vector<std::vector<QString>>& lista) {
     ui->tblMantenimientos->clearContents();
     ui->tblMantenimientos->setRowCount(0);
     ui->tblMantenimientos->setColumnCount(7);
     ui->tblMantenimientos->setHorizontalHeaderLabels({"ID", "Auto", "Tipo", "Ingreso", "Salida", "Costo", "Estado"});
     ui->tblMantenimientos->setColumnHidden(0, true);
 
-    // Le pedimos al DAO la lista usando listar()
-    auto lista = daoMantenimiento.listar();
     int row = 0;
     for(const auto& fila : lista) {
         ui->tblMantenimientos->insertRow(row);
@@ -37,6 +36,47 @@ void GestorMantenimiento::listar() {
         ui->tblMantenimientos->setItem(row, 6, new QTableWidgetItem(fila[6]));
         row++;
     }
+}
+
+void GestorMantenimiento::listar() {
+    poblarTabla(daoMantenimiento.listar());
+}
+
+void GestorMantenimiento::buscar(const QString &texto) {
+    if (texto.isEmpty()) {
+        listar();
+    } else {
+        poblarTabla(daoMantenimiento.buscarCampo(texto));
+    }
+}
+
+void GestorMantenimiento::cargarDatos() {
+    int fila = ui->tblMantenimientos->currentRow();
+    if (fila == -1) return;
+
+    ui->cmbAutoMantenimiento->setCurrentText(ui->tblMantenimientos->item(fila, 1)->text());
+    ui->cmbTipoMantenimiento->setCurrentText(ui->tblMantenimientos->item(fila, 2)->text());
+    ui->dteFechaIngresoMantenimiento->setDate(QDate::fromString(ui->tblMantenimientos->item(fila, 3)->text(), "yyyy-MM-dd"));
+    ui->dteFechaSalidaMantenimiento->setDate(QDate::fromString(ui->tblMantenimientos->item(fila, 4)->text(), "yyyy-MM-dd"));
+
+    QString costo = ui->tblMantenimientos->item(fila, 5)->text().replace("$", "").trimmed();
+    ui->txtCostoMantenimiento->setText(costo);
+
+    QString estado = ui->tblMantenimientos->item(fila, 6)->text();
+    if(!estado.isEmpty()) {
+        estado[0] = estado[0].toUpper();
+        ui->cmbEstadoMantenimiento->setCurrentText(estado);
+    }
+}
+
+void GestorMantenimiento::limpiarFormulario() {
+    ui->cmbAutoMantenimiento->setCurrentIndex(0);
+    ui->cmbTipoMantenimiento->setCurrentIndex(0);
+    ui->dteFechaIngresoMantenimiento->setDate(QDate::currentDate());
+    ui->dteFechaSalidaMantenimiento->setDate(QDate::currentDate());
+    ui->txtObservacionesMantenimiento->clear();
+    ui->txtCostoMantenimiento->clear();
+    ui->cmbEstadoMantenimiento->setCurrentIndex(0);
 }
 
 int GestorMantenimiento::getIdSeleccionadoTabla() {
@@ -57,6 +97,7 @@ void GestorMantenimiento::guardar() {
 
     daoMantenimiento.insertar(obj);
     listar();
+    limpiarFormulario();
     QMessageBox::information(ui->centralwidget, "Éxito", "Mantenimiento guardado.");
 }
 
@@ -76,6 +117,7 @@ void GestorMantenimiento::actualizar() {
 
     daoMantenimiento.actualizar(obj);
     listar();
+    limpiarFormulario();
 }
 
 void GestorMantenimiento::eliminar() {
@@ -85,4 +127,5 @@ void GestorMantenimiento::eliminar() {
     obj.setid_Mantenimiento(id);
     daoMantenimiento.eliminar(obj);
     listar();
+    limpiarFormulario();
 }

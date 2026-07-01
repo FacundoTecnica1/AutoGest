@@ -14,10 +14,17 @@ public:
     void guardar();
     void actualizar();
     void eliminar();
+    void limpiarFormulario();
+
+public slots:
+    void buscar(const QString &texto);
+    void cargarDatos();
 
 private:
     Ui::MainWindow *ui;
     AutoDAOImpl daoAuto;
     int getIdSeleccionadoTabla();
+    //funcion auxiliar para cargar la tabla y no repetir codigo entre listar y buscar
+    void poblarTabla(const std::vector<Auto>& lista);
 };
 #endif
