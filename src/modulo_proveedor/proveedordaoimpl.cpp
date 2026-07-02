@@ -1,4 +1,4 @@
-#include "Proveedordaoimpl.h"
+#include "proveedordaoimpl.h"
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
@@ -8,7 +8,9 @@ using namespace std;
 
 void ProveedorDAOImpl::insertar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("INSERT INTO Proveedor (nombre, telefono, email, direccion) "
+    //pongo proveedor en minuscula
+    //y armo la consulta de insert
+    query.prepare("INSERT INTO proveedor (nombre, telefono, email, direccion) "
                   "VALUES (:nombre, :telefono, :email, :direccion)");
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":telefono", obj.getTelefono());
@@ -19,9 +21,11 @@ void ProveedorDAOImpl::insertar(Proveedor obj) {
 
 void ProveedorDAOImpl::actualizar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("UPDATE Proveedor SET nombre = :nombre, telefono = :telefono, email = :email, direccion = :direccion "
-                  "WHERE `id_Proveedor` = :id_Proveedor");
-    query.bindValue(":id_Proveedor", obj.getid_proveedor());
+    //acomodo id_proveedor
+    //asi reconoce el where
+    query.prepare("UPDATE proveedor SET nombre = :nombre, telefono = :telefono, email = :email, direccion = :direccion "
+                  "WHERE id_proveedor = :id_proveedor");
+    query.bindValue(":id_proveedor", obj.getid_proveedor());
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":telefono", obj.getTelefono());
     query.bindValue(":email", obj.getEmail());
@@ -32,26 +36,29 @@ void ProveedorDAOImpl::actualizar(Proveedor obj) {
 void ProveedorDAOImpl::eliminar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
 
-    //se limpian las autopartes conectadas a este proveedor primero
-    query.prepare("DELETE FROM autoparte WHERE id_Proveedor = :id_Proveedor");
-    query.bindValue(":id_Proveedor", obj.getid_proveedor());
+    //se limpian las autopartes
+    //conectadas al id correspondiente
+    query.prepare("DELETE FROM autoparte WHERE id_proveedor = :id_proveedor");
+    query.bindValue(":id_proveedor", obj.getid_proveedor());
     query.exec();
 
-    //y ahora sí se va el proveedor
-    query.prepare("DELETE FROM Proveedor WHERE `id_Proveedor` = :id_Proveedor");
-    query.bindValue(":id_Proveedor", obj.getid_proveedor());
+    //y ahora sí se elimina el proveedor
+    //sin mayusculas molestas
+    query.prepare("DELETE FROM proveedor WHERE id_proveedor = :id_proveedor");
+    query.bindValue(":id_proveedor", obj.getid_proveedor());
     query.exec();
 }
-
 
 vector<Proveedor> ProveedorDAOImpl::listar() {
     vector<Proveedor> lista;
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM Proveedor");
+    query.prepare("SELECT * FROM proveedor");
     if(query.exec()) {
         while(query.next()) {
             Proveedor obj;
-            obj.setid_proveedor(query.value("id_Proveedor").toInt());
+            //hago coincidir el id
+            //con lo que trae de base
+            obj.setid_proveedor(query.value("id_proveedor").toInt());
             obj.setNombre(query.value("nombre").toString());
             obj.setTelefono(query.value("telefono").toString());
             obj.setEmail(query.value("email").toString());
@@ -66,14 +73,16 @@ vector<Proveedor> ProveedorDAOImpl::buscarCampo(const QString &busqueda) {
     vector<Proveedor> lista;
     QSqlQuery query(QSqlDatabase::database());
 
-    query.prepare("SELECT * FROM Proveedor WHERE id_Proveedor LIKE :busqueda OR nombre LIKE :busqueda "
+    //bajo a minuscula todo
+    //para poder usar el buscador
+    query.prepare("SELECT * FROM proveedor WHERE id_proveedor LIKE :busqueda OR nombre LIKE :busqueda "
                   "OR telefono LIKE :busqueda OR email LIKE :busqueda OR direccion LIKE :busqueda");
     query.bindValue(":busqueda", "%" + busqueda + "%");
 
     if(query.exec()) {
         while(query.next()) {
             Proveedor obj;
-            obj.setid_proveedor(query.value("id_Proveedor").toInt());
+            obj.setid_proveedor(query.value("id_proveedor").toInt());
             obj.setNombre(query.value("nombre").toString());
             obj.setTelefono(query.value("telefono").toString());
             obj.setEmail(query.value("email").toString());

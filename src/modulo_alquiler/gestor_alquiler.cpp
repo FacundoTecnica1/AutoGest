@@ -26,7 +26,6 @@ void GestorAlquiler::calcularTotal() {
     ui->lblTotalAlquiler->setText("$ " + QString::number(total, 'f', 2));
 }
 
-//usamos un vector de vectores de string porque asi lo armaste en tu dao para el join
 void GestorAlquiler::poblarTabla(const std::vector<std::vector<QString>>& lista) {
     ui->tblAlquileres->clearContents();
     ui->tblAlquileres->setRowCount(0);
@@ -37,14 +36,23 @@ void GestorAlquiler::poblarTabla(const std::vector<std::vector<QString>>& lista)
     int row = 0;
     for(const auto& fila : lista) {
         ui->tblAlquileres->insertRow(row);
-        ui->tblAlquileres->setItem(row, 0, new QTableWidgetItem(fila[0])); //ID
-        ui->tblAlquileres->setItem(row, 1, new QTableWidgetItem(fila[1])); //Auto
-        ui->tblAlquileres->setItem(row, 2, new QTableWidgetItem(fila[2])); //Cliente
-        ui->tblAlquileres->setItem(row, 3, new QTableWidgetItem(fila[3])); //Metodo Pago
-        ui->tblAlquileres->setItem(row, 4, new QTableWidgetItem(fila[4])); //Inicio
-        ui->tblAlquileres->setItem(row, 5, new QTableWidgetItem(fila[5])); //Fin
-        ui->tblAlquileres->setItem(row, 6, new QTableWidgetItem("$" + fila[6])); //Total
-        ui->tblAlquileres->setItem(row, 7, new QTableWidgetItem(fila[7])); //Estado
+
+        //oculto el id en la primer columna
+        //para usarlo en las funciones
+        ui->tblAlquileres->setItem(row, 0, new QTableWidgetItem(fila[0]));
+
+        //asigno los indices que traen los textos
+        //para que no se vean los numeros de id
+        ui->tblAlquileres->setItem(row, 1, new QTableWidgetItem(fila[3]));
+        ui->tblAlquileres->setItem(row, 2, new QTableWidgetItem(fila[4]));
+
+        //desplazo los indices de los demas datos
+        //para que coincidan con la fila del dao
+        ui->tblAlquileres->setItem(row, 3, new QTableWidgetItem(fila[5]));
+        ui->tblAlquileres->setItem(row, 4, new QTableWidgetItem(fila[6]));
+        ui->tblAlquileres->setItem(row, 5, new QTableWidgetItem(fila[7]));
+        ui->tblAlquileres->setItem(row, 6, new QTableWidgetItem("$" + fila[8]));
+        ui->tblAlquileres->setItem(row, 7, new QTableWidgetItem(fila[9]));
         row++;
     }
 }
@@ -65,11 +73,9 @@ void GestorAlquiler::cargarDatos() {
     int fila = ui->tblAlquileres->currentRow();
     if (fila == -1) return;
 
-    //seteamos el combobox buscando el texto exacto que aparece en la tabla
     ui->cmbAutoAlquiler->setCurrentText(ui->tblAlquileres->item(fila, 1)->text());
     ui->cmbClienteAlquiler->setCurrentText(ui->tblAlquileres->item(fila, 2)->text());
 
-    //capitalizamos la primera letra para que coincida con el combobox si viene en minuscula
     QString metodo = ui->tblAlquileres->item(fila, 3)->text();
     if(!metodo.isEmpty()) {
         metodo[0] = metodo[0].toUpper();
@@ -79,7 +85,6 @@ void GestorAlquiler::cargarDatos() {
     ui->dteFechaInicioAlquiler->setDate(QDate::fromString(ui->tblAlquileres->item(fila, 4)->text(), "yyyy-MM-dd"));
     ui->dteFechaFinAlquiler->setDate(QDate::fromString(ui->tblAlquileres->item(fila, 5)->text(), "yyyy-MM-dd"));
 
-    //le sacamos el signo peso para guardar el numero limpio
     QString total = ui->tblAlquileres->item(fila, 6)->text().replace("$", "").trimmed();
     ui->lblTotalAlquiler->setText("$ " + total);
 

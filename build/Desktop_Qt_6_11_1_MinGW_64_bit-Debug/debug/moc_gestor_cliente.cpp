@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../src/modulo_cliente/gestor_cliente.h"
+#include "../../../../autogest-localpp/src/modulo_cliente/gestor_cliente.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>

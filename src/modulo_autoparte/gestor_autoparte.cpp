@@ -1,9 +1,12 @@
 #include "gestor_autoparte.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QSqlQuery>
+#include <QVariant>
 
 GestorAutoparte::GestorAutoparte(Ui::MainWindow *ui, QObject *parent) : QObject(parent), ui(ui) {
-    //ponemos un maximo logico al stock para no mandar numeros re locos a la base
+    //ponemos un maximo logico al stock
+    //para no mandar numeros re locos a la base
     ui->txtStockAutoparte->setMaxLength(5);
 }
 
@@ -69,9 +72,31 @@ int GestorAutoparte::getIdSeleccionadoTabla() {
 }
 
 void GestorAutoparte::guardar() {
+    //busco el primer id de proveedor
+    //y si no hay corto todo aca
+    int idProv = -1;
+    QSqlQuery qProv("SELECT id_proveedor FROM proveedor LIMIT 1");
+    if(qProv.next()) {
+        idProv = qProv.value(0).toInt();
+    } else {
+        QMessageBox::warning(ui->centralwidget, "Faltan datos", "Tenés que crear un proveedor antes de guardar una autoparte.");
+        return;
+    }
+
+    //hago la misma comprobacion para el mantenimiento
+    //asi no explota la clave foranea
+    int idMant = -1;
+    QSqlQuery qMant("SELECT id_mantenimiento FROM mantenimiento LIMIT 1");
+    if(qMant.next()) {
+        idMant = qMant.value(0).toInt();
+    } else {
+        QMessageBox::warning(ui->centralwidget, "Faltan datos", "Tenés que crear un mantenimiento antes de guardar una autoparte.");
+        return;
+    }
+
     Autoparte obj;
-    obj.setid_proveedor(1);
-    obj.setid_Mantenimiento(1);
+    obj.setid_proveedor(idProv);
+    obj.setid_Mantenimiento(idMant);
     obj.setNombre(ui->txtNombreAutoparte->text());
     obj.setMarca(ui->txtMarcaAutoparte->text());
     obj.setPrecio(ui->txtPrecioAutoparte->text().toDouble());
@@ -87,10 +112,32 @@ void GestorAutoparte::actualizar() {
     int id = getIdSeleccionadoTabla();
     if(id == -1) return;
 
+    //repito el filtro de seguridad para el proveedor
+    //asi evitamos que se rompa al editar
+    int idProv = -1;
+    QSqlQuery qProv("SELECT id_proveedor FROM proveedor LIMIT 1");
+    if(qProv.next()) {
+        idProv = qProv.value(0).toInt();
+    } else {
+        QMessageBox::warning(ui->centralwidget, "Faltan datos", "No hay proveedores en la base de datos.");
+        return;
+    }
+
+    //compruebo el mantenimiento antes de actualizar
+    //para mantener la base limpia
+    int idMant = -1;
+    QSqlQuery qMant("SELECT id_mantenimiento FROM mantenimiento LIMIT 1");
+    if(qMant.next()) {
+        idMant = qMant.value(0).toInt();
+    } else {
+        QMessageBox::warning(ui->centralwidget, "Faltan datos", "No hay mantenimientos en la base de datos.");
+        return;
+    }
+
     Autoparte obj;
     obj.setid_autoparte(id);
-    obj.setid_proveedor(1);
-    obj.setid_Mantenimiento(1);
+    obj.setid_proveedor(idProv);
+    obj.setid_Mantenimiento(idMant);
     obj.setNombre(ui->txtNombreAutoparte->text());
     obj.setMarca(ui->txtMarcaAutoparte->text());
     obj.setPrecio(ui->txtPrecioAutoparte->text().toDouble());

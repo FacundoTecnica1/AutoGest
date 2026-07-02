@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../src/modulo_auto/gestor_auto.h"
+#include "../../../../autogest-localpp/src/modulo_auto/gestor_auto.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
