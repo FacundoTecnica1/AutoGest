@@ -12,6 +12,7 @@ public:
     void eliminar(Auto obj);
     vector<Auto> listar();
     vector<Auto> buscarCampo(const QString &busqueda);
+    void actualizarEstado(int id_auto, const QString& estado);
 };
 
 #endif // AUTODAOIMPL_H

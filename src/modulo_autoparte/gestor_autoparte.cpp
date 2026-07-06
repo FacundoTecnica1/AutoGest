@@ -75,7 +75,7 @@ void GestorAutoparte::guardar() {
     //busco el primer id de proveedor
     //y si no hay corto todo aca
     int idProv = -1;
-    QSqlQuery qProv("SELECT id_proveedor FROM proveedor LIMIT 1");
+    QSqlQuery qProv("SELECT id_proveedor FROM proveedor ORDER BY id_proveedor");
     if(qProv.next()) {
         idProv = qProv.value(0).toInt();
     } else {
@@ -83,15 +83,12 @@ void GestorAutoparte::guardar() {
         return;
     }
 
-    //hago la misma comprobacion para el mantenimiento
-    //asi no explota la clave foranea
-    int idMant = -1;
-    QSqlQuery qMant("SELECT id_mantenimiento FROM mantenimiento LIMIT 1");
+    //la autoparte puede quedar sin mantenimiento
+    //si existe alguno lo asociamos, y si no queda libre
+    int idMant = 0;
+    QSqlQuery qMant("SELECT id_mantenimiento FROM mantenimiento ORDER BY id_mantenimiento");
     if(qMant.next()) {
         idMant = qMant.value(0).toInt();
-    } else {
-        QMessageBox::warning(ui->centralwidget, "Faltan datos", "Tenés que crear un mantenimiento antes de guardar una autoparte.");
-        return;
     }
 
     Autoparte obj;
@@ -115,7 +112,7 @@ void GestorAutoparte::actualizar() {
     //repito el filtro de seguridad para el proveedor
     //asi evitamos que se rompa al editar
     int idProv = -1;
-    QSqlQuery qProv("SELECT id_proveedor FROM proveedor LIMIT 1");
+    QSqlQuery qProv("SELECT id_proveedor FROM proveedor ORDER BY id_proveedor");
     if(qProv.next()) {
         idProv = qProv.value(0).toInt();
     } else {
@@ -123,15 +120,12 @@ void GestorAutoparte::actualizar() {
         return;
     }
 
-    //compruebo el mantenimiento antes de actualizar
-    //para mantener la base limpia
-    int idMant = -1;
-    QSqlQuery qMant("SELECT id_mantenimiento FROM mantenimiento LIMIT 1");
+    //si no hay mantenimiento, la autoparte queda sin esa asociacion
+    //esto permite cargar repuestos antes de usarlos en un trabajo
+    int idMant = 0;
+    QSqlQuery qMant("SELECT id_mantenimiento FROM mantenimiento ORDER BY id_mantenimiento");
     if(qMant.next()) {
         idMant = qMant.value(0).toInt();
-    } else {
-        QMessageBox::warning(ui->centralwidget, "Faltan datos", "No hay mantenimientos en la base de datos.");
-        return;
     }
 
     Autoparte obj;

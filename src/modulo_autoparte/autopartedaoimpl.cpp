@@ -14,7 +14,11 @@ void AutoparteDAOImpl::insertar(Autoparte obj) {
     query.prepare("INSERT INTO autoparte (id_proveedor, id_mantenimiento, nombre, marca, precio, stock) "
                   "VALUES (:id_proveedor, :id_mantenimiento, :nombre, :marca, :precio, :stock)");
     query.bindValue(":id_proveedor", obj.getid_proveedor());
-    query.bindValue(":id_mantenimiento", obj.getid_Mantenimiento());
+    if(obj.getid_Mantenimiento() > 0) {
+        query.bindValue(":id_mantenimiento", obj.getid_Mantenimiento());
+    } else {
+        query.bindValue(":id_mantenimiento", QVariant());
+    }
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":marca", obj.getMarca());
     query.bindValue(":precio", obj.getPrecio());
@@ -30,7 +34,11 @@ void AutoparteDAOImpl::actualizar(Autoparte obj) {
                   "marca = :marca, precio = :precio, stock = :stock WHERE id_autoparte = :id_autoparte");
     query.bindValue(":id_autoparte", obj.getid_autoparte());
     query.bindValue(":id_proveedor", obj.getid_proveedor());
-    query.bindValue(":id_mantenimiento", obj.getid_Mantenimiento());
+    if(obj.getid_Mantenimiento() > 0) {
+        query.bindValue(":id_mantenimiento", obj.getid_Mantenimiento());
+    } else {
+        query.bindValue(":id_mantenimiento", QVariant());
+    }
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":marca", obj.getMarca());
     query.bindValue(":precio", obj.getPrecio());

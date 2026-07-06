@@ -1210,6 +1210,52 @@
            <string>Costo:</string>
           </property>
          </widget>
+         <widget class="QLabel" name="lblAutoIncidente">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>280</y>
+            <width>101</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Auto:</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="cmbAutoIncidente">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>310</y>
+            <width>231</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblClienteIncidente">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>350</y>
+            <width>101</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Cliente:</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="cmbClienteIncidente">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>380</y>
+            <width>231</width>
+            <height>24</height>
+           </rect>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="Mantenimientos">
          <attribute name="title">

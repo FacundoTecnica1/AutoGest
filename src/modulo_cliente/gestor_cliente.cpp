@@ -78,13 +78,28 @@ int GestorCliente::getIdSeleccionadoTabla() {
 }
 
 void GestorCliente::guardar() {
+    int edad = ui->txtEdadCliente->text().toInt();
+    QString email = ui->txtEmailCliente->text().trimmed();
+
+    //solo se guardan clientes mayores de edad
+    //tambien se pide un mail con arroba para evitar datos incompletos
+    if(edad < 18) {
+        QMessageBox::warning(ui->centralwidget, "Edad invalida", "Solo se pueden registrar clientes mayores de 18 anos.");
+        return;
+    }
+
+    if(!email.contains("@")) {
+        QMessageBox::warning(ui->centralwidget, "Email invalido", "El email tiene que contener @.");
+        return;
+    }
+
     Cliente obj;
     obj.setNombre(ui->txtNombreCliente->text());
     obj.setApellido(ui->txtApellidoCliente->text());
-    obj.setEdad(ui->txtEdadCliente->text().toInt());
+    obj.setEdad(edad);
     obj.setDni(ui->txtDniCliente->text());
     obj.setTelefono(ui->txtTelefonoCliente->text());
-    obj.setEmail(ui->txtEmailCliente->text());
+    obj.setEmail(email);
     obj.setDireccion(ui->txtDireccionCliente->text());
     obj.setClaseLicencia(ui->cmbClaseLicenciaCliente->currentText());
     obj.setFechaRegistro(QDate::currentDate().toString("yyyy-MM-dd"));
@@ -99,14 +114,27 @@ void GestorCliente::actualizar() {
     int id = getIdSeleccionadoTabla();
     if(id == -1) return;
 
+    int edad = ui->txtEdadCliente->text().toInt();
+    QString email = ui->txtEmailCliente->text().trimmed();
+
+    if(edad < 18) {
+        QMessageBox::warning(ui->centralwidget, "Edad invalida", "Solo se pueden registrar clientes mayores de 18 anos.");
+        return;
+    }
+
+    if(!email.contains("@")) {
+        QMessageBox::warning(ui->centralwidget, "Email invalido", "El email tiene que contener @.");
+        return;
+    }
+
     Cliente obj;
     obj.setid_cliente(id);
     obj.setNombre(ui->txtNombreCliente->text());
     obj.setApellido(ui->txtApellidoCliente->text());
-    obj.setEdad(ui->txtEdadCliente->text().toInt());
+    obj.setEdad(edad);
     obj.setDni(ui->txtDniCliente->text());
     obj.setTelefono(ui->txtTelefonoCliente->text());
-    obj.setEmail(ui->txtEmailCliente->text());
+    obj.setEmail(email);
     obj.setDireccion(ui->txtDireccionCliente->text());
     obj.setClaseLicencia(ui->cmbClaseLicenciaCliente->currentText());
     obj.setFechaRegistro(QDate::currentDate().toString("yyyy-MM-dd"));

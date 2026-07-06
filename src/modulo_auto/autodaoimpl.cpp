@@ -99,3 +99,14 @@ vector<Auto> AutoDAOImpl::buscarCampo(const QString &busqueda) {
     }
     return lista;
 }
+
+void AutoDAOImpl::actualizarEstado(int id_auto, const QString& estado) {
+    QSqlQuery query(QSqlDatabase::database());
+
+    //actualiza solo el estado del auto
+    //se usa cuando alquiler o mantenimiento cambia la situacion del vehiculo
+    query.prepare("UPDATE auto SET estado = :estado WHERE id_auto = :id_auto");
+    query.bindValue(":estado", estado);
+    query.bindValue(":id_auto", id_auto);
+    query.exec();
+}

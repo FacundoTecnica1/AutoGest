@@ -82,6 +82,18 @@ int GestorAuto::getIdSeleccionadoTabla() {
 }
 
 void GestorAuto::guardar() {
+    //si faltan los datos principales, no se guarda el auto
+    //esto evita registros vacios que despues rompen los combos
+    if(ui->txtMarcaAuto->text().trimmed().isEmpty() ||
+       ui->txtModeloAuto->text().trimmed().isEmpty() ||
+       ui->txtPatenteAuto->text().trimmed().isEmpty() ||
+       ui->txtAnioAuto->text().trimmed().isEmpty() ||
+       ui->txtKilometrajeAuto->text().trimmed().isEmpty() ||
+       ui->txtPrecioDiaAuto->text().trimmed().isEmpty()) {
+        QMessageBox::warning(ui->centralwidget, "Campos vacios", "Completa los datos del auto antes de guardarlo.");
+        return;
+    }
+
     Auto obj;
     obj.setMarca(ui->txtMarcaAuto->text());
     obj.setModelo(ui->txtModeloAuto->text());

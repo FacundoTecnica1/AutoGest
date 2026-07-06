@@ -115,3 +115,19 @@ vector<vector<QString>> MantenimientoDAOImpl::buscarCampo(const QString &busqued
     }
     return lista;
 }
+
+bool MantenimientoDAOImpl::alquilerCerrado(int id_auto) {
+    QSqlQuery q(QSqlDatabase::database());
+
+    //si existe un alquiler activo del auto, no se puede mandar a mantenimiento
+    //solo se permite cuando el alquiler esta cancelado o finalizado
+    q.prepare("SELECT COUNT(*) FROM alquiler "
+              "WHERE id_auto = :id_auto AND estado = 'activo'");
+    q.bindValue(":id_auto", id_auto);
+
+    if(q.exec() && q.next()) {
+        return q.value(0).toInt() == 0;
+    }
+
+    return false;
+}

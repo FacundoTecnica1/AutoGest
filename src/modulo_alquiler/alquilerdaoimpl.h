@@ -13,7 +13,9 @@ public:
     vector<vector<QString>> listar();
     vector<vector<QString>> buscarCampo(const QString &busqueda);
     double calcularTotal(int id_auto, const QString& fechaInicio, const QString& fechaFin);
-    //Sirve para calcular cuanto costara el precio del alquiler
+    bool autoDisponibleParaAlquiler(int id_auto, const QString& fechaInicio, const QString& fechaFin, int id_alquilerIgnorar = -1);
+    bool mantenimientoFinalizado(int id_auto);
+    //sirve para calcular cuanto costara el precio del alquiler
 };
 
 #endif // ALQUILERDAOIMPL_H

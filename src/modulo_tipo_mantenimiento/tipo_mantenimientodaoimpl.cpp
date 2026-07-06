@@ -39,7 +39,7 @@ vector<TipoMantenimiento> TipoMantenimientoDAOImpl::listar() {
     QSqlQuery query(QSqlDatabase::database());
     //ajusto el select
     //para que traiga bien las opciones
-    query.prepare("SELECT * FROM tipo_mantenimiento");
+    query.prepare("SELECT id_tipo_mantenimiento, nombre FROM tipo_mantenimiento ORDER BY id_tipo_mantenimiento");
     if(query.exec()) {
         while(query.next()) {
             TipoMantenimiento obj;

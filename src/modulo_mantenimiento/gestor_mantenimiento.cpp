@@ -86,9 +86,27 @@ int GestorMantenimiento::getIdSeleccionadoTabla() {
 }
 
 void GestorMantenimiento::guardar() {
+    int idAuto = ui->cmbAutoMantenimiento->currentData().toInt();
+    int idTipo = ui->cmbTipoMantenimiento->currentData().toInt();
+
+    //si el combo quedo vacio, el id tipo se manda como cero y falla la foreign key
+    //por eso se corta aca con un mensaje mas claro
+    if(idTipo <= 0) {
+        QMessageBox::warning(ui->centralwidget, "Tipo mantenimiento", "No hay un tipo de mantenimiento valido seleccionado.");
+        cargarListasCombo();
+        return;
+    }
+
+    //el mantenimiento no arranca si el auto sigue alquilado
+    //primero el alquiler tiene que quedar cancelado o finalizado
+    if(!daoMantenimiento.alquilerCerrado(idAuto)) {
+        QMessageBox::warning(ui->centralwidget, "Alquiler activo", "El mantenimiento solo se puede registrar si el alquiler esta cancelado o finalizado.");
+        return;
+    }
+
     Mantenimiento obj;
-    obj.setid_auto(ui->cmbAutoMantenimiento->currentData().toInt());
-    obj.setid_tipo_Mantenimiento(ui->cmbTipoMantenimiento->currentData().toInt());
+    obj.setid_auto(idAuto);
+    obj.setid_tipo_Mantenimiento(idTipo);
     obj.setFechaIngreso(ui->dteFechaIngresoMantenimiento->date().toString("yyyy-MM-dd"));
     obj.setFechaSalida(ui->dteFechaSalidaMantenimiento->date().toString("yyyy-MM-dd"));
     obj.setObservaciones(ui->txtObservacionesMantenimiento->text());
@@ -96,6 +114,11 @@ void GestorMantenimiento::guardar() {
     obj.setEstado(ui->cmbEstadoMantenimiento->currentText().toLower());
 
     daoMantenimiento.insertar(obj);
+    if(obj.getEstado() == "iniciado") {
+        daoAuto.actualizarEstado(idAuto, "En mantenimiento");
+    } else {
+        daoAuto.actualizarEstado(idAuto, "Disponible");
+    }
     listar();
     limpiarFormulario();
     QMessageBox::information(ui->centralwidget, "Éxito", "Mantenimiento guardado.");
@@ -105,10 +128,24 @@ void GestorMantenimiento::actualizar() {
     int id = getIdSeleccionadoTabla();
     if(id == -1) return;
 
+    int idAuto = ui->cmbAutoMantenimiento->currentData().toInt();
+    int idTipo = ui->cmbTipoMantenimiento->currentData().toInt();
+
+    if(idTipo <= 0) {
+        QMessageBox::warning(ui->centralwidget, "Tipo mantenimiento", "No hay un tipo de mantenimiento valido seleccionado.");
+        cargarListasCombo();
+        return;
+    }
+
+    if(!daoMantenimiento.alquilerCerrado(idAuto)) {
+        QMessageBox::warning(ui->centralwidget, "Alquiler activo", "El mantenimiento solo se puede registrar si el alquiler esta cancelado o finalizado.");
+        return;
+    }
+
     Mantenimiento obj;
     obj.setid_Mantenimiento(id);
-    obj.setid_auto(ui->cmbAutoMantenimiento->currentData().toInt());
-    obj.setid_tipo_Mantenimiento(ui->cmbTipoMantenimiento->currentData().toInt());
+    obj.setid_auto(idAuto);
+    obj.setid_tipo_Mantenimiento(idTipo);
     obj.setFechaIngreso(ui->dteFechaIngresoMantenimiento->date().toString("yyyy-MM-dd"));
     obj.setFechaSalida(ui->dteFechaSalidaMantenimiento->date().toString("yyyy-MM-dd"));
     obj.setObservaciones(ui->txtObservacionesMantenimiento->text());
@@ -116,6 +153,11 @@ void GestorMantenimiento::actualizar() {
     obj.setEstado(ui->cmbEstadoMantenimiento->currentText().toLower());
 
     daoMantenimiento.actualizar(obj);
+    if(obj.getEstado() == "iniciado") {
+        daoAuto.actualizarEstado(idAuto, "En mantenimiento");
+    } else {
+        daoAuto.actualizarEstado(idAuto, "Disponible");
+    }
     listar();
     limpiarFormulario();
 }

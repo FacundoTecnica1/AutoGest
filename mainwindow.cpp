@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     gestorMantenimiento->listar();
     gestorProveedor->listar();
     gestorAutoparte->listar();
+    gestorIncidente->cargarListasCombo();
     gestorIncidente->listar();
 
     //Conectamos las fechas y el combobox de auto para que cambien el total del alquiler automaticamente
@@ -105,32 +106,38 @@ void MainWindow::on_btnGuardarAuto_clicked() {
     gestorAuto->guardar();
     gestorAlquiler->cargarListasCombo();
     gestorMantenimiento->cargarListasCombo();
+    gestorIncidente->cargarListasCombo();
 }
 void MainWindow::on_btnActualizarAuto_clicked() {
     gestorAuto->actualizar();
     gestorAlquiler->cargarListasCombo();
     gestorMantenimiento->cargarListasCombo();
+    gestorIncidente->cargarListasCombo();
 }
 void MainWindow::on_btnEliminarAuto_clicked() {
     gestorAuto->eliminar();
     gestorAlquiler->cargarListasCombo();
     gestorMantenimiento->cargarListasCombo();
+    gestorIncidente->cargarListasCombo();
 }
 
 //Eventos de Clientes
 void MainWindow::on_btnGuardarCliente_clicked() {
     gestorCliente->guardar();
     gestorAlquiler->cargarListasCombo();
+    gestorIncidente->cargarListasCombo();
 }
 
 void MainWindow::on_btnActualizarCliente_clicked() {
     gestorCliente->actualizar();
     gestorAlquiler->cargarListasCombo();
+    gestorIncidente->cargarListasCombo();
 }
 
 void MainWindow::on_btnEliminarCliente_clicked() {
     gestorCliente->eliminar();
     gestorAlquiler->cargarListasCombo();
+    gestorIncidente->cargarListasCombo();
 }
 
 //Eventos de Alquiler
@@ -188,10 +195,12 @@ void MainWindow::on_btnEliminarAutoparte_clicked() {
 //Eventos de Incidentes
 void MainWindow::on_btnGuardarIncidente_clicked() {
     gestorIncidente->guardar();
+    gestorAlquiler->listar();
 }
 
 void MainWindow::on_btnActualizarIncidente_clicked() {
     gestorIncidente->actualizar();
+    gestorAlquiler->listar();
 }
 
 void MainWindow::on_btnEliminarIncidente_clicked() {

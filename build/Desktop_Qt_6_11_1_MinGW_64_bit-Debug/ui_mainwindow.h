@@ -132,6 +132,10 @@ public:
     QLineEdit *txtDescripcionIncidente;
     QLineEdit *txtCostoIncidente;
     QLabel *lblCostoIncidente;
+    QLabel *lblAutoIncidente;
+    QComboBox *cmbAutoIncidente;
+    QLabel *lblClienteIncidente;
+    QComboBox *cmbClienteIncidente;
     QWidget *Mantenimientos;
     QLabel *lblBuscadorMantenimiento;
     QLabel *lblListaMantenimientos;
@@ -535,6 +539,18 @@ public:
         lblCostoIncidente = new QLabel(Incidentes);
         lblCostoIncidente->setObjectName("lblCostoIncidente");
         lblCostoIncidente->setGeometry(QRect(150, 100, 101, 40));
+        lblAutoIncidente = new QLabel(Incidentes);
+        lblAutoIncidente->setObjectName("lblAutoIncidente");
+        lblAutoIncidente->setGeometry(QRect(20, 280, 101, 24));
+        cmbAutoIncidente = new QComboBox(Incidentes);
+        cmbAutoIncidente->setObjectName("cmbAutoIncidente");
+        cmbAutoIncidente->setGeometry(QRect(20, 310, 231, 24));
+        lblClienteIncidente = new QLabel(Incidentes);
+        lblClienteIncidente->setObjectName("lblClienteIncidente");
+        lblClienteIncidente->setGeometry(QRect(20, 350, 101, 24));
+        cmbClienteIncidente = new QComboBox(Incidentes);
+        cmbClienteIncidente->setObjectName("cmbClienteIncidente");
+        cmbClienteIncidente->setGeometry(QRect(20, 380, 231, 24));
         tabWidget->addTab(Incidentes, QString());
         Mantenimientos = new QWidget();
         Mantenimientos->setObjectName("Mantenimientos");
@@ -803,6 +819,8 @@ public:
         btnGuardarIncidente->setText(QCoreApplication::translate("MainWindow", "Guardar", nullptr));
         lblDescripcionIncidente->setText(QCoreApplication::translate("MainWindow", "Descripci\303\263n:", nullptr));
         lblCostoIncidente->setText(QCoreApplication::translate("MainWindow", "Costo:", nullptr));
+        lblAutoIncidente->setText(QCoreApplication::translate("MainWindow", "Auto:", nullptr));
+        lblClienteIncidente->setText(QCoreApplication::translate("MainWindow", "Cliente:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Incidentes), QCoreApplication::translate("MainWindow", "Incidentes", nullptr));
         lblBuscadorMantenimiento->setText(QCoreApplication::translate("MainWindow", "Buscador:", nullptr));
         lblListaMantenimientos->setText(QCoreApplication::translate("MainWindow", "Lista de Mantenimientos", nullptr));

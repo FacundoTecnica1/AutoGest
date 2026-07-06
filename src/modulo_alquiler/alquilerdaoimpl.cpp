@@ -137,3 +137,41 @@ double AlquilerDAOImpl::calcularTotal(int id_auto, const QString& fechaInicio, c
 
     return dias * precioDia;
 }
+
+bool AlquilerDAOImpl::autoDisponibleParaAlquiler(int id_auto, const QString& fechaInicio, const QString& fechaFin, int id_alquilerIgnorar) {
+    QSqlQuery q(QSqlDatabase::database());
+
+    //buscamos alquileres activos que se crucen con las fechas elegidas
+    //si aparece alguno, ese auto no se puede alquilar en el mismo lapso
+    q.prepare("SELECT COUNT(*) FROM alquiler "
+              "WHERE id_auto = :id_auto AND estado = 'activo' "
+              "AND id_alquiler <> :id_alquiler "
+              "AND fecha_inicio <= :fecha_fin AND fecha_fin >= :fecha_inicio");
+    q.bindValue(":id_auto", id_auto);
+    q.bindValue(":id_alquiler", id_alquilerIgnorar);
+    q.bindValue(":fecha_inicio", fechaInicio);
+    q.bindValue(":fecha_fin", fechaFin);
+
+    if(q.exec() && q.next()) {
+        return q.value(0).toInt() == 0;
+    }
+
+    return false;
+}
+
+bool AlquilerDAOImpl::mantenimientoFinalizado(int id_auto) {
+    QSqlQuery q(QSqlDatabase::database());
+
+    //si el auto tiene mantenimientos, el ultimo tiene que estar finalizado
+    //cuando no tiene mantenimientos cargados tambien puede alquilarse
+    q.prepare("SELECT estado FROM mantenimiento "
+              "WHERE id_auto = :id_auto "
+              "ORDER BY fecha_ingreso DESC, id_mantenimiento DESC");
+    q.bindValue(":id_auto", id_auto);
+
+    if(q.exec() && q.next()) {
+        return q.value(0).toString().toLower() == "finalizado";
+    }
+
+    return true;
+}
