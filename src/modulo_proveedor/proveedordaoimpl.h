@@ -1,8 +1,7 @@
-#ifndef ProveedorDAOIMPL_H
-#define ProveedorDAOIMPL_H
-#include "Proveedordao.h"
+#ifndef PROVEEDORDAOIMPL_H
+#define PROVEEDORDAOIMPL_H
+#include "proveedordao.h"
 #include <QString>
-
 
 using namespace std;
 
@@ -15,4 +14,4 @@ public:
     vector<Proveedor> buscarCampo(const QString &busqueda);
 };
 
-#endif // ProveedorDAOIMPL_H
+#endif // PROVEEDORDAOIMPL_H

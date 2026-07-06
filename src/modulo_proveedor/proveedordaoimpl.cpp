@@ -4,12 +4,11 @@
 #include <QSqlDatabase>
 #include <QString>
 #include <vector>
+
 using namespace std;
 
 void ProveedorDAOImpl::insertar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
-    //pongo proveedor en minuscula
-    //y armo la consulta de insert
     query.prepare("INSERT INTO proveedor (nombre, telefono, email, direccion) "
                   "VALUES (:nombre, :telefono, :email, :direccion)");
     query.bindValue(":nombre", obj.getNombre());
@@ -21,10 +20,10 @@ void ProveedorDAOImpl::insertar(Proveedor obj) {
 
 void ProveedorDAOImpl::actualizar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
-    //acomodo id_proveedor
-    //asi reconoce el where
-    query.prepare("UPDATE proveedor SET nombre = :nombre, telefono = :telefono, email = :email, direccion = :direccion "
-                  "WHERE id_proveedor = :id_proveedor");
+    //ajusto el update quitando backticks
+    //y espacios fantasma
+    query.prepare("UPDATE proveedor SET nombre = :nombre, telefono = :telefono, "
+                  "email = :email, direccion = :direccion WHERE id_proveedor = :id_proveedor");
     query.bindValue(":id_proveedor", obj.getid_proveedor());
     query.bindValue(":nombre", obj.getNombre());
     query.bindValue(":telefono", obj.getTelefono());
@@ -36,14 +35,12 @@ void ProveedorDAOImpl::actualizar(Proveedor obj) {
 void ProveedorDAOImpl::eliminar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
 
-    //se limpian las autopartes
-    //conectadas al id correspondiente
+    //primero borramos dependencias en autoparte para evitar el error de Foreign Key
     query.prepare("DELETE FROM autoparte WHERE id_proveedor = :id_proveedor");
     query.bindValue(":id_proveedor", obj.getid_proveedor());
     query.exec();
 
-    //y ahora sí se elimina el proveedor
-    //sin mayusculas molestas
+    //ahora sí borramos el proveedor sin problema
     query.prepare("DELETE FROM proveedor WHERE id_proveedor = :id_proveedor");
     query.bindValue(":id_proveedor", obj.getid_proveedor());
     query.exec();
@@ -56,8 +53,8 @@ vector<Proveedor> ProveedorDAOImpl::listar() {
     if(query.exec()) {
         while(query.next()) {
             Proveedor obj;
-            //hago coincidir el id
-            //con lo que trae de base
+            //hago coincidir los names de los values
+            //asi pobla la tabla piola
             obj.setid_proveedor(query.value("id_proveedor").toInt());
             obj.setNombre(query.value("nombre").toString());
             obj.setTelefono(query.value("telefono").toString());
@@ -73,8 +70,8 @@ vector<Proveedor> ProveedorDAOImpl::buscarCampo(const QString &busqueda) {
     vector<Proveedor> lista;
     QSqlQuery query(QSqlDatabase::database());
 
-    //bajo a minuscula todo
-    //para poder usar el buscador
+    //corrijo las columnas del select
+    //para buscar bien el string
     query.prepare("SELECT * FROM proveedor WHERE id_proveedor LIKE :busqueda OR nombre LIKE :busqueda "
                   "OR telefono LIKE :busqueda OR email LIKE :busqueda OR direccion LIKE :busqueda");
     query.bindValue(":busqueda", "%" + busqueda + "%");

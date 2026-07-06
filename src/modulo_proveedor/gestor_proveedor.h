@@ -2,8 +2,7 @@
 #define GESTOR_PROVEEDOR_H
 
 #include <QObject>
-#include <vector>
-#include "Proveedordaoimpl.h"
+#include "proveedordaoimpl.h"
 
 namespace Ui { class MainWindow; }
 
