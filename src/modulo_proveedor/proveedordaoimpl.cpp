@@ -20,8 +20,7 @@ void ProveedorDAOImpl::insertar(Proveedor obj) {
 
 void ProveedorDAOImpl::actualizar(Proveedor obj) {
     QSqlQuery query(QSqlDatabase::database());
-    //ajusto el update quitando backticks
-    //y espacios fantasma
+
     query.prepare("UPDATE proveedor SET nombre = :nombre, telefono = :telefono, "
                   "email = :email, direccion = :direccion WHERE id_proveedor = :id_proveedor");
     query.bindValue(":id_proveedor", obj.getid_proveedor());

@@ -5,7 +5,6 @@
 
 GestorAuto::GestorAuto(Ui::MainWindow *ui, QObject *parent) : QObject(parent), ui(ui) {
     //limite de 7 caracteres para la patente
-    //evita errores de tipeo o desbordes en la base de datos
     ui->txtPatenteAuto->setMaxLength(7);
 }
 

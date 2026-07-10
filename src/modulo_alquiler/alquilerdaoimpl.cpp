@@ -84,7 +84,7 @@ vector<vector<QString>> AlquilerDAOImpl::listar() {
 vector<vector<QString>> AlquilerDAOImpl::buscarCampo(const QString &busqueda) {
     vector<vector<QString>> lista;
     QSqlQuery q(QSqlDatabase::database());
-    // Hacemos el JOIN e incluimos todos los campos en el WHERE para que busque por cualquier lado
+    //sehace el JOIN y se incluye a todos los campos en el wherE para que busque por cualquier lado
     q.prepare("SELECT alq.id_alquiler, alq.id_auto, alq.id_cliente, a.marca, a.modelo, a.patente, c.nombre, c.apellido, "
               "alq.metodo_pago, alq.fecha_inicio, alq.fecha_fin, alq.precio_total, alq.estado "
               "FROM alquiler alq "

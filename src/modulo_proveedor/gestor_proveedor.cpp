@@ -21,8 +21,6 @@ void GestorProveedor::poblarTabla(const std::vector<Proveedor>& lista) {
     for(const auto& p : lista) {
         ui->tblProveedores->insertRow(row);
 
-        //oculto el id en la primer columna
-        //para usarlo en las funciones
         ui->tblProveedores->setItem(row, 0, new QTableWidgetItem(QString::number(p.getid_proveedor())));
         ui->tblProveedores->setItem(row, 1, new QTableWidgetItem(p.getNombre()));
         ui->tblProveedores->setItem(row, 2, new QTableWidgetItem(p.getTelefono()));

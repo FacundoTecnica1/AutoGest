@@ -8,8 +8,6 @@ public:
     Conexion();
     bool conectar();
     void desconectar();
-
-
     QSqlDatabase getDB();
     void cerrar();
 
