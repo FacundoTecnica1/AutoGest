@@ -43,7 +43,8 @@ void MantenimientoDAOImpl::actualizar(Mantenimiento obj) {
 }
 
 void MantenimientoDAOImpl::eliminar(Mantenimiento obj) {
-    QSqlQuery query(QSqlDatabase::database());
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
     int idAuto = -1;
 
     query.prepare("SELECT id_auto FROM mantenimiento WHERE id_mantenimiento = :id_mantenimiento");
@@ -51,18 +52,33 @@ void MantenimientoDAOImpl::eliminar(Mantenimiento obj) {
     if(query.exec() && query.next()) {
         idAuto = query.value(0).toInt();
     }
+    query.finish();
+
+    //los dos borrados quedan dentro de la misma transaccion
+    if(!db.transaction()) return;
 
     //pongo todo el where en minuscula
     //asi borra primero las autopartes
     query.prepare("DELETE FROM autoparte WHERE id_mantenimiento = :id_mantenimiento");
     query.bindValue(":id_mantenimiento", obj.getid_Mantenimiento());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
 
     //y despues borra piola el mantenimiento
     //sin quejarse por las foreanas
     query.prepare("DELETE FROM mantenimiento WHERE id_mantenimiento = :id_mantenimiento");
     query.bindValue(":id_mantenimiento", obj.getid_Mantenimiento());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    if(!db.commit()) {
+        db.rollback();
+        return;
+    }
 
     if(idAuto != -1) {
         AutoDAOImpl autoDao;

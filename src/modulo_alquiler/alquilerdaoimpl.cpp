@@ -41,7 +41,8 @@ void AlquilerDAOImpl::actualizar(Alquiler obj) {
 }
 
 void AlquilerDAOImpl::eliminar(Alquiler obj) {
-    QSqlQuery query(QSqlDatabase::database());
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
     int idAuto = -1;
 
     query.prepare("SELECT id_auto FROM alquiler WHERE id_alquiler = :id_alquiler");
@@ -49,16 +50,31 @@ void AlquilerDAOImpl::eliminar(Alquiler obj) {
     if(query.exec() && query.next()) {
         idAuto = query.value(0).toInt();
     }
+    query.finish();
+
+    //si alguno de los borrados falla se vuelve atras con todo
+    if(!db.transaction()) return;
 
     //primero borramos dependencias en incidentes para evitar el error de Foreign Key
     query.prepare("DELETE FROM incidente WHERE id_alquiler = :id_alquiler");
     query.bindValue(":id_alquiler", obj.getid_alquiler());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
 
     //ahora sí borramos el alquiler sin problema
     query.prepare("DELETE FROM alquiler WHERE id_alquiler = :id_alquiler");
     query.bindValue(":id_alquiler", obj.getid_alquiler());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    if(!db.commit()) {
+        db.rollback();
+        return;
+    }
 
     if(idAuto != -1) {
         AutoDAOImpl autoDao;

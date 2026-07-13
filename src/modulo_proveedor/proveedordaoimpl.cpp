@@ -32,17 +32,29 @@ void ProveedorDAOImpl::actualizar(Proveedor obj) {
 }
 
 void ProveedorDAOImpl::eliminar(Proveedor obj) {
-    QSqlQuery query(QSqlDatabase::database());
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
+
+    //se agrupan los borrados para no dejar el proveedor a mitad de camino
+    if(!db.transaction()) return;
 
     //primero borramos dependencias en autoparte para evitar el error de Foreign Key
     query.prepare("DELETE FROM autoparte WHERE id_proveedor = :id_proveedor");
     query.bindValue(":id_proveedor", obj.getid_proveedor());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
 
     //ahora sí borramos el proveedor sin problema
     query.prepare("DELETE FROM proveedor WHERE id_proveedor = :id_proveedor");
     query.bindValue(":id_proveedor", obj.getid_proveedor());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    if(!db.commit()) db.rollback();
 }
 
 vector<Proveedor> ProveedorDAOImpl::listar() {

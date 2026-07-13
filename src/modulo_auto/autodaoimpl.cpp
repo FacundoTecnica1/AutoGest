@@ -43,16 +43,54 @@ void AutoDAOImpl::actualizar(Auto obj) {
 }
 
 void AutoDAOImpl::eliminar(Auto obj) {
-    QSqlQuery query(QSqlDatabase::database());
-    // primero se borra mantenimiento para liberar la referencia al auto
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
+
+    //se hace todo junto para no dejar datos a mitad de borrar
+    if(!db.transaction()) return;
+
+    //primero salen los incidentes que dependen de los alquileres del auto
+    query.prepare("DELETE FROM incidente WHERE id_alquiler IN "
+                  "(SELECT id_alquiler FROM alquiler WHERE id_auto = :id_auto)");
+    query.bindValue(":id_auto", obj.getid_auto());
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    //despues se borran los alquileres que todavia apuntan al auto
+    query.prepare("DELETE FROM alquiler WHERE id_auto = :id_auto");
+    query.bindValue(":id_auto", obj.getid_auto());
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    //las autopartes se borran antes que sus mantenimientos por la clave foranea
+    query.prepare("DELETE FROM autoparte WHERE id_mantenimiento IN "
+                  "(SELECT id_mantenimiento FROM mantenimiento WHERE id_auto = :id_auto)");
+    query.bindValue(":id_auto", obj.getid_auto());
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
     query.prepare("DELETE FROM mantenimiento WHERE id_auto = :id_auto");
     query.bindValue(":id_auto", obj.getid_auto());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
 
-    // luego se borra el auto mismo
+    //cuando ya no queda ninguna referencia se puede borrar el auto tranquilo
     query.prepare("DELETE FROM auto WHERE id_auto = :id_auto");
     query.bindValue(":id_auto", obj.getid_auto());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    if(!db.commit()) db.rollback();
 }
 
 
@@ -107,7 +145,12 @@ vector<Auto> AutoDAOImpl::listarDisponiblesParaMantenimiento() {
 vector<Auto> AutoDAOImpl::listarDisponiblesParaAlquiler() {
     vector<Auto> lista;
     QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT * FROM auto");
+
+    //el combo se arma con el estado guardado del auto
+    //asi no se cuela uno alquilado o en mantenimiento
+    query.prepare("SELECT a.* FROM auto a "
+                  "WHERE LOWER(TRIM(a.estado)) = 'disponible' "
+                  "ORDER BY a.marca, a.modelo, a.patente");
     if(query.exec()) {
         while(query.next()) {
             Auto obj;
@@ -119,11 +162,9 @@ vector<Auto> AutoDAOImpl::listarDisponiblesParaAlquiler() {
             obj.setColor(query.value("color").toString());
             obj.setKilometraje(query.value("kilometraje").toInt());
             obj.setPrecio_por_dia(query.value("precio_por_dia").toDouble());
-            obj.setEstado(calcularEstado(obj.getid_auto()));
+            obj.setEstado("Disponible");
             obj.setFechaIngreso(query.value("fecha_ingreso").toString());
-            if(obj.getEstado() == "Disponible") {
-                lista.push_back(obj);
-            }
+            lista.push_back(obj);
         }
     }
     return lista;

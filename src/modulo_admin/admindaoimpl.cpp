@@ -1,5 +1,6 @@
 #include "admindaoimpl.h"
 #include "conexion.h"
+#include "../modulo_auto/autodaoimpl.h"
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
@@ -30,11 +31,51 @@ void AdminDAOImpl::actualizar(Admin obj) {
 }
 
 void AdminDAOImpl::eliminar(Admin obj) {
-    QSqlQuery query(QSqlDatabase::database());
-    //elimina el usuario con la clave primaria id_admin
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
+    vector<int> autosAfectados;
+
+    //guardamos los autos de sus alquileres para acomodar el estado despues
+    query.prepare("SELECT DISTINCT id_auto FROM alquiler WHERE id_usuario = :id_admin");
+    query.bindValue(":id_admin", obj.getid_usuario());
+    if(query.exec()) {
+        while(query.next()) autosAfectados.push_back(query.value(0).toInt());
+    }
+    query.finish();
+
+    //primero se limpian los registros que dependen del usuario
+    if(!db.transaction()) return;
+
+    query.prepare("DELETE FROM incidente WHERE id_alquiler IN "
+                  "(SELECT id_alquiler FROM alquiler WHERE id_usuario = :id_admin)");
+    query.bindValue(":id_admin", obj.getid_usuario());
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    query.prepare("DELETE FROM alquiler WHERE id_usuario = :id_admin");
+    query.bindValue(":id_admin", obj.getid_usuario());
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    //sin alquileres relacionados ya se puede borrar el usuario
     query.prepare("DELETE FROM admin WHERE id_admin = :id_admin");
     query.bindValue(":id_admin", obj.getid_usuario());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    if(!db.commit()) {
+        db.rollback();
+        return;
+    }
+
+    AutoDAOImpl autoDao;
+    for(int idAuto : autosAfectados) autoDao.sincronizarEstado(idAuto);
 }
 
 

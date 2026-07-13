@@ -1,4 +1,5 @@
 #include "clientedaoimpl.h"
+#include "../modulo_auto/autodaoimpl.h"
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
@@ -41,22 +42,52 @@ void ClienteDAOImpl::actualizar(Cliente obj) {
 }
 
 void ClienteDAOImpl::eliminar(Cliente obj) {
-    QSqlQuery query(QSqlDatabase::database());
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
+    vector<int> autosAfectados;
+
+    //guardamos los autos para recalcular su estado al terminar
+    query.prepare("SELECT DISTINCT id_auto FROM alquiler WHERE id_cliente = :id_cliente");
+    query.bindValue(":id_cliente", obj.getid_cliente());
+    if(query.exec()) {
+        while(query.next()) autosAfectados.push_back(query.value(0).toInt());
+    }
+    query.finish();
+
+    //la transaccion evita que quede un cliente borrado a medias
+    if(!db.transaction()) return;
 
     //primero borramos incidentes de alquileres de este cliente
     query.prepare("DELETE FROM incidente WHERE id_alquiler IN (SELECT id_alquiler FROM alquiler WHERE id_cliente = :id_cliente)");
     query.bindValue(":id_cliente", obj.getid_cliente());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
 
     //borramos los alquileres
     query.prepare("DELETE FROM alquiler WHERE id_cliente = :id_cliente");
     query.bindValue(":id_cliente", obj.getid_cliente());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
 
     //y por ultimo al cliente
     query.prepare("DELETE FROM cliente WHERE id_cliente = :id_cliente");
     query.bindValue(":id_cliente", obj.getid_cliente());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    if(!db.commit()) {
+        db.rollback();
+        return;
+    }
+
+    AutoDAOImpl autoDao;
+    for(int idAuto : autosAfectados) autoDao.sincronizarEstado(idAuto);
 }
 vector<Cliente> ClienteDAOImpl::listar() {
     vector<Cliente> lista;

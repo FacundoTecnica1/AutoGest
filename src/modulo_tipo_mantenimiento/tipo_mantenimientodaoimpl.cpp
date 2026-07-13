@@ -1,4 +1,5 @@
 #include "tipo_mantenimientodaoimpl.h"
+#include "../modulo_auto/autodaoimpl.h"
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
@@ -26,12 +27,52 @@ void TipoMantenimientoDAOImpl::actualizar(TipoMantenimiento obj) {
 }
 
 void TipoMantenimientoDAOImpl::eliminar(TipoMantenimiento obj) {
-    QSqlQuery query(QSqlDatabase::database());
-    //arreglo las mayusculas de la consulta
-    //asi no revienta el delete
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(db);
+    vector<int> autosAfectados;
+
+    //guardamos los autos porque al final pueden volver a quedar disponibles
+    query.prepare("SELECT DISTINCT id_auto FROM mantenimiento "
+                  "WHERE id_tipo_mantenimiento = :id_tipo_mantenimiento");
+    query.bindValue(":id_tipo_mantenimiento", obj.getid_tipo_Mantenimiento());
+    if(query.exec()) {
+        while(query.next()) autosAfectados.push_back(query.value(0).toInt());
+    }
+    query.finish();
+
+    //el tipo puede tener mantenimientos y autopartes relacionadas
+    //por eso se borran las referencias desde la mas dependiente
+    if(!db.transaction()) return;
+
+    query.prepare("DELETE FROM autoparte WHERE id_mantenimiento IN "
+                  "(SELECT id_mantenimiento FROM mantenimiento WHERE id_tipo_mantenimiento = :id_tipo_mantenimiento)");
+    query.bindValue(":id_tipo_mantenimiento", obj.getid_tipo_Mantenimiento());
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    query.prepare("DELETE FROM mantenimiento WHERE id_tipo_mantenimiento = :id_tipo_mantenimiento");
+    query.bindValue(":id_tipo_mantenimiento", obj.getid_tipo_Mantenimiento());
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
     query.prepare("DELETE FROM tipo_mantenimiento WHERE id_tipo_mantenimiento = :id_tipo_mantenimiento");
     query.bindValue(":id_tipo_mantenimiento", obj.getid_tipo_Mantenimiento());
-    query.exec();
+    if(!query.exec()) {
+        db.rollback();
+        return;
+    }
+
+    if(!db.commit()) {
+        db.rollback();
+        return;
+    }
+
+    AutoDAOImpl autoDao;
+    for(int idAuto : autosAfectados) autoDao.sincronizarEstado(idAuto);
 }
 
 vector<TipoMantenimiento> TipoMantenimientoDAOImpl::listar() {
