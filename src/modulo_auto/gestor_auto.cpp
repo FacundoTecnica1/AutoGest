@@ -9,8 +9,8 @@ GestorAuto::GestorAuto(Ui::MainWindow *ui, QObject *parent) : QObject(parent), u
 }
 
 void GestorAuto::poblarTabla(const std::vector<Auto>& lista) {
-    //vaciamos la tabla por completo antes de meter la data nueva
-    //si no hacemos esto se empiezan a duplicar las filas visualmente
+    //limpia toda la tabla antes de volver a cargar los datos
+    //de esta forma no quedan filas viejas ni se repite la informacion
     ui->tblAutos->clearContents();
     ui->tblAutos->setRowCount(0);
     ui->tblAutos->setColumnCount(9);
@@ -19,6 +19,7 @@ void GestorAuto::poblarTabla(const std::vector<Auto>& lista) {
 
     int row = 0;
     for(const auto& a : lista) {
+        //insertamos cada auto en una fila diferente
         ui->tblAutos->insertRow(row);
         ui->tblAutos->setItem(row, 0, new QTableWidgetItem(QString::number(a.getid_auto())));
         ui->tblAutos->setItem(row, 1, new QTableWidgetItem(a.getMarca()));
@@ -34,6 +35,7 @@ void GestorAuto::poblarTabla(const std::vector<Auto>& lista) {
 }
 
 void GestorAuto::listar() {
+    //trae todos los autos desde el DAO y actualiza la tabla
     poblarTabla(daoAuto.listar());
 }
 
@@ -59,7 +61,10 @@ void GestorAuto::cargarDatos() {
     ui->cmbColorAuto->setCurrentText(ui->tblAutos->item(fila, 5)->text());
     ui->txtKilometrajeAuto->setText(ui->tblAutos->item(fila, 6)->text());
     ui->txtPrecioDiaAuto->setText(ui->tblAutos->item(fila, 7)->text());
-    ui->cmbEstadoAuto->setCurrentText(ui->tblAutos->item(fila, 8)->text());
+
+    int idAuto = getIdSeleccionadoTabla();
+    QString estadoActual = idAuto != -1 ? daoAuto.calcularEstado(idAuto) : ui->tblAutos->item(fila, 8)->text();
+    ui->cmbEstadoAuto->setCurrentText(estadoActual);
 }
 
 void GestorAuto::limpiarFormulario() {
@@ -77,10 +82,13 @@ void GestorAuto::limpiarFormulario() {
 int GestorAuto::getIdSeleccionadoTabla() {
     int fila = ui->tblAutos->currentRow();
     if (fila == -1) return -1;
+    //devolvemos el id oculto de la fila seleccionada
     return ui->tblAutos->item(fila, 0)->text().toInt();
 }
 
 void GestorAuto::guardar() {
+    //el método guardar construye el objeto Auto desde el formulario
+    //y luego lo persiste en la base de datos
     //si faltan los datos principales, no se guarda el auto
     //esto evita registros vacios que despues rompen los combos
     if(ui->txtMarcaAuto->text().trimmed().isEmpty() ||
@@ -101,16 +109,18 @@ void GestorAuto::guardar() {
     obj.setColor(ui->cmbColorAuto->currentText());
     obj.setKilometraje(ui->txtKilometrajeAuto->text().toInt());
     obj.setPrecio_por_dia(ui->txtPrecioDiaAuto->text().toDouble());
-    obj.setEstado(ui->cmbEstadoAuto->currentText());
+    obj.setEstado("Disponible");
     obj.setFechaIngreso(QDate::currentDate().toString("yyyy-MM-dd"));
 
     daoAuto.insertar(obj);
     listar();
-    limpiarFormulario(); //limpiamos aca despues de insertar
+    limpiarFormulario();
+    ui->cmbEstadoAuto->setCurrentText("Disponible");
     QMessageBox::information(ui->centralwidget, "Éxito", "Auto guardado.");
 }
 
 void GestorAuto::actualizar() {
+    //actualiza los datos del auto seleccionado usando el id de la fila
     int id = getIdSeleccionadoTabla();
     if(id == -1) return;
 
@@ -123,15 +133,16 @@ void GestorAuto::actualizar() {
     obj.setColor(ui->cmbColorAuto->currentText());
     obj.setKilometraje(ui->txtKilometrajeAuto->text().toInt());
     obj.setPrecio_por_dia(ui->txtPrecioDiaAuto->text().toDouble());
-    obj.setEstado(ui->cmbEstadoAuto->currentText());
     obj.setFechaIngreso(QDate::currentDate().toString("yyyy-MM-dd"));
 
     daoAuto.actualizar(obj);
     listar();
     limpiarFormulario();
+    ui->cmbEstadoAuto->setCurrentText(daoAuto.calcularEstado(id));
 }
 
 void GestorAuto::eliminar() {
+    //el metodo eliminar borra el auto seleccionado y refresca la tabla
     int id = getIdSeleccionadoTabla();
     if(id == -1) return;
     Auto obj;

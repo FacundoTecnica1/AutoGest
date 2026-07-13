@@ -12,8 +12,7 @@ public:
     void actualizar(Admin obj);
     void eliminar(Admin obj);
     vector<Admin> listar();
-    bool validarLogin(const QString &user, const QString &password); //Sirve para buscar al admin dentro
-                                                                       //De la base de datos
+    bool validarLogin(const QString &user, const QString &password, QString &rol); //busca usuario y devuelve rol
 };
 
 #endif // ADMINDAOIMPL_H

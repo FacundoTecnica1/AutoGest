@@ -4,7 +4,7 @@
 #include <QDate>
 
 GestorAlquiler::GestorAlquiler(Ui::MainWindow *ui, QObject *parent) : QObject(parent), ui(ui) {
-    //el calendario arranca desde manana
+    //el calendario arranca desde mañana
     //asi queda bloqueado elegir hoy o fechas anteriores
     ui->dteFechaInicioAlquiler->setMinimumDate(QDate::currentDate().addDays(1));
     ui->dteFechaFinAlquiler->setMinimumDate(QDate::currentDate().addDays(1));
@@ -14,20 +14,28 @@ GestorAlquiler::GestorAlquiler(Ui::MainWindow *ui, QObject *parent) : QObject(pa
 
 void GestorAlquiler::cargarListasCombo() {
     ui->cmbClienteAlquiler->clear();
+    //llenamos la lista de clientes actuales
     for (const auto& c : daoCliente.listar()) {
         ui->cmbClienteAlquiler->addItem(c.getNombre() + " " + c.getApellido(), c.getid_cliente());
     }
 
     ui->cmbAutoAlquiler->clear();
-    for (const auto& a : daoAuto.listar()) {
+    //llenamos el combo con solo los autos realmente disponibles para alquilar
+    for (const auto& a : daoAuto.listarDisponiblesParaAlquiler()) {
         ui->cmbAutoAlquiler->addItem(a.getMarca() + " " + a.getModelo() + " - " + a.getPatente(), a.getid_auto());
     }
 }
 
 void GestorAlquiler::calcularTotal() {
+    //calcula el precio total del alquiler segun las fechas y el auto seleccionado
     QString inicio = ui->dteFechaInicioAlquiler->date().toString("yyyy-MM-dd");
     QString fin = ui->dteFechaFinAlquiler->date().toString("yyyy-MM-dd");
     int idAuto = ui->cmbAutoAlquiler->currentData().toInt();
+
+    if (idAuto <= 0 || ui->cmbAutoAlquiler->count() == 0) {
+        ui->lblTotalAlquiler->setText("$ 0.00");
+        return;
+    }
 
     double total = daoAlquiler.calcularTotal(idAuto, inicio, fin);
     ui->lblTotalAlquiler->setText("$ " + QString::number(total, 'f', 2));
@@ -69,6 +77,7 @@ void GestorAlquiler::poblarTabla(const std::vector<std::vector<QString>>& lista)
 }
 
 void GestorAlquiler::listar() {
+    //actualiza la lista de alquileres desde la base de datos
     poblarTabla(daoAlquiler.listar());
 }
 
@@ -84,6 +93,7 @@ void GestorAlquiler::cargarDatos() {
     int fila = ui->tblAlquileres->currentRow();
     if (fila == -1) return;
 
+    //carga la fila seleccionada en el formulario de alquiler
     ui->cmbAutoAlquiler->setCurrentText(ui->tblAlquileres->item(fila, 3)->text().replace(" (", " - ").replace(")", ""));
     ui->cmbClienteAlquiler->setCurrentText(ui->tblAlquileres->item(fila, 4)->text());
 
@@ -107,6 +117,7 @@ void GestorAlquiler::cargarDatos() {
 }
 
 void GestorAlquiler::limpiarFormulario() {
+    //vuelve el formulario de alquiler a su estado inicial
     ui->cmbAutoAlquiler->setCurrentIndex(0);
     ui->cmbClienteAlquiler->setCurrentIndex(0);
     ui->cmbMetodoPagoAlquiler->setCurrentIndex(0);
@@ -134,11 +145,14 @@ void GestorAlquiler::guardar() {
         return;
     }
 
+    //el auto no puede alquilarse si tiene mantenimiento pendiente
+    //esto revisa el ultimo registro de mantenimiento del auto
     if(!daoAlquiler.mantenimientoFinalizado(idAuto)) {
         QMessageBox::warning(ui->centralwidget, "Mantenimiento pendiente", "El auto solo se puede alquilar si su ultimo mantenimiento esta finalizado.");
         return;
     }
 
+    //verifica que no haya otro alquiler activo que choque fechas
     if(!daoAlquiler.autoDisponibleParaAlquiler(idAuto, inicio.toString("yyyy-MM-dd"), fin.toString("yyyy-MM-dd"))) {
         QMessageBox::warning(ui->centralwidget, "Auto no disponible", "Ese auto ya tiene un alquiler activo en esas fechas.");
         return;
@@ -147,7 +161,7 @@ void GestorAlquiler::guardar() {
     Alquiler obj;
     obj.setid_auto(idAuto);
     obj.setid_cliente(ui->cmbClienteAlquiler->currentData().toInt());
-    obj.setid_usuario(1);
+    obj.setid_usuario(1); //hasta tener sesión real, se usa usuario estático
     obj.setMetodoPago(ui->cmbMetodoPagoAlquiler->currentText().toLower());
     obj.setFechaInicio(ui->dteFechaInicioAlquiler->date().toString("yyyy-MM-dd"));
     obj.setFechaFin(ui->dteFechaFinAlquiler->date().toString("yyyy-MM-dd"));
@@ -159,6 +173,7 @@ void GestorAlquiler::guardar() {
 
     daoAlquiler.insertar(obj);
     if(obj.getEstado() == "activo") {
+        //cuando el alquiler queda activo, el auto se marca como alquilado
         daoAuto.actualizarEstado(idAuto, "Alquilado");
     }
     listar();
@@ -205,12 +220,15 @@ void GestorAlquiler::actualizar() {
     obj.setEstado(ui->cmbEstadoAlquiler->currentText().toLower());
 
     daoAlquiler.actualizar(obj);
+    //si el alquiler cambió de auto, liberamos el auto anterior
     if(idAutoAnterior != idAuto) {
         daoAuto.actualizarEstado(idAutoAnterior, "Disponible");
     }
     if(obj.getEstado() == "activo") {
+        //el auto sigue alquilado mientras el estado del alquiler esté activo
         daoAuto.actualizarEstado(idAuto, "Alquilado");
     } else {
+        //si el alquiler ya no está activo, el auto vuelve a estar disponible
         daoAuto.actualizarEstado(idAuto, "Disponible");
     }
     listar();
@@ -225,6 +243,7 @@ void GestorAlquiler::eliminar() {
     Alquiler obj;
     obj.setid_alquiler(id);
     daoAlquiler.eliminar(obj);
+    //al borrar un alquiler, el auto asociado debe quedar disponible
     daoAuto.actualizarEstado(idAuto, "Disponible");
     listar();
     limpiarFormulario();

@@ -47,6 +47,7 @@ public:
     QWidget *page_2;
     QTabWidget *tabWidget;
     QWidget *Autos;
+    QPushButton *btnVolverLoginAutos;
     QLabel *lblMarcaAuto;
     QLineEdit *txtMarcaAuto;
     QLabel *lblModeloAuto;
@@ -71,6 +72,7 @@ public:
     QLabel *lblBuscadorAuto;
     QPushButton *btnActualizarAuto;
     QWidget *Clientes;
+    QPushButton *btnVolverLoginClientes;
     QLineEdit *txtTelefonoCliente;
     QLineEdit *txtDniCliente;
     QLabel *lblListaClientes;
@@ -95,6 +97,7 @@ public:
     QLineEdit *txtEdadCliente;
     QLabel *lblEdadCliente;
     QWidget *Alquiler;
+    QPushButton *btnVolverLoginAlquileres;
     QPushButton *btnEliminarAlquiler;
     QLabel *lblMetodoPagoAlquiler;
     QLabel *lblEstadoAlquiler;
@@ -117,6 +120,7 @@ public:
     QLabel *lblClienteAlquiler;
     QComboBox *cmbClienteAlquiler;
     QWidget *Incidentes;
+    QPushButton *btnVolverLoginIncidentes;
     QTableWidget *tblIncidentes;
     QLabel *lblBuscadorIncidente;
     QLabel *lblListaIncidentes;
@@ -137,6 +141,7 @@ public:
     QLabel *lblClienteIncidente;
     QComboBox *cmbClienteIncidente;
     QWidget *Mantenimientos;
+    QPushButton *btnVolverLoginMantenimientos;
     QLabel *lblBuscadorMantenimiento;
     QLabel *lblListaMantenimientos;
     QDateEdit *dteFechaIngresoMantenimiento;
@@ -159,6 +164,7 @@ public:
     QComboBox *cmbAutoMantenimiento;
     QLabel *lblEstadoMantenimiento_2;
     QWidget *Autopartes;
+    QPushButton *btnVolverLoginAutopartes;
     QLineEdit *txtPrecioAutoparte;
     QLabel *lblStockAutoparte;
     QPushButton *btnGuardarAutoparte;
@@ -175,6 +181,7 @@ public:
     QLabel *lblPrecioAutoparte;
     QLineEdit *txtMarcaAutoparte;
     QWidget *Proveedores;
+    QPushButton *btnVolverLoginProveedores;
     QLineEdit *txtTelefonoProveedor;
     QLabel *lblNombreProveedor;
     QLabel *lblBuscadorProveedor;
@@ -256,6 +263,9 @@ public:
         tabWidget->setGeometry(QRect(0, 0, 781, 581));
         Autos = new QWidget();
         Autos->setObjectName("Autos");
+        btnVolverLoginAutos = new QPushButton(Autos);
+        btnVolverLoginAutos->setObjectName("btnVolverLoginAutos");
+        btnVolverLoginAutos->setGeometry(QRect(650, 10, 100, 24));
         lblMarcaAuto = new QLabel(Autos);
         lblMarcaAuto->setObjectName("lblMarcaAuto");
         lblMarcaAuto->setGeometry(QRect(20, 20, 75, 40));
@@ -340,6 +350,9 @@ public:
         tabWidget->addTab(Autos, QString());
         Clientes = new QWidget();
         Clientes->setObjectName("Clientes");
+        btnVolverLoginClientes = new QPushButton(Clientes);
+        btnVolverLoginClientes->setObjectName("btnVolverLoginClientes");
+        btnVolverLoginClientes->setGeometry(QRect(650, 10, 100, 24));
         txtTelefonoCliente = new QLineEdit(Clientes);
         txtTelefonoCliente->setObjectName("txtTelefonoCliente");
         txtTelefonoCliente->setGeometry(QRect(150, 280, 113, 24));
@@ -415,6 +428,9 @@ public:
         tabWidget->addTab(Clientes, QString());
         Alquiler = new QWidget();
         Alquiler->setObjectName("Alquiler");
+        btnVolverLoginAlquileres = new QPushButton(Alquiler);
+        btnVolverLoginAlquileres->setObjectName("btnVolverLoginAlquileres");
+        btnVolverLoginAlquileres->setGeometry(QRect(650, 10, 100, 24));
         btnEliminarAlquiler = new QPushButton(Alquiler);
         btnEliminarAlquiler->setObjectName("btnEliminarAlquiler");
         btnEliminarAlquiler->setGeometry(QRect(170, 310, 80, 24));
@@ -493,6 +509,9 @@ public:
         tabWidget->addTab(Alquiler, QString());
         Incidentes = new QWidget();
         Incidentes->setObjectName("Incidentes");
+        btnVolverLoginIncidentes = new QPushButton(Incidentes);
+        btnVolverLoginIncidentes->setObjectName("btnVolverLoginIncidentes");
+        btnVolverLoginIncidentes->setGeometry(QRect(650, 10, 100, 24));
         tblIncidentes = new QTableWidget(Incidentes);
         tblIncidentes->setObjectName("tblIncidentes");
         tblIncidentes->setGeometry(QRect(290, 100, 421, 401));
@@ -554,6 +573,9 @@ public:
         tabWidget->addTab(Incidentes, QString());
         Mantenimientos = new QWidget();
         Mantenimientos->setObjectName("Mantenimientos");
+        btnVolverLoginMantenimientos = new QPushButton(Mantenimientos);
+        btnVolverLoginMantenimientos->setObjectName("btnVolverLoginMantenimientos");
+        btnVolverLoginMantenimientos->setGeometry(QRect(650, 10, 100, 24));
         lblBuscadorMantenimiento = new QLabel(Mantenimientos);
         lblBuscadorMantenimiento->setObjectName("lblBuscadorMantenimiento");
         lblBuscadorMantenimiento->setGeometry(QRect(290, 20, 75, 40));
@@ -623,6 +645,9 @@ public:
         tabWidget->addTab(Mantenimientos, QString());
         Autopartes = new QWidget();
         Autopartes->setObjectName("Autopartes");
+        btnVolverLoginAutopartes = new QPushButton(Autopartes);
+        btnVolverLoginAutopartes->setObjectName("btnVolverLoginAutopartes");
+        btnVolverLoginAutopartes->setGeometry(QRect(650, 10, 100, 24));
         txtPrecioAutoparte = new QLineEdit(Autopartes);
         txtPrecioAutoparte->setObjectName("txtPrecioAutoparte");
         txtPrecioAutoparte->setGeometry(QRect(20, 140, 113, 24));
@@ -672,6 +697,9 @@ public:
         tabWidget->addTab(Autopartes, QString());
         Proveedores = new QWidget();
         Proveedores->setObjectName("Proveedores");
+        btnVolverLoginProveedores = new QPushButton(Proveedores);
+        btnVolverLoginProveedores->setObjectName("btnVolverLoginProveedores");
+        btnVolverLoginProveedores->setGeometry(QRect(650, 10, 100, 24));
         txtTelefonoProveedor = new QLineEdit(Proveedores);
         txtTelefonoProveedor->setObjectName("txtTelefonoProveedor");
         txtTelefonoProveedor->setGeometry(QRect(160, 60, 113, 24));
@@ -727,7 +755,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -741,6 +769,7 @@ public:
         lblContrasena->setText(QCoreApplication::translate("MainWindow", "Contrase\303\261a:", nullptr));
         btnIngresar->setText(QCoreApplication::translate("MainWindow", "Ingresar", nullptr));
         btnCerrar->setText(QCoreApplication::translate("MainWindow", "Cerrar", nullptr));
+        btnVolverLoginAutos->setText(QCoreApplication::translate("MainWindow", "Volver al login", nullptr));
         lblMarcaAuto->setText(QCoreApplication::translate("MainWindow", "Marca:", nullptr));
         lblModeloAuto->setText(QCoreApplication::translate("MainWindow", "Modelo:", nullptr));
         lblAnioAuto->setText(QCoreApplication::translate("MainWindow", "A\303\261o:", nullptr));
@@ -767,6 +796,7 @@ public:
         lblBuscadorAuto->setText(QCoreApplication::translate("MainWindow", "Buscador:", nullptr));
         btnActualizarAuto->setText(QCoreApplication::translate("MainWindow", "Actualizar", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Autos), QCoreApplication::translate("MainWindow", "Autos", nullptr));
+        btnVolverLoginClientes->setText(QCoreApplication::translate("MainWindow", "Volver al login", nullptr));
         lblListaClientes->setText(QCoreApplication::translate("MainWindow", "Lista de Clientes", nullptr));
         cmbClaseLicenciaCliente->setItemText(0, QCoreApplication::translate("MainWindow", "B1", nullptr));
         cmbClaseLicenciaCliente->setItemText(1, QCoreApplication::translate("MainWindow", "B2", nullptr));
@@ -785,6 +815,7 @@ public:
         btnActualizarCliente->setText(QCoreApplication::translate("MainWindow", "Actualizar", nullptr));
         lblEdadCliente->setText(QCoreApplication::translate("MainWindow", "Edad:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Clientes), QCoreApplication::translate("MainWindow", "Clientes", nullptr));
+        btnVolverLoginAlquileres->setText(QCoreApplication::translate("MainWindow", "Volver al login", nullptr));
         btnEliminarAlquiler->setText(QCoreApplication::translate("MainWindow", "Eliminar", nullptr));
         lblMetodoPagoAlquiler->setText(QCoreApplication::translate("MainWindow", "Metodo de pago:", nullptr));
         lblEstadoAlquiler->setText(QCoreApplication::translate("MainWindow", "Estado de alquiler:", nullptr));
@@ -809,6 +840,7 @@ public:
         lblAutoAlquiler->setText(QCoreApplication::translate("MainWindow", "Auto a alquilar:", nullptr));
         lblClienteAlquiler->setText(QCoreApplication::translate("MainWindow", "Cliente que alquila:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Alquiler), QCoreApplication::translate("MainWindow", "Alquileres", nullptr));
+        btnVolverLoginIncidentes->setText(QCoreApplication::translate("MainWindow", "Volver al login", nullptr));
         lblBuscadorIncidente->setText(QCoreApplication::translate("MainWindow", "Buscador:", nullptr));
         lblListaIncidentes->setText(QCoreApplication::translate("MainWindow", "Lista de Incidentes", nullptr));
         btnEliminarIncidente->setText(QCoreApplication::translate("MainWindow", "Eliminar", nullptr));
@@ -822,6 +854,7 @@ public:
         lblAutoIncidente->setText(QCoreApplication::translate("MainWindow", "Auto:", nullptr));
         lblClienteIncidente->setText(QCoreApplication::translate("MainWindow", "Cliente:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Incidentes), QCoreApplication::translate("MainWindow", "Incidentes", nullptr));
+        btnVolverLoginMantenimientos->setText(QCoreApplication::translate("MainWindow", "Volver al login", nullptr));
         lblBuscadorMantenimiento->setText(QCoreApplication::translate("MainWindow", "Buscador:", nullptr));
         lblListaMantenimientos->setText(QCoreApplication::translate("MainWindow", "Lista de Mantenimientos", nullptr));
         lblFechaIngresoMantenimiento->setText(QCoreApplication::translate("MainWindow", "Fecha ingreso:", nullptr));
@@ -839,6 +872,7 @@ public:
         lblCostoMantenimiento->setText(QCoreApplication::translate("MainWindow", "Costo:", nullptr));
         lblEstadoMantenimiento_2->setText(QCoreApplication::translate("MainWindow", "Auto:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Mantenimientos), QCoreApplication::translate("MainWindow", "Mantenimientos", nullptr));
+        btnVolverLoginAutopartes->setText(QCoreApplication::translate("MainWindow", "Volver al login", nullptr));
         lblStockAutoparte->setText(QCoreApplication::translate("MainWindow", "Stock:", nullptr));
         btnGuardarAutoparte->setText(QCoreApplication::translate("MainWindow", "Guardar", nullptr));
         lblListaAutopartes->setText(QCoreApplication::translate("MainWindow", "Lista de Autopartes", nullptr));
@@ -850,6 +884,7 @@ public:
         btnActualizarAutoparte->setText(QCoreApplication::translate("MainWindow", "Actualizar", nullptr));
         lblPrecioAutoparte->setText(QCoreApplication::translate("MainWindow", "Precio:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Autopartes), QCoreApplication::translate("MainWindow", "Autopartes", nullptr));
+        btnVolverLoginProveedores->setText(QCoreApplication::translate("MainWindow", "Volver al login", nullptr));
         lblNombreProveedor->setText(QCoreApplication::translate("MainWindow", "Nombre proveedor:", nullptr));
         lblBuscadorProveedor->setText(QCoreApplication::translate("MainWindow", "Buscador:", nullptr));
         txtBuscadorProveedor->setPlaceholderText(QCoreApplication::translate("MainWindow", "Buscar por nombre, telefono, email o direccion del proveedor", nullptr));

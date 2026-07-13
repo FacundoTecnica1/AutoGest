@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QTableWidgetItem>
+#include <QString>
 #include <vector>
 #include <QMainWindow>
 
@@ -30,6 +31,13 @@ public:
 private slots:
     void on_btnCerrar_clicked();
     void on_btnIngresar_clicked();
+    void on_btnVolverLoginAutos_clicked();
+    void on_btnVolverLoginClientes_clicked();
+    void on_btnVolverLoginAlquileres_clicked();
+    void on_btnVolverLoginIncidentes_clicked();
+    void on_btnVolverLoginMantenimientos_clicked();
+    void on_btnVolverLoginAutopartes_clicked();
+    void on_btnVolverLoginProveedores_clicked();
 
     //Agregamos slots para disparar las funciones de cada gestor al hacer click
     //Autos
@@ -67,6 +75,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QString currentUserRole; //rol actual para usar luego en restricciones de vistas
+
+    void aplicarPermisosPorRol();
+    void cerrarSesion();
 
     //Punteros a nuestros gestores
     GestorAuto* gestorAuto;

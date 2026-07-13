@@ -1,4 +1,5 @@
 #include "alquilerdaoimpl.h"
+#include "../modulo_auto/autodaoimpl.h"
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
@@ -41,6 +42,13 @@ void AlquilerDAOImpl::actualizar(Alquiler obj) {
 
 void AlquilerDAOImpl::eliminar(Alquiler obj) {
     QSqlQuery query(QSqlDatabase::database());
+    int idAuto = -1;
+
+    query.prepare("SELECT id_auto FROM alquiler WHERE id_alquiler = :id_alquiler");
+    query.bindValue(":id_alquiler", obj.getid_alquiler());
+    if(query.exec() && query.next()) {
+        idAuto = query.value(0).toInt();
+    }
 
     //primero borramos dependencias en incidentes para evitar el error de Foreign Key
     query.prepare("DELETE FROM incidente WHERE id_alquiler = :id_alquiler");
@@ -51,6 +59,11 @@ void AlquilerDAOImpl::eliminar(Alquiler obj) {
     query.prepare("DELETE FROM alquiler WHERE id_alquiler = :id_alquiler");
     query.bindValue(":id_alquiler", obj.getid_alquiler());
     query.exec();
+
+    if(idAuto != -1) {
+        AutoDAOImpl autoDao;
+        autoDao.sincronizarEstado(idAuto);
+    }
 }
 
 vector<vector<QString>> AlquilerDAOImpl::listar() {
@@ -173,5 +186,6 @@ bool AlquilerDAOImpl::mantenimientoFinalizado(int id_auto) {
         return q.value(0).toString().toLower() == "finalizado";
     }
 
+    //si no hay registros de mantenimiento, el auto esta libre para alquilar
     return true;
 }

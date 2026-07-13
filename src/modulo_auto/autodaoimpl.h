@@ -12,6 +12,10 @@ public:
     void eliminar(Auto obj);
     vector<Auto> listar();
     vector<Auto> buscarCampo(const QString &busqueda);
+    vector<Auto> listarDisponiblesParaMantenimiento();
+    vector<Auto> listarDisponiblesParaAlquiler();
+    QString calcularEstado(int id_auto);
+    void sincronizarEstado(int id_auto);
     void actualizarEstado(int id_auto, const QString& estado);
 };
 

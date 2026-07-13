@@ -103,6 +103,19 @@
          <attribute name="title">
           <string>Autos</string>
          </attribute>
+         <widget class="QPushButton" name="btnVolverLoginAutos">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>10</y>
+            <width>100</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Volver al login</string>
+          </property>
+         </widget>
          <widget class="QLabel" name="lblMarcaAuto">
           <property name="geometry">
            <rect>
@@ -430,6 +443,19 @@
          <attribute name="title">
           <string>Clientes</string>
          </attribute>
+         <widget class="QPushButton" name="btnVolverLoginClientes">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>10</y>
+            <width>100</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Volver al login</string>
+          </property>
+         </widget>
          <widget class="QLineEdit" name="txtTelefonoCliente">
           <property name="geometry">
            <rect>
@@ -722,6 +748,19 @@
          <attribute name="title">
           <string>Alquileres</string>
          </attribute>
+         <widget class="QPushButton" name="btnVolverLoginAlquileres">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>10</y>
+            <width>100</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Volver al login</string>
+          </property>
+         </widget>
          <widget class="QPushButton" name="btnEliminarAlquiler">
           <property name="geometry">
            <rect>
@@ -1025,6 +1064,19 @@
          <attribute name="title">
           <string>Incidentes</string>
          </attribute>
+         <widget class="QPushButton" name="btnVolverLoginIncidentes">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>10</y>
+            <width>100</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Volver al login</string>
+          </property>
+         </widget>
          <widget class="QTableWidget" name="tblIncidentes">
           <property name="geometry">
            <rect>
@@ -1261,6 +1313,19 @@
          <attribute name="title">
           <string>Mantenimientos</string>
          </attribute>
+         <widget class="QPushButton" name="btnVolverLoginMantenimientos">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>10</y>
+            <width>100</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Volver al login</string>
+          </property>
+         </widget>
          <widget class="QLabel" name="lblBuscadorMantenimiento">
           <property name="geometry">
            <rect>
@@ -1530,6 +1595,19 @@
          <attribute name="title">
           <string>Autopartes</string>
          </attribute>
+         <widget class="QPushButton" name="btnVolverLoginAutopartes">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>10</y>
+            <width>100</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Volver al login</string>
+          </property>
+         </widget>
          <widget class="QLineEdit" name="txtPrecioAutoparte">
           <property name="geometry">
            <rect>
@@ -1720,6 +1798,19 @@
          <attribute name="title">
           <string>Proveedores</string>
          </attribute>
+         <widget class="QPushButton" name="btnVolverLoginProveedores">
+          <property name="geometry">
+           <rect>
+            <x>650</x>
+            <y>10</y>
+            <width>100</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Volver al login</string>
+          </property>
+         </widget>
          <widget class="QLineEdit" name="txtTelefonoProveedor">
           <property name="geometry">
            <rect>

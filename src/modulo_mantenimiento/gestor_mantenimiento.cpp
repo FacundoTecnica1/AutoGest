@@ -7,7 +7,9 @@ GestorMantenimiento::GestorMantenimiento(Ui::MainWindow *ui, QObject *parent) : 
 
 void GestorMantenimiento::cargarListasCombo() {
     ui->cmbAutoMantenimiento->clear();
-    for (const auto& a : daoAuto.listar()) {
+    //solo agregamos autos libres para mantenimiento
+    //esto impide seleccionar autos que ya estan alquilados o en taller
+    for (const auto& a : daoAuto.listarDisponiblesParaMantenimiento()) {
         ui->cmbAutoMantenimiento->addItem(a.getMarca() + " " + a.getModelo() + " - " + a.getPatente(), a.getid_auto());
     }
 
@@ -26,6 +28,7 @@ void GestorMantenimiento::poblarTabla(const std::vector<std::vector<QString>>& l
 
     int row = 0;
     for(const auto& fila : lista) {
+        //cada fila del vector corresponde a un mantenimiento
         ui->tblMantenimientos->insertRow(row);
         ui->tblMantenimientos->setItem(row, 0, new QTableWidgetItem(fila[0]));
         ui->tblMantenimientos->setItem(row, 1, new QTableWidgetItem(fila[1]));
@@ -54,6 +57,7 @@ void GestorMantenimiento::cargarDatos() {
     int fila = ui->tblMantenimientos->currentRow();
     if (fila == -1) return;
 
+    //carga los datos de la fila seleccionada al formulario de mantenimiento
     ui->cmbAutoMantenimiento->setCurrentText(ui->tblMantenimientos->item(fila, 1)->text());
     ui->cmbTipoMantenimiento->setCurrentText(ui->tblMantenimientos->item(fila, 2)->text());
     ui->dteFechaIngresoMantenimiento->setDate(QDate::fromString(ui->tblMantenimientos->item(fila, 3)->text(), "yyyy-MM-dd"));
@@ -70,6 +74,7 @@ void GestorMantenimiento::cargarDatos() {
 }
 
 void GestorMantenimiento::limpiarFormulario() {
+    //resetea el formulario para que el usuario pueda ingresar otro mantenimiento
     ui->cmbAutoMantenimiento->setCurrentIndex(0);
     ui->cmbTipoMantenimiento->setCurrentIndex(0);
     ui->dteFechaIngresoMantenimiento->setDate(QDate::currentDate());
@@ -97,8 +102,7 @@ void GestorMantenimiento::guardar() {
         return;
     }
 
-    //el mantenimiento no arranca si el auto sigue alquilado
-    //primero el alquiler tiene que quedar cancelado o finalizado
+    //si el auto aun esta en alquiler no se puede empezar el mantenimiento
     if(!daoMantenimiento.alquilerCerrado(idAuto)) {
         QMessageBox::warning(ui->centralwidget, "Alquiler activo", "El mantenimiento solo se puede registrar si el alquiler esta cancelado o finalizado.");
         return;
@@ -113,10 +117,13 @@ void GestorMantenimiento::guardar() {
     obj.setCosto(ui->txtCostoMantenimiento->text().toDouble());
     obj.setEstado(ui->cmbEstadoMantenimiento->currentText().toLower());
 
+    //guardamos el mantenimiento y actualizamos el estado del auto segun corresponda
     daoMantenimiento.insertar(obj);
     if(obj.getEstado() == "iniciado") {
+        //cuando el mantenimiento comienza, el auto deja de estar disponible
         daoAuto.actualizarEstado(idAuto, "En mantenimiento");
     } else {
+        //cuando termina o queda finalizado, el auto vuelve a estar disponible
         daoAuto.actualizarEstado(idAuto, "Disponible");
     }
     listar();

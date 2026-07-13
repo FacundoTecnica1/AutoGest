@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "admindaoimpl.h"
 #include <QMessageBox>
-
+#include <QVector>
 
 #include "gestor_auto.h"
 #include "gestor_cliente.h"
@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //Instanciamos los gestores y les pasamos la UI
+    //creamos gestores modulares que controlan cada pantalla
+    //cada gestor recibe la ui para poder actualizar la vista
     gestorAuto = new GestorAuto(ui, this);
     gestorCliente = new GestorCliente(ui, this);
     gestorAlquiler = new GestorAlquiler(ui, this);
@@ -27,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     gestorAutoparte = new GestorAutoparte(ui, this);
     gestorIncidente = new GestorIncidente(ui, this);
 
-    //Cargamos las tablas y combobox iniciales
+    //cargamos los datos iniciales en las tablas y comboboxes
     gestorAuto->listar();
     gestorCliente->listar();
     gestorAlquiler->cargarListasCombo();
@@ -39,13 +40,13 @@ MainWindow::MainWindow(QWidget *parent)
     gestorIncidente->cargarListasCombo();
     gestorIncidente->listar();
 
-    //Conectamos las fechas y el combobox de auto para que cambien el total del alquiler automaticamente
+    //conexiones automaticas para recalcular el total de alquiler cuando cambian fechas o auto
     connect(ui->dteFechaInicioAlquiler, &QDateEdit::dateChanged, gestorAlquiler, &GestorAlquiler::calcularTotal);
     connect(ui->dteFechaFinAlquiler, &QDateEdit::dateChanged, gestorAlquiler, &GestorAlquiler::calcularTotal);
     connect(ui->cmbAutoAlquiler, &QComboBox::currentIndexChanged, gestorAlquiler, &GestorAlquiler::calcularTotal);
 
 
-    //conectamos los buscadores de texto con la funcion buscar de cada gestor
+    //los buscadores filtran cada tabla en vivo mientras se escribe
     connect(ui->txtBuscadorAuto, &QLineEdit::textChanged, gestorAuto, &GestorAuto::buscar);
     connect(ui->txtBuscadorCliente, &QLineEdit::textChanged, gestorCliente, &GestorCliente::buscar);
     connect(ui->txtBuscadorAlquiler, &QLineEdit::textChanged, gestorAlquiler, &GestorAlquiler::buscar);
@@ -54,7 +55,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->txtBuscadorAutoparte, &QLineEdit::textChanged, gestorAutoparte, &GestorAutoparte::buscar);
     connect(ui->txtBuscadorIncidente, &QLineEdit::textChanged, gestorIncidente, &GestorIncidente::buscar);
 
-    //conectamos el evento de tocar una fila de la tabla para rellenar los datos en el formulario
+    //cuando el usuario selecciona una fila en una tabla
+    //los datos se vuelcan en el formulario correspondiente
     connect(ui->tblAutos, &QTableWidget::itemSelectionChanged, gestorAuto, &GestorAuto::cargarDatos);
     connect(ui->tblClientes, &QTableWidget::itemSelectionChanged, gestorCliente, &GestorCliente::cargarDatos);
     connect(ui->tblAlquileres, &QTableWidget::itemSelectionChanged, gestorAlquiler, &GestorAlquiler::cargarDatos);
@@ -63,10 +65,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->tblAutopartes, &QTableWidget::itemSelectionChanged, gestorAutoparte, &GestorAutoparte::cargarDatos);
     connect(ui->tblIncidentes, &QTableWidget::itemSelectionChanged, gestorIncidente, &GestorIncidente::cargarDatos);
 
+    aplicarPermisosPorRol();
+
 }
 
 MainWindow::~MainWindow()
 {
+    //liberamos todos los gestores y la ui cuando se cierra la ventana
     delete gestorAuto;
     delete gestorCliente;
     delete gestorAlquiler;
@@ -78,6 +83,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_btnCerrar_clicked(){
+    //cierra la aplicacion desde el boton cerrar
     this->close();
 }
 
@@ -90,32 +96,87 @@ void MainWindow::on_btnIngresar_clicked(){
         return;
     }
     AdminDAOImpl dao;
-    if (dao.validarLogin(usuario, password)) {
+    QString rol;
+    //validamos credenciales y recibimos el rol para uso posterior
+    if (dao.validarLogin(usuario, password, rol)) {
+        currentUserRole = rol.trimmed(); //guardamos el rol para aplicar restricciones luego
         QMessageBox::information(this, "Éxito", "¡Bienvenido a AutoGest!");
+        //al iniciar sesion mostramos la pantalla principal
         ui->stackedWidget->setCurrentIndex(1);
+        aplicarPermisosPorRol();
         ui->txtUsuario->clear();
         ui->txtPassword->clear();
-    }else{
+    } else {
         QMessageBox::critical(this, "Error de Login", "Usuario o contraseña incorrectos.");
         ui->txtPassword->clear();
     }
 }
 
+void MainWindow::aplicarPermisosPorRol() {
+    const QString rol = currentUserRole.trimmed();
+    const bool esAdmin = rol.compare("Admin", Qt::CaseInsensitive) == 0;
+    const bool esMostrador = rol.compare("Mostrador", Qt::CaseInsensitive) == 0;
+    const bool esMecanico = rol.compare("Mecánico", Qt::CaseInsensitive) == 0 || rol.compare("Mecanico", Qt::CaseInsensitive) == 0;
+    const bool esCompras = rol.compare("Compras", Qt::CaseInsensitive) == 0;
+
+    //por defecto se muestran todos los módulos; si hay un rol concreto, se ocultan los no permitidos
+    const QVector<int> indicesPermitidos = esAdmin ? QVector<int>({0, 1, 2, 3, 4, 5, 6})
+                                          : esMostrador ? QVector<int>({0, 1, 2})
+                                          : esMecanico ? QVector<int>({0, 4})
+                                          : esCompras ? QVector<int>({5, 6})
+                                          : QVector<int>({0, 1, 2, 3, 4, 5, 6});
+
+    for (int i = 0; i < ui->tabWidget->count(); ++i) {
+        const bool visible = indicesPermitidos.contains(i);
+        ui->tabWidget->setTabVisible(i, visible);
+    }
+
+    if (ui->tabWidget->currentIndex() < 0 || !ui->tabWidget->isTabVisible(ui->tabWidget->currentIndex())) {
+        for (int i = 0; i < ui->tabWidget->count(); ++i) {
+            if (ui->tabWidget->isTabVisible(i)) {
+                ui->tabWidget->setCurrentIndex(i);
+                break;
+            }
+        }
+    }
+}
+
+void MainWindow::cerrarSesion() {
+    currentUserRole.clear();
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->txtUsuario->clear();
+    ui->txtPassword->clear();
+    aplicarPermisosPorRol();
+    ui->txtUsuario->setFocus();
+}
+
+void MainWindow::on_btnVolverLoginAutos_clicked() { cerrarSesion(); }
+void MainWindow::on_btnVolverLoginClientes_clicked() { cerrarSesion(); }
+void MainWindow::on_btnVolverLoginAlquileres_clicked() { cerrarSesion(); }
+void MainWindow::on_btnVolverLoginIncidentes_clicked() { cerrarSesion(); }
+void MainWindow::on_btnVolverLoginMantenimientos_clicked() { cerrarSesion(); }
+void MainWindow::on_btnVolverLoginAutopartes_clicked() { cerrarSesion(); }
+void MainWindow::on_btnVolverLoginProveedores_clicked() { cerrarSesion(); }
+
 //Eventos de Autos
+//los botones de autos llaman al gestor y actualizan los combos afectados
 void MainWindow::on_btnGuardarAuto_clicked() {
     gestorAuto->guardar();
+    gestorAuto->listar();
     gestorAlquiler->cargarListasCombo();
     gestorMantenimiento->cargarListasCombo();
     gestorIncidente->cargarListasCombo();
 }
 void MainWindow::on_btnActualizarAuto_clicked() {
     gestorAuto->actualizar();
+    gestorAuto->listar();
     gestorAlquiler->cargarListasCombo();
     gestorMantenimiento->cargarListasCombo();
     gestorIncidente->cargarListasCombo();
 }
 void MainWindow::on_btnEliminarAuto_clicked() {
     gestorAuto->eliminar();
+    gestorAuto->listar();
     gestorAlquiler->cargarListasCombo();
     gestorMantenimiento->cargarListasCombo();
     gestorIncidente->cargarListasCombo();
@@ -124,18 +185,21 @@ void MainWindow::on_btnEliminarAuto_clicked() {
 //Eventos de Clientes
 void MainWindow::on_btnGuardarCliente_clicked() {
     gestorCliente->guardar();
+    gestorCliente->listar();
     gestorAlquiler->cargarListasCombo();
     gestorIncidente->cargarListasCombo();
 }
 
 void MainWindow::on_btnActualizarCliente_clicked() {
     gestorCliente->actualizar();
+    gestorCliente->listar();
     gestorAlquiler->cargarListasCombo();
     gestorIncidente->cargarListasCombo();
 }
 
 void MainWindow::on_btnEliminarCliente_clicked() {
     gestorCliente->eliminar();
+    gestorCliente->listar();
     gestorAlquiler->cargarListasCombo();
     gestorIncidente->cargarListasCombo();
 }
@@ -143,27 +207,51 @@ void MainWindow::on_btnEliminarCliente_clicked() {
 //Eventos de Alquiler
 void MainWindow::on_btnGuardarAlquiler_clicked() {
     gestorAlquiler->guardar();
+    gestorAlquiler->listar();
+    gestorAlquiler->cargarListasCombo();
+    gestorAuto->listar();
+    gestorMantenimiento->cargarListasCombo();
 }
 
 void MainWindow::on_btnActualizarAlquiler_clicked() {
     gestorAlquiler->actualizar();
+    gestorAlquiler->listar();
+    gestorAlquiler->cargarListasCombo();
+    gestorAuto->listar();
+    gestorMantenimiento->cargarListasCombo();
 }
 
 void MainWindow::on_btnEliminarAlquiler_clicked() {
     gestorAlquiler->eliminar();
+    gestorAlquiler->listar();
+    gestorAlquiler->cargarListasCombo();
+    gestorAuto->listar();
+    gestorMantenimiento->cargarListasCombo();
 }
 
 //Eventos de Mantenimiento
 void MainWindow::on_btnGuardarMantenimiento_clicked() {
     gestorMantenimiento->guardar();
+    gestorMantenimiento->listar();
+    gestorMantenimiento->cargarListasCombo();
+    gestorAlquiler->cargarListasCombo();
+    gestorAuto->listar();
 }
 
 void MainWindow::on_btnActualizarMantenimiento_clicked() {
     gestorMantenimiento->actualizar();
+    gestorMantenimiento->listar();
+    gestorMantenimiento->cargarListasCombo();
+    gestorAlquiler->cargarListasCombo();
+    gestorAuto->listar();
 }
 
 void MainWindow::on_btnEliminarMantenimiento_clicked() {
     gestorMantenimiento->eliminar();
+    gestorMantenimiento->listar();
+    gestorMantenimiento->cargarListasCombo();
+    gestorAlquiler->cargarListasCombo();
+    gestorAuto->listar();
 }
 
 //Eventos de Proveedores

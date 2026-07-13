@@ -1,4 +1,5 @@
 #include "mantenimientodaoimpl.h"
+#include "../modulo_auto/autodaoimpl.h"
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSqlDatabase>
@@ -43,6 +44,13 @@ void MantenimientoDAOImpl::actualizar(Mantenimiento obj) {
 
 void MantenimientoDAOImpl::eliminar(Mantenimiento obj) {
     QSqlQuery query(QSqlDatabase::database());
+    int idAuto = -1;
+
+    query.prepare("SELECT id_auto FROM mantenimiento WHERE id_mantenimiento = :id_mantenimiento");
+    query.bindValue(":id_mantenimiento", obj.getid_Mantenimiento());
+    if(query.exec() && query.next()) {
+        idAuto = query.value(0).toInt();
+    }
 
     //pongo todo el where en minuscula
     //asi borra primero las autopartes
@@ -55,6 +63,11 @@ void MantenimientoDAOImpl::eliminar(Mantenimiento obj) {
     query.prepare("DELETE FROM mantenimiento WHERE id_mantenimiento = :id_mantenimiento");
     query.bindValue(":id_mantenimiento", obj.getid_Mantenimiento());
     query.exec();
+
+    if(idAuto != -1) {
+        AutoDAOImpl autoDao;
+        autoDao.sincronizarEstado(idAuto);
+    }
 }
 
 vector<vector<QString>> MantenimientoDAOImpl::listar() {
